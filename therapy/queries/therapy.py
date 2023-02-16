@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Union
+from typing import Union, List
 from queries.pool import pool
 
 
@@ -77,7 +77,7 @@ class TherapyRepository:
         except Exception:
             return {"message": "Create did not work"}
 
-    def get_all(self):
+    def get_all(self) -> Union[Error, List[TherapyOut]]:
         try:
             # connect the database
             with pool.connection() as conn:
@@ -90,5 +90,85 @@ class TherapyRepository:
                         """
                     )
                     print(result)
+                    return [TherapyOut(id=record[0], name=record[1],
+                    license_information=record[2], state=record[3],
+                    zipcode=record[4], picture=record[5],
+                    specialties=record[6], about_me=record[7], payment=record[8],
+                    languages=record[9]) for record in db]
+        except Exception:
+            return {"message": "Create did not work"}
+
+
+class ClientIn(BaseModel):
+    name: str
+    city: str
+    state: str
+    zipcode: int
+    additional_notes: str
+
+
+
+class ClientOut(BaseModel):
+    id: int
+    name: str
+    city: str
+    state: str
+    zipcode: int
+    additional_notes: str
+
+
+class ClientRepository:
+    def create_client(self, client: ClientIn) -> Union[ClientOut, Error]:
+        try:
+            # connect the database
+            with pool.connection() as conn:
+                # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    # Run our INSERT statement
+                    result = db.execute(
+                        """
+                        INSERT INTO client
+                            (name,
+                            city,
+                            state,
+                            zipcode,
+                            additional_notes)
+                        VALUES
+                            (%s, %s, %s, %s, %s)
+                        RETURNING id;
+                        """,
+                        [
+                            client.name,
+                            client.city,
+                            client.state,
+                            client.zipcode,
+                            client.additional_notes,
+                        ],
+                    )
+                    id = result.fetchone()[0]
+                    # Return new data
+                    old_data = client.dict()
+                    print("old_dta**************", old_data)
+                    return ClientOut(id=id, **old_data)
+                    # return self.vacation_in_to_out(id, vacation)
+        except Exception:
+            return {"message": "Create did not work"}
+
+    def get_all_clients(self) -> Union[Error, List[ClientOut]]:
+        try:
+            # connect the database
+            with pool.connection() as conn:
+                # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    # Run our INSERT statement
+                    result = db.execute(
+                        """
+                        SELECT * FROM client
+                        """
+                    )
+                    return [ClientOut(id=record[0],
+                    name=record[1], city=record[2],
+                    state=record[3], zipcode=record[4],
+                    additional_notes=record[5]) for record in db]
         except Exception:
             return {"message": "Create did not work"}

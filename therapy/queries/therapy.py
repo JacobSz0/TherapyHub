@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Union, List
+from typing import Union, List, Optional
 from queries.pool import pool
 
 
@@ -172,3 +172,34 @@ class ClientRepository:
                     additional_notes=record[5]) for record in db]
         except Exception:
             return {"message": "Create did not work"}
+
+
+    def get_one_client(self, client_id: int) -> Optional[ClientOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                        , name
+                        , city
+                        , state
+                        , zipcode
+                        , additional_notes
+                        FROM client
+                        WHERE id = %s
+                        """,
+                        [client_id]
+                    )
+                    record = result.fetchone()
+                    return ClientOut(
+                        id=record[0],
+                        name=record[1],
+                        city=record[2],
+                        state=record[3],
+                        zipcode=record[4],
+                        additional_notes=record[5],
+                    )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not view that client"}

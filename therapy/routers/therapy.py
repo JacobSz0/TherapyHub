@@ -1,5 +1,5 @@
-from fastapi import APIRouter, Depends
-from typing import Union, List
+from fastapi import APIRouter, Depends, Response
+from typing import Union, List, Optional
 from queries.therapy import (
     TherapyIn, TherapyOut,
     TherapyRepository, Error, ClientIn, ClientOut, ClientRepository
@@ -32,3 +32,14 @@ def get_all_clients(
     repo: ClientRepository = Depends(),
 ):
     return repo.get_all_clients()
+
+@router.get("/client/{client_id}", response_model=Optional[ClientOut])
+def get_one_client(
+    client_id: int,
+    response: Response,
+    repo: ClientRepository = Depends(),
+) -> ClientOut:
+    client = repo.get_one_client(client_id)
+    if client is None:
+        response.status_code = 404
+    return client

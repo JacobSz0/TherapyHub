@@ -174,6 +174,35 @@ class ClientRepository:
             return {"message": "Create did not work"}
 
 
+    def update_client(self, client_id: int, client: ClientIn) -> Union[ClientOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE client
+                        SET name = %s
+                            , city = %s
+                            , state = %s
+                            , zipcode = %s
+                            , additional_notes = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            client.name,
+                            client.city,
+                            client.state,
+                            client.zipcode,
+                            client.additional_notes,
+                            client_id
+                        ]
+                    )
+                    old_data = client.dict()
+                    return ClientOut(id=client_id, **old_data)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get client"}
+
     def get_one_client(self, client_id: int) -> Optional[ClientOut]:
         try:
             with pool.connection() as conn:

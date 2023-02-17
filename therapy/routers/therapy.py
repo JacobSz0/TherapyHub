@@ -33,6 +33,16 @@ def get_all_clients(
 ):
     return repo.get_all_clients()
 
+
+@router.put("/client/{client_id}", response_model=Union[ClientOut, Error])
+def update_client(
+    client_id: int,
+    client: ClientIn,
+    repo: ClientRepository = Depends(),
+) -> Union[Error, ClientOut]:
+    return repo.update_client(client_id, client)
+
+    
 @router.get("/client/{client_id}", response_model=Optional[ClientOut])
 def get_one_client(
     client_id: int,

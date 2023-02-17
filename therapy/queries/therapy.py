@@ -98,6 +98,29 @@ class TherapyRepository:
         except Exception:
             return {"message": "Create did not work"}
 
+    def get_one_therapist(self, therapy_id: int) -> Optional[TherapyOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT *
+                        FROM therapy
+                        WHERE id = %s
+                        """,
+                        [therapy_id]
+                    )
+                    record = result.fetchone()
+                    return TherapyOut(id=record[0], name=record[1],
+                    license_information=record[2], state=record[3],
+                    zipcode=record[4], picture=record[5],
+                    specialties=record[6], about_me=record[7], payment=record[8],
+                    languages=record[9])
+
+        except Exception as e:
+            print(e)
+            return {"message": "Could not view that therapist"}
+
 
 class ClientIn(BaseModel):
     name: str
@@ -172,6 +195,7 @@ class ClientRepository:
                     additional_notes=record[5]) for record in db]
         except Exception:
             return {"message": "Create did not work"}
+
 
 
     def update_client(self, client_id: int, client: ClientIn) -> Union[ClientOut, Error]:

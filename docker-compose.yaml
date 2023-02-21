@@ -11,7 +11,7 @@ services:
       volumes:
           - postgres-data:/var/lib/postgresql/data
       environment:
-          - POSTGRES_MULTIPLE_DATABASES=therapy,accounts
+          - POSTGRES_MULTIPLE_DATABASES=therapy
           - POSTGRES_PASSWORD=test-databases
       ports:
           - 15432:5432
@@ -28,6 +28,8 @@ services:
       DATABASE_URL: postgresql://therapy:password@postgres/therapy
       WAIT_HOSTS: postgres:5432
       SIGNING_KEY: ${SIGNING_KEY}
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
 
   accounts:
     build:
@@ -38,9 +40,11 @@ services:
     volumes:
       - ./accounts:/app
     environment:
-      DATABASE_URL: postgresql://accounts:password@postgres/accounts
+      DATABASE_URL: postgresql://accounts:password@postgres/therapy
       WAIT_HOSTS: postgres:5432
       SIGNING_KEY: ${SIGNING_KEY}
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
 
   ghi:
     image: node:lts-bullseye

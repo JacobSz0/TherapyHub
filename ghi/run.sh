@@ -1,2 +1,2 @@
 npm install -g
-npm start
+npm start -g

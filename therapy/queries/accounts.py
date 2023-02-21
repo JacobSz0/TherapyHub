@@ -11,7 +11,7 @@ class AccountIn(BaseModel):
     email: str
     password: str
     role_id: int
-   
+
 class Account(AccountIn):
     id:int
 
@@ -20,7 +20,7 @@ class AccountOut(BaseModel):
     username: str
     email: str
     role_id: int
-    
+
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
@@ -34,7 +34,7 @@ class RoleOut(BaseModel):
 class DuplicateAccountError(ValueError):
     pass
 
-    
+
 
 class AccountQueries:
     def create(self, info: AccountIn, hashed_password: str,
@@ -60,7 +60,7 @@ class AccountQueries:
                 # Return new data
                 old_data = info.dict()
                 return AccountOut(id=id, **old_data)
-    
+
     def get_one_account(self, username: str) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -80,21 +80,21 @@ class AccountQueries:
                         record[column.name] = row[i]
                 return record
 
-    # def get_all_accounts(self) -> Union[Error, List[AccountOut]]:
-    #     with pool.connection() as conn:
-    #         with conn.cursor() as cur:
-    #             cur.execute(
-    #                 """
-    #             SELECT id, username, email, hashed_password, role_id
-    #             FROM accounts
-    #             """
-    #             )
-    #             results =[
-    #                 AccountOut(id=row[0], username=row[1], email=row[2], role_id=[3])
-    #                 for row in cur.fetchall()
-    #             ]
-    #             return results
-        
+    def get_all_accounts(self) -> Union[Error, List[AccountOut]]:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                SELECT id, username, email, hashed_password, role_id
+                FROM accounts
+                """
+                )
+                results =[
+                    AccountOut(id=row[0], username=row[1], email=row[2], role_id=[3])
+                    for row in cur.fetchall()
+                ]
+                return results
+
 
     def delete(self, id: int) -> bool:
         try:
@@ -182,11 +182,3 @@ class RoleQueries:
             id=record[0],
             role=record[1],
         )
-
-
-
-
-
-
-
-

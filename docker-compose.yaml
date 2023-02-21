@@ -31,21 +31,6 @@ services:
       WAIT_BEFORE: 5
       WAIT_TIMEOUT: 60
 
-  accounts:
-    build:
-      context: ./accounts
-      dockerfile: ./Dockerfile.dev
-    ports:
-      - 8100:8000
-    volumes:
-      - ./accounts:/app
-    environment:
-      DATABASE_URL: postgresql://accounts:password@postgres/therapy
-      WAIT_HOSTS: postgres:5432
-      SIGNING_KEY: ${SIGNING_KEY}
-      WAIT_BEFORE: 5
-      WAIT_TIMEOUT: 60
-
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh

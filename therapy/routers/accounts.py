@@ -22,7 +22,7 @@ from queries.accounts import (
     RoleIn,
     RoleOut,
     RoleQueries,
-    
+
 )
 
 class AccountToken(Token):
@@ -42,10 +42,10 @@ router = APIRouter()
 
 
 
-# @router.get("/api/accounts", response_model=Union[List[AccountOut],Error])
-# def accounts_list(repo: AccountQueries=Depends(),):
-#     return repo.get_all_accounts()
-    
+@router.get("/api/accounts", response_model=Union[List[AccountOut],Error])
+def accounts_list(repo: AccountQueries=Depends(),):
+    return repo.get_all_accounts()
+
 
 @router.post("/api/accounts", response_model=AccountToken | HttpError)
 async def create_account(
@@ -102,7 +102,3 @@ def all_roles(repo: RoleQueries = Depends()):
 @router.delete("/role/{role_id}", response_model=bool)
 def delete_role(role_id: int, repo: RoleQueries = Depends()) -> bool:
     return repo.delete(role_id)
-
-
-
-

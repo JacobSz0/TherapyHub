@@ -13,4 +13,16 @@ In addition, we created the issues in GitLab and plan to assign points tomorrow.
 
 ## February 16, 2023
 
-As a team we created endpoints for creating and listing all clients. I also created an update client endpoint. I merged my branch to create an update client endpoint. 
+As a team we created endpoints for creating and listing all clients. I also created an update client endpoint. I merged my branch to create an update client endpoint.
+
+## February 20, 2023
+
+Today, we worked on;
+
+* Authentication
+
+As a team, we tried to fix some bugs in the account creation process. For some reason, we were unable to create a new account. When we added the 'role_id' to the account, we realized that it was missing from the 'get_one_account' query. Now, we are able to create an account, log in, log out, and delete an account. However, we still have some bugs in the 'get_all_accounts' query. We plan to find a solution tomorrow with the help of a SEIR.
+
+## February 21, 2023
+
+Today, as a team we worked on making merges, trouble shooting issues with merges. We assigned point values to our issues and divided our issues among the team. Tomorrow we will find a solution for the issue of getting all accounts and begin working on our respective ends of the project. 

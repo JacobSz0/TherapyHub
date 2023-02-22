@@ -78,7 +78,7 @@ class ClientRepository:
                     state=record[3], zipcode=record[4],
                     additional_notes=record[5]) for record in db]
         except Exception:
-            return {"message": "Create did not work"}
+            return {"message": "Can't get list"}
 
 
     def update_client(self, client_id: int, client: ClientIn) -> Union[ClientOut, Error]:

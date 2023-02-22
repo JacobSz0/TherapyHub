@@ -85,12 +85,12 @@ class AccountQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                SELECT id, username, email, hashed_password, role_id
+                SELECT id, username, email, role_id
                 FROM accounts
                 """
                 )
                 results =[
-                    AccountOut(id=row[0], username=row[1], email=row[2], role_id=[3])
+                    AccountOut(id=row[0], username=row[1], email=row[2], role_id=row[3])
                     for row in cur.fetchall()
                 ]
                 return results

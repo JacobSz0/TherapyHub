@@ -12,9 +12,6 @@ class AccountIn(BaseModel):
     password: str
     role_id: int
 
-class Account(AccountIn):
-    id:int
-
 class AccountOut(BaseModel):
     id: int
     username: str
@@ -112,16 +109,6 @@ class AccountQueries:
             print(e)
             return False
 
-    def account_in_out(self, id: int, account: AccountIn):
-        data = account.dict()
-        return AccountOut(id=id, **data)
-
-    def record_in_out(self, record):
-        return AccountOut(
-            id=record[0],
-            username=record[1],
-
-        )
 
 
 class RoleQueries:

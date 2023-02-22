@@ -19,3 +19,11 @@ In addition, we created the issues in GitLab and plan to assign points tomorrow.
 Today, I worked on:
 
 * As a team we created endpoints for creating and listing all clients. In addition, I created the client detail view endpoint.
+
+## February 21, 2023
+
+Today, I worked on:
+
+* We divided up the points today and finally got docker working on everyone's machine.
+
+* I corrected the version numbers in the requirements.txt, pruned Docker(containers, images, and + volumes), renamed the "001" migrations file before I rebuilt everything.

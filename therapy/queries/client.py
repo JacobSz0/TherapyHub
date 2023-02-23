@@ -139,3 +139,19 @@ class ClientRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not view that client"}
+
+    def delete_client(self, client_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM client
+                        WHERE id = %s
+                        """,
+                        [client_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False

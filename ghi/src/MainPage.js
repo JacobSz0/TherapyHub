@@ -1,4 +1,13 @@
+import React, {useState, useEffect} from 'react';
+
+
 function MainPage() {
+  // const selectRef = useRef(null);
+
+  // useEffect(() => {
+  //   $(selectRef.current).multiselect();
+  // }, []);
+
   return (
     <div className="px-4 py-5 my-5 text-center">
       <h1 className="display-5 fw-bold">TherapyHub</h1>
@@ -8,6 +17,14 @@ function MainPage() {
         </p>
       </div>
     </div>
+    //    <select id="example-multiple-selected" multiple ref={selectRef}>
+    //   <option value="1">Option 1</option>
+    //   <option value="2" selected>Option 2</option>
+    //   <option value="3" selected>Option 3</option>
+    //   <option value="4">Option 4</option>
+    //   <option value="5">Option 5</option>
+    //   <option value="6">Option 6</option>
+    // </select>
   );
 }
 

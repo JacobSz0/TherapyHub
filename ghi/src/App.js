@@ -3,11 +3,18 @@ import Construct from './Construct.js'
 import ErrorNotification from './ErrorNotification';
 import MainPage from './MainPage.js';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
-  
+
   return (
-  <p>Hello World</p>
+      <BrowserRouter>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
   // const [launch_info, setLaunchInfo] = useState([]);
   // const [error, setError] = useState(null);

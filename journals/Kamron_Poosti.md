@@ -25,7 +25,4 @@ As a team, we tried to fix some bugs in the account creation process. For some r
 
 ## February 21, 2023
 
-Today, as a team we worked on making merges, trouble shooting issues with merges. We assigned point values to our issues and divided our issues among the team. Tomorrow we will find a solution for the issue of getting all accounts and begin working on our respective ends of the project.
-
-## February 22, 2023
-Today, as a team we troubleshooted some merge issues, we troubleshooted the get request for list of accounts. As a team we discussed and identified how to implement our wishlist and foreign keys. As a team we connected our clients table to the authentication. I prepared the react frontend for us to be able to start working on the frontend. 
+Today, as a team we worked on making merges, trouble shooting issues with merges. We assigned point values to our issues and divided our issues among the team. Tomorrow we will find a solution for the issue of getting all accounts and begin working on our respective ends of the project. 

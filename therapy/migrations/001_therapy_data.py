@@ -44,7 +44,6 @@ steps = [
             payment TEXT NOT NULL,
             languages TEXT NOT NULL,
             account_id INTEGER NOT NULL REFERENCES accounts(id)
-
         );
         """,
         # "Down" SQL statement
@@ -61,7 +60,8 @@ steps = [
             city VARCHAR(100) NOT NULL,
             state VARCHAR(100) NOT NULL,
             zipcode INTEGER NOT NULL,
-            additional_notes TEXT NOT NULL
+            additional_notes TEXT NOT NULL,
+            account_id INTEGER NOT NULL REFERENCES accounts(id)
         );
         """,
         # "Down" SQL statement

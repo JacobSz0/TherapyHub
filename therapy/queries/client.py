@@ -12,6 +12,7 @@ class ClientIn(BaseModel):
     state: str
     zipcode: int
     additional_notes: str
+    account_id: int
 
 
 
@@ -22,6 +23,8 @@ class ClientOut(BaseModel):
     state: str
     zipcode: int
     additional_notes: str
+    account_id: int
+
 
 
 class ClientRepository:
@@ -39,9 +42,10 @@ class ClientRepository:
                             city,
                             state,
                             zipcode,
-                            additional_notes)
+                            additional_notes,
+                            account_id)
                         VALUES
-                            (%s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
@@ -50,6 +54,7 @@ class ClientRepository:
                             client.state,
                             client.zipcode,
                             client.additional_notes,
+                            client.account_id
                         ],
                     )
                     id = result.fetchone()[0]
@@ -76,7 +81,7 @@ class ClientRepository:
                     return [ClientOut(id=record[0],
                     name=record[1], city=record[2],
                     state=record[3], zipcode=record[4],
-                    additional_notes=record[5]) for record in db]
+                    additional_notes=record[5], account_id=record[6]) for record in db]
         except Exception:
             return {"message": "Can't get list"}
 
@@ -93,6 +98,7 @@ class ClientRepository:
                             , state = %s
                             , zipcode = %s
                             , additional_notes = %s
+                            , account_id = %s
                         WHERE id = %s
                         """,
                         [
@@ -101,6 +107,7 @@ class ClientRepository:
                             client.state,
                             client.zipcode,
                             client.additional_notes,
+                            client.account_id,
                             client_id
                         ]
                     )
@@ -116,12 +123,7 @@ class ClientRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id
-                        , name
-                        , city
-                        , state
-                        , zipcode
-                        , additional_notes
+                        SELECT *
                         FROM client
                         WHERE id = %s
                         """,
@@ -135,7 +137,24 @@ class ClientRepository:
                         state=record[3],
                         zipcode=record[4],
                         additional_notes=record[5],
+                        account_id=record[6]
                     )
         except Exception as e:
             print(e)
             return {"message": "Could not view that client"}
+
+    def delete_client(self, client_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM client
+                        WHERE id = %s
+                        """,
+                        [client_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False

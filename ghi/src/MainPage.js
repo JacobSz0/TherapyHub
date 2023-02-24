@@ -12,6 +12,8 @@ function MainPage() {
 
   return (
 
+
+
 <div className="px-4 py-5 my-5 text-center">
   <img
     src={logo}
@@ -21,18 +23,33 @@ function MainPage() {
   />
   <form className="form-inline mt-3">
     <input
-      className="form-control mr-sm-2"
+      className="form-control mr-sm-2 search-input"
       type="search"
-      placeholder="Search"
+      placeholder="Zipcode"
       aria-label="Search"
     />
-    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+    <input
+      className="form-control mr-sm-2 search-input"
+      type="search"
+      placeholder="Radius(Miles)"
+      aria-label="Search"
+    />
+    <Link to="/therapists">
+      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
       Search
-    </button>
+      </button>
+    </Link>
   </form>
 </div>
 
-    //   <div className="px-4 py-5 my-5 text-center">
+
+  );
+}
+
+export default MainPage;
+
+
+//   <div className="px-4 py-5 my-5 text-center">
     //  <h1 className="display-5 fw-bold">TherapyHub</h1>
     //   <div className="col-lg-6 mx-auto">
     //     <p className="lead mb-4">
@@ -48,7 +65,3 @@ function MainPage() {
     //   <option value="5">Option 5</option>
     //   <option value="6">Option 6</option>
     // </select>
-  );
-}
-
-export default MainPage;

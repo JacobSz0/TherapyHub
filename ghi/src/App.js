@@ -18,8 +18,6 @@ function App() {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
-      console.log(data)
       const therapists = data
       setTherapists(therapists)
     }

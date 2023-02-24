@@ -12,6 +12,7 @@ const Wishlist = () => {
         const response2 = await fetch("http://localhost:8090/therapy")
         if (response.ok && response2) {
           var clientData = await response.json();
+          console.log(clientData)
           var therapyData = await response2.json();
         }
         var wishlist=clientData[1].wish_list

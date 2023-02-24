@@ -1,22 +1,31 @@
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import Construct from './Construct.js'
-import ErrorNotification from './ErrorNotification';
-import MainPage from './MainPage.js';
 import Wishlist from './Wishlist'
 import './App.css';
+import ClientSignupForm from './ClientSignupForm.js';
+import AccountSignupForm from './AccountSignupForm.js';
+import Nav from './Nav.js';
+
 
 function App() {
 
   return (
-      <>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/Wishlist" element={<Wishlist />} />
-          </Routes>
-        </BrowserRouter>
-      </>
+  <BrowserRouter>
+  <Nav/>
+  <div className="container">
+  <Routes>
+    <Route path="account" element={<AccountSignupForm/>}/>
+    <Route path="client/new" element={<ClientSignupForm/>}/>
+    <Route path="/Wishlist" element={<Wishlist />} />
+  </Routes>
+  </div>
+  </BrowserRouter>
   )
+
+}
+
+export default App;
+
+
   // const [launch_info, setLaunchInfo] = useState([]);
   // const [error, setError] = useState(null);
 
@@ -46,6 +55,3 @@ function App() {
   //     <Construct info={launch_info} />
   //   </div>
   // );
-}
-
-export default App;

@@ -12,17 +12,26 @@ function MainPage() {
 
   return (
 
-    <div className="px-4 py-5 my-5 text-center">
+<div className="px-4 py-5 my-5 text-center">
+  <img
+    src={logo}
+    className="img-fluid mx-auto d-block"
+    alt="Responsive image"
+    style={{ height: "600px" }}
+  />
+  <form className="form-inline mt-3">
+    <input
+      className="form-control mr-sm-2"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+    />
+    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+      Search
+    </button>
+  </form>
+</div>
 
-      <div style={{
-      backgroundImage: `url(${logo})`,
-      backgroundSize: 'cover',
-      height: '600px',
-      width: '100%'
-    }}>
-
-    </div>
-    </div>
     //   <div className="px-4 py-5 my-5 text-center">
     //  <h1 className="display-5 fw-bold">TherapyHub</h1>
     //   <div className="col-lg-6 mx-auto">
@@ -30,7 +39,7 @@ function MainPage() {
     //       Find your Therapist Today!
     //     </p>
     //   </div>
-    //</div>
+    // </div>
     //    <select id="example-multiple-selected" multiple ref={selectRef}>
     //   <option value="1">Option 1</option>
     //   <option value="2" selected>Option 2</option>

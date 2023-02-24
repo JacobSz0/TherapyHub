@@ -42,9 +42,13 @@ function MainPage() {
     </Link>
   </form>
 </div>
-
-
-  );
+/* for the submit button, When I attach the zipcode api to the button,
+do a onClick or onChange or w/e it is so that when someone hits submit,
+it creates a variable that contains the list of zip codes and we use that
+for the filter. I just have to figure out how to attach that list to the
+person's token and it deletes when the person logs out or closes the site.
+*/
+);
 }
 
 export default MainPage;

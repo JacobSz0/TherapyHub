@@ -13,6 +13,7 @@ class ClientIn(BaseModel):
     zipcode: int
     additional_notes: str
     account_id: int
+    wish_list: list
 
 
 
@@ -24,6 +25,7 @@ class ClientOut(BaseModel):
     zipcode: int
     additional_notes: str
     account_id: int
+    wish_list: list
 
 
 
@@ -43,9 +45,10 @@ class ClientRepository:
                             state,
                             zipcode,
                             additional_notes,
-                            account_id)
+                            account_id,
+                            wish_list)
                         VALUES
-                            (%s, %s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
@@ -54,7 +57,8 @@ class ClientRepository:
                             client.state,
                             client.zipcode,
                             client.additional_notes,
-                            client.account_id
+                            client.account_id,
+                            client.wish_list
                         ],
                     )
                     id = result.fetchone()[0]
@@ -81,7 +85,7 @@ class ClientRepository:
                     return [ClientOut(id=record[0],
                     name=record[1], city=record[2],
                     state=record[3], zipcode=record[4],
-                    additional_notes=record[5], account_id=record[6]) for record in db]
+                    additional_notes=record[5], account_id=record[6], wish_list=record[7]) for record in db]
         except Exception:
             return {"message": "Can't get list"}
 
@@ -99,6 +103,7 @@ class ClientRepository:
                             , zipcode = %s
                             , additional_notes = %s
                             , account_id = %s
+                            , wish_list = %s
                         WHERE id = %s
                         """,
                         [
@@ -108,7 +113,8 @@ class ClientRepository:
                             client.zipcode,
                             client.additional_notes,
                             client.account_id,
-                            client_id
+                            client.wish_list,
+                            client_id,
                         ]
                     )
                     old_data = client.dict()
@@ -137,7 +143,8 @@ class ClientRepository:
                         state=record[3],
                         zipcode=record[4],
                         additional_notes=record[5],
-                        account_id=record[6]
+                        account_id=record[6],
+                        wish_list=record[7]
                     )
         except Exception as e:
             print(e)

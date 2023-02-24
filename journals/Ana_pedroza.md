@@ -48,6 +48,7 @@ Today, I worked on;
 
 As a team, we tried to fix some bugs in the account creation process. For some reason, we were unable to create a new account. When we added the 'role_id' to the account, we realized that it was missing from the 'get_one_account' query. Now, we are able to create an account, log in, log out, and delete an account. However, we still have some bugs in the 'get_all_accounts' query. We plan to find a solution tomorrow with the help of a SEIR.
 
+
 ## February 21, 2023
 
 Today, I worked on;
@@ -55,5 +56,22 @@ Today, I worked on;
 * Today, I worked on the monolithic application
 
 During the day, we decided to consolidate the backend by merging all microservices into one. As a result, we deleted the account microservice. However, we encountered some issues with Docker while making these changes. After a couple of hours of troubleshooting with the SIer, we were able to resolve the issues and the container is now working. Also, we divided the work and assigned points to each feature. 
- 
 
+
+## February 22, 2023
+
+Today, I worked on;
+
+* Firstly, I updated the client table, and secondly, I came up with some ideas on how to implement the wish list table.
+
+Throughout the day, we worked on a way to implement the wish list feature. Additionally, we updated the client table by adding a foreign key account_id, and we also updated the endpoints.
+
+
+## February 23, 2023
+
+Today, I worked on;
+
+* Today, we connected the back-end with the front-end and created an account signup form..
+
+Today, I learned how to connect the back-end to the front-end and retrieve information from the back-end to display it on the front-end. I realized that we were missing CORS, so I added the CORSMiddleware to the main.py file. In addition, I collaborated with Will to implement an account signup feature in the front-end, allowing new therapists or clients to sign up.
+ 

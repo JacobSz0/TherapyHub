@@ -61,7 +61,8 @@ steps = [
             state VARCHAR(100) NOT NULL,
             zipcode INTEGER NOT NULL,
             additional_notes TEXT NOT NULL,
-            account_id INTEGER NOT NULL REFERENCES accounts(id)
+            account_id INTEGER NOT NULL REFERENCES accounts(id),
+            wish_list TEXT ARRAY
         );
         """,
         # "Down" SQL statement

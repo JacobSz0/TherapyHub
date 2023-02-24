@@ -1,13 +1,21 @@
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Construct from './Construct.js'
 import ErrorNotification from './ErrorNotification';
 import MainPage from './MainPage.js';
+import Wishlist from './Wishlist'
 import './App.css';
 
 function App() {
-  
+
   return (
-  <p>Hello World</p>
+      <>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/Wishlist" element={<Wishlist />} />
+          </Routes>
+        </BrowserRouter>
+      </>
   )
   // const [launch_info, setLaunchInfo] = useState([]);
   // const [error, setError] = useState(null);

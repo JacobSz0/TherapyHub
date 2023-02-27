@@ -1,12 +1,17 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Wishlist from "./Wishlist";
 import "./App.css";
 import ClientSignupForm from "./ClientSignupForm.js";
 import AccountSignupForm from "./AccountSignupForm.js";
 import Nav from "./Nav.js";
 import ClientLoginForm from "./ClientLoginForm.js";
+import { useToken } from "./Authentication.js";
 
 
+function GetToken() {
+  useToken();
+  return null;
+}
 
 function App() {
   return (
@@ -23,6 +28,7 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 export default App;
 

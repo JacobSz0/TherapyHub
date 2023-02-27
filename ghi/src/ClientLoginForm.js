@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useToken } from "./Authentication.js";
 
-function ClientLoginForm({ getUsers }) {
-  const [email, setEmail] = useState("");
+
+function ClientLoginForm() {
+  const { token, login } = useToken();
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleEmailChange = (event) => {
+  const handleUsernameChange = (event) => {
     const value = event.target.value;
-    setEmail(value);
+    setUserName(value);
   };
 
   const handlePasswordChange = (event) => {
@@ -16,26 +19,8 @@ function ClientLoginForm({ getUsers }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const data = {};
-    data.email = email;
-    data.password = password;
-
-    const usersUrl = "http://localhost:8080/client/login";
-    const fetchConfig = {
-      method: "post",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const response = await fetch(usersUrl, fetchConfig);
-    if (response.ok) {
-      const newUser = await response.json();
-      setEmail("");
-      setPassword("");
-    }
+    await login(username, password);
+    console.log("Login was successful!");
   };
 
   return (
@@ -46,16 +31,16 @@ function ClientLoginForm({ getUsers }) {
           <form onSubmit={handleSubmit} id="login-client-form">
             <div className="form-floating mb-3">
               <input
-                onChange={handleEmailChange}
-                placeholder="You@email.com"
+                onChange={handleUsernameChange}
+                placeholder="username"
                 required
-                type="email"
-                name="email"
-                id="email"
+                type="text"
+                name="username"
+                id="username"
                 className="form-control"
-                value={email}
+                value={username}
               />
-              <label htmlFor="email">email</label>
+              <label htmlFor="username">username</label>
             </div>
             <div className="form-floating mb-3">
               <input
@@ -77,4 +62,5 @@ function ClientLoginForm({ getUsers }) {
     </div>
   );
 }
+
 export default ClientLoginForm;

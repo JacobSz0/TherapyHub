@@ -7,66 +7,11 @@ import { Link, useNavigate} from 'react-router-dom';
 function MainPage() {
   const [zip_code, setZip_code] = useState("");
   const [radius, setRadius] = useState("")
+  const navigate = useNavigate();
 
-
-
-
-  // const selectRef = useRef(null);
-
-  // useEffect(() => {
-  //   $(selectRef.current).multiselect();
-  // }, []);
-  /* create a post request for the parameters of the zipcode and radius and unit (default miles)
-  create a new variable with the list of the results from the post
-  maybe if response.ok create variable
-  */
-
-  // const handleSearch = async (event) => {
-  //   event.preventDefault();
-  //   const data = {};
-  //   data.zip_code = zip_code;
-  //   data.radius = radius
-
-  //   const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}zipcode?zip_code=${zip_code}&radius=${radius}`;
-  //   const fetchConfig = {
-  //     method: "POST",
-  //     body: JSON.stringify(data),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   };
-
-  //   const response = await fetch(url, fetchConfig);
-  //   console.log(response)
-  //   if (response.ok) {
-  //     const listZipcodes = await response.json()
-  //     console.log(listZipcodes)
-  //   }
-  // }
-    const navigate = useNavigate();
-
-    const handleSearch = async (event) => {
+  const handleSearch = async (event) => {
     event.preventDefault();
       navigate(`/therapists?zip_code=${zip_code}&radius=${radius}`)
-    // const data = {};
-    // data.zip_code = zip_code;
-    // data.radius = radius
-
-    // const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}zipcode?zip_code=${zip_code}&radius=${radius}`;
-    // const fetchConfig = {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // };
-
-    // const response = await fetch(url, fetchConfig);
-    // console.log(response)
-    // if (response.ok) {
-    //   const listZipcodes = await response.json()
-    //   console.log(listZipcodes)
-    // }
   }
 
 
@@ -80,12 +25,9 @@ function MainPage() {
     setRadius(value);
   }
 
-
   return (
 
-
-
-<div className="px-4 py-5 my-5 text-center">
+  <div className="px-4 py-5 my-5 text-center">
   <img
     src={logo}
     className="img-fluid mx-auto d-block"
@@ -101,19 +43,21 @@ function MainPage() {
       aria-label="Search"
       value={zip_code}
     />
+    <label>Zipcode</label>
+
     <input
       onChange={handleRadiusChange}
       className="form-control mr-sm-2 search-input"
       type="search"
       placeholder="Radius(Miles)"
       aria-label="Search"
-      vallue={radius}
+      value={radius}
     />
-    {/* <Link to="/therapists"> */}
+    <label>Radius(Miles)</label>
+
       <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
       Search
       </button>
-    {/* </Link> */}
   </form>
 </div>
 

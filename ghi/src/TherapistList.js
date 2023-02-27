@@ -1,6 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 function TherapistList({ therapists, getTherapists }){
+  const [searchParams, setSearchParams] = useSearchParams();
+  const zip_code = searchParams.get("zip_code")
+  console.log(searchParams.entries())
+  const radius = searchParams.get("radius")
+
+  useEffect(() => {
+    const handleSearch = async () => {
+    const data = {};
+    data.zip_code = zip_code;
+    data.radius = radius
+
+    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}zipcode?zip_code=${zip_code}&radius=${radius}`;
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await fetch(url, fetchConfig);
+    console.log(response)
+    if (response.ok) {
+      const listZipcodes = await response.json()
+      console.log(listZipcodes)
+    }}
+    handleSearch();
+  },[]);
+
+
   if (therapists === undefined) {
      return null
   }

@@ -13,6 +13,7 @@ def zipcode_request(zip_code, radius):
         ("radius",radius),
         ("country","us"),
     )
+
     response = requests.get('https://app.zipcodebase.com/api/v1/radius', headers=headers, params=params)
     zipcode_list=[]
     zip=response.text

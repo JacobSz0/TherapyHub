@@ -3,8 +3,10 @@ import { useSearchParams } from 'react-router-dom';
 
 function TherapistList({ therapists, getTherapists }){
   const [searchParams, setSearchParams] = useSearchParams();
+  const [listZipcodes, setListZipcodes] = useState([])
+
   const zip_code = searchParams.get("zip_code")
-  console.log(searchParams.entries())
+  console.log(searchParams)
   const radius = searchParams.get("radius")
 
   useEffect(() => {
@@ -23,10 +25,11 @@ function TherapistList({ therapists, getTherapists }){
     };
 
     const response = await fetch(url, fetchConfig);
-    console.log(response)
     if (response.ok) {
       const listZipcodes = await response.json()
+      setListZipcodes(listZipcodes)
       console.log(listZipcodes)
+
     }}
     handleSearch();
   },[]);
@@ -43,7 +46,7 @@ function TherapistList({ therapists, getTherapists }){
 
   return (
     <div className="row justify-content-center">
-      {therapists?.map((therapist) => (
+      {therapists.filter(therapist => listZipcodes.includes(therapist.zipcode)).map((therapist) => (
         <div key={therapist.id} className="col-sm-10">
           <div className="card bg-light mb-3" style={cardStyle}>
             <div className="row g-0">

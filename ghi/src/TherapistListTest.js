@@ -199,7 +199,82 @@ function TherapistList({ therapists, getTherapists }){
 export default TherapistList;
 
 
-/*
-Authorization stuff
-const [loggedIn, setLoggedIn] = useState(localStorage.access ? true : false)
-*/
+<Multiselect
+  style={{searchBox: {width: "500px"}}}
+  placeholder="Filter"
+  displayValue="key"
+  groupBy="cat"
+  onRemove={(selectedList, removedItem) => {
+    setSelectedSpecialties(selectedSpecialties.filter(item => item !== removedItem.key));
+  }}
+  onSelect={(selectedList, selectedItem) => {
+      setSelectedSpecialties([...selectedSpecialties, selectedItem.key]);
+  }}
+  options={[
+    {
+      cat: 'Specialty',
+      key: 'Anxiety'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Depression'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Individual'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Couples'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Child & Adolescents'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Trauma'
+    }
+  ]}
+  showCheckbox
+/>
+
+<Multiselect
+  style={{searchBox: {width: "500px"}}}
+  placeholder="Filter"
+  displayValue="key"
+  groupBy="cat"
+  onRemove={(selectedList, removedItem) => {
+    setSelectedPayments(selectedPayments.filter(item => item !== removedItem.key));
+  }}
+  onSelect={(selectedList, selectedItem) => {
+    setSelectedPayments([...selectedPayments, selectedItem.key]);
+  }}
+  options={[
+    {
+      cat: 'Payment',
+      key: 'Cash'
+    },
+        {
+      cat: 'Payment',
+      key: 'Anthem'
+    },
+        {
+      cat: 'Payment',
+      key: 'Kaiser Permamente'
+    },
+        {
+      cat: 'Payment',
+      key: 'Healthnet'
+    },
+        {
+      cat: 'Payment',
+      key: 'State Farm'
+    },
+        {
+      cat: 'Payment',
+      key: 'Progressive'
+    }
+  ]}
+  showCheckbox
+/>

@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+//Hello
+import { Multiselect } from "multiselect-react-dropdown";
+
 
 
 function TherapistList({ therapists, getTherapists }){
 
-
+  const [selectedSpecialties, setSelectedSpecialties] = useState([]);
+  const [selectedPayments, setSelectedPayments] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [listZipcodes, setListZipcodes] = useState([]);
   const [zip_code, setZipCode] = useState(searchParams.get('zip_code'));
   const [radius, setRadius] = useState(searchParams.get('radius'));
-
+  console.log(selectedSpecialties)
+  console.log(selectedPayments)
 
   useEffect(() => {
     const handleSearch = async () => {
@@ -79,11 +84,87 @@ function TherapistList({ therapists, getTherapists }){
           value={radius}
         />
         <label>Radius(Miles)</label>
+
+<Multiselect
+  style={{searchBox: {width: "500px"}}}
+  placeholder="Filter"
+  displayValue="key"
+  groupBy="cat"
+  onRemove={(selectedList, removedItem) => {
+    if (removedItem.cat === "Specialty") {
+      setSelectedSpecialties(selectedSpecialties.filter(item => item !== removedItem.key));
+    } else if (removedItem.cat === "Payment") {
+      setSelectedPayments(selectedPayments.filter(item => item !== removedItem.key));
+    }
+  }}
+  onSelect={(selectedList, selectedItem) => {
+    if (selectedItem.cat === "Specialty") {
+      setSelectedSpecialties([...selectedSpecialties, selectedItem.key]);
+    } else if (selectedItem.cat === "Payment") {
+      setSelectedPayments([...selectedPayments, selectedItem.key]);
+    }
+  }}
+  options={[
+    {
+      cat: 'Specialty',
+      key: 'Anxiety'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Depression'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Individual'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Couples'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Child & Adolescents'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Trauma'
+    },
+    {
+      cat: 'Payment',
+      key: 'Cash'
+    },
+        {
+      cat: 'Payment',
+      key: 'Anthem'
+    },
+        {
+      cat: 'Payment',
+      key: 'Kaiser Permamente'
+    },
+        {
+      cat: 'Payment',
+      key: 'Healthnet'
+    },
+        {
+      cat: 'Payment',
+      key: 'State Farm'
+    },
+        {
+      cat: 'Payment',
+      key: 'Progressive'
+    }
+  ]}
+  showCheckbox
+/>
         <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
           Search
         </button>
       </form>
-      {therapists.filter(therapist => listZipcodes.includes(therapist.zipcode)).map((therapist) => (
+      {therapists.filter(therapist =>
+   listZipcodes.includes(therapist.zipcode) &&
+   (selectedSpecialties.length === 0 || therapist.specialties.split(",").some(specialty => selectedSpecialties.includes(specialty))) &&
+   (selectedPayments.length === 0 || therapist.payment.split(",").some(payment => selectedPayments.includes(payment)))
+).map((therapist) => (
         <div key={therapist.id} className="col-sm-10">
           <div className="card bg-light mb-3">
             <div className="row g-0">

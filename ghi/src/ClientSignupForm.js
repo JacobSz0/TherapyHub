@@ -18,7 +18,6 @@ function ClientSignupForm(){
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
-    console.log(info)
     setAccountId(info.account.id)
 
   }
@@ -63,7 +62,6 @@ function ClientSignupForm(){
         event.preventDefault();
 
         const data = {}
-        console.log(data)
         data.name = name;
         data.city = city;
         data.state = state;

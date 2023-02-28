@@ -78,5 +78,14 @@ Today, I worked on;
 * add information Form.
 
 Today, I worked on implementing a form where a new client can fill out personal information. Once the client fills out the account form, they are redirected to the add information form. I have almost finished the form, but I am having trouble passing a value from the account form to the add information form. I hope I can solve this problem with a SEIR. 
+
+
+## February 27, 2023
+
+Today, I worked on;
+
+* access to token and decode it.
+
+Today, I worked on accessing and decoding a token. Finally, I was able to successfully access the account_id by implementing authentication in the front end and passing the token value to app.js. With this, I was able to successfully add the value account-id when the client fill out the add information form. 
  
  

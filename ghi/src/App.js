@@ -3,6 +3,7 @@ import Wishlist from "./Wishlist";
 import "./App.css";
 import ClientSignupForm from "./ClientSignupForm.js";
 import AccountSignupForm from "./AccountSignupForm.js";
+import TherapistSignupForm from "./TherapistSignupForm.js";
 import Nav from "./Nav.js";
 import ClientLoginForm from "./ClientLoginForm.js";
 import { useToken, AuthProvider} from "./Authentication.js";
@@ -27,6 +28,7 @@ function App() {
           <Route path="client/:username" element={<ClientSignupForm />} />
           <Route path="/Wishlist" element={<Wishlist />} />
           <Route path="/client/login" element={<ClientLoginForm />} />
+          
         </Routes>
       </div>
       </AuthProvider>

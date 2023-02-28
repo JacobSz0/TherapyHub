@@ -12,18 +12,18 @@ function ClientSignupForm(){
     const[account_id, setAccountId] = useState()
     const[wish_list, setWishList] = useState([]);
     const { token, login } = useToken();
-    
-   
+
+
     function parseJwt(data) {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
     console.log(info)
     setAccountId(info.account.id)
-    
+
   }
-    
-    
+
+
     const handleNameChange = (event) =>{
         const value = event.target.value;
         setName(value)
@@ -61,7 +61,7 @@ function ClientSignupForm(){
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
         const data = {}
         console.log(data)
         data.name = name;
@@ -71,7 +71,7 @@ function ClientSignupForm(){
         data.additional_notes = additional_notes;
         data.account_id = account_id;
         data.wish_list = wish_list
-        
+
         const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}client`;
         const fetchConfig = {
             method: "POST",
@@ -87,11 +87,11 @@ function ClientSignupForm(){
             setState('');
             setZipcode('');
             setAdditionalNote('');
-            
+
             // setWishList('');
-            
+
         }
-    
+
     useEffect (() => {
     if (token) {
       parseJwt(token);
@@ -99,7 +99,7 @@ function ClientSignupForm(){
   }, [token]);
 
     return (
-     
+
         <div className="container">
             <div className="row">
               <div className="offset-3 col-6">
@@ -133,7 +133,7 @@ function ClientSignupForm(){
             </div>
         </div>
  )
-    
+
 
 }
 

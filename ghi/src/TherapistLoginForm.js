@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useToken } from "./Authentication.js";
 
-
-function ClientLoginForm() {
+function TherapistLoginForm() {
   const { token, login } = useToken();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -27,8 +26,8 @@ function ClientLoginForm() {
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-          <h1>Client Login</h1>
-          <form onSubmit={handleSubmit} id="login-client-form">
+          <h1>Therapist Login</h1>
+          <form onSubmit={handleSubmit} id="login-therapist-form">
             <div className="form-floating mb-3">
               <input
                 onChange={handleUsernameChange}
@@ -63,4 +62,4 @@ function ClientLoginForm() {
   );
 }
 
-export default ClientLoginForm;
+export default TherapistLoginForm;

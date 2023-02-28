@@ -7,6 +7,8 @@ import Nav from "./Nav.js";
 import ClientLoginForm from "./ClientLoginForm.js";
 import { useToken, AuthProvider} from "./Authentication.js";
 import React ,{useState} from "react";
+import TherapistLoginForm from "./TherapistLoginForm.js";
+import MainPage from "./MainPage.js";
 
 
 function GetToken() {
@@ -18,17 +20,19 @@ function App() {
 
   return (
     <BrowserRouter>
-    <AuthProvider>
-      <GetToken />
-        <Nav/>
-      <div className="container">
-        <Routes>
-          <Route path="account" element={<AccountSignupForm />} />
-          <Route path="client/:username" element={<ClientSignupForm />} />
-          <Route path="/Wishlist" element={<Wishlist />} />
-          <Route path="/client/login" element={<ClientLoginForm />} />
-        </Routes>
-      </div>
+      <AuthProvider>
+        <GetToken />
+        <Nav />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="account" element={<AccountSignupForm />} />
+            <Route path="client/:username" element={<ClientSignupForm />} />
+            <Route path="/Wishlist" element={<Wishlist />} />
+            <Route path="/client/login" element={<ClientLoginForm />} />
+            <Route path="/therapist/login" element={<TherapistLoginForm />} />
+          </Routes>
+        </div>
       </AuthProvider>
     </BrowserRouter>
   );

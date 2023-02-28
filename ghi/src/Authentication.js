@@ -67,7 +67,6 @@ export function useToken() {
   useEffect(() => {
     async function fetchToken() {
       const token = await getTokenInternal();
-      console.log(token, "THIS IS THE USE EFFECT");
       setToken(token);
     }
     if (!token) {
@@ -98,7 +97,6 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
-      console.log("THIS IS THE TOKEN: ", token);
       return;
     }
     let error = await response.json();
@@ -147,4 +145,3 @@ export function useToken() {
 
   return { token, login, logout, signup, update };
 }
-

@@ -5,11 +5,10 @@ import ClientSignupForm from "./ClientSignupForm.js";
 import AccountSignupForm from "./AccountSignupForm.js";
 import Nav from "./Nav.js";
 import ClientLoginForm from "./ClientLoginForm.js";
-import { useToken, AuthProvider} from "./Authentication.js";
-import React ,{useState} from "react";
-import TherapistLoginForm from "./TherapistLoginForm.js";
+import { useToken, AuthProvider } from "./Authentication.js";
+import React, { useState } from "react";
 import MainPage from "./MainPage.js";
-
+import TherapistLoginForm from "./TherapistLoginForm.js"
 
 function GetToken() {
   useToken();
@@ -17,7 +16,6 @@ function GetToken() {
 }
 
 function App() {
-
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -37,7 +35,6 @@ function App() {
     </BrowserRouter>
   );
 }
-
 
 export default App;
 

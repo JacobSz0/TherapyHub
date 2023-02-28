@@ -97,6 +97,7 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      console.log("THIS IS THE TOKEN: ", token);
       return;
     }
     let error = await response.json();
@@ -131,7 +132,7 @@ export function useToken() {
         username,
         password,
         email,
-        role_id
+        role_id,
       }),
       headers: {
         "Content-Type": "application/json",

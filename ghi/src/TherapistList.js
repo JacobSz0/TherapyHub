@@ -7,11 +7,6 @@ import { Multiselect } from "multiselect-react-dropdown";
 
 function TherapistList({ therapists, getTherapists }){
 
-  // const cardStyle = {
-  //   margin: '10px',
-  //   padding: '10px',
-  // };
-
   const [selectedSpecialties, setSelectedSpecialties] = useState([]);
   const [selectedPayments, setSelectedPayments] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();

@@ -19,7 +19,6 @@ function TherapistLoginForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await login(username, password);
-    console.log("Login was successful!");
   };
 
   return (
@@ -55,6 +54,9 @@ function TherapistLoginForm() {
               <label htmlFor="password">Password</label>
             </div>
             <button className="btn btn-primary">Submit</button>
+            <button>
+              Don't have an account? Register here!
+            </button>
           </form>
         </div>
       </div>

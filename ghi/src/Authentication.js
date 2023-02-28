@@ -97,7 +97,6 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
-      console.log("THIS IS THE TOKEN: ", token);
       return;
     }
     let error = await response.json();

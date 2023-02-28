@@ -23,13 +23,13 @@ function App() {
           <GetToken />
         <Nav  />
           <div className="container">
-            <Routes>
+              <Routes>
               <Route path="/" element={<MainPage />} />
-            <Route path="account" element={<AccountSignupForm />} />
+              <Route path="account" element={<AccountSignupForm />} />
               <Route path="client/:username" element={<ClientSignupForm />} />
               <Route path="/Wishlist" element={<Wishlist />} />
               <Route path="/client/login" element={<ClientLoginForm />} />
-            <Route path="/therapist/:username" element={<TherapistSignupForm />} />
+              <Route path="/therapist/:username" element={<TherapistSignupForm />} />
               <Route path="/therapist/login" element={<TherapistLoginForm />} />
           </Routes>
           </div>

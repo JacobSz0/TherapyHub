@@ -1,4 +1,6 @@
 import React ,{useState,useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
+import { useToken } from "./Authentication";
 
 function AccountSignupForm(){
 
@@ -7,6 +9,9 @@ function AccountSignupForm(){
     const[username, setUsername] = useState("");
     const[email, setEmail] = useState("");
     const[password, setPassword] = useState("");
+    const { token, login } = useToken();
+
+    const navigate = useNavigate();
 
     const handleUsernameChange = (event) => {
         const value = event.target.value;
@@ -28,7 +33,7 @@ function AccountSignupForm(){
         setRoleId(value)
     }
 
-    const handleSubmit = async (event) =>{
+    const handleCreateAccount = async (event) =>{
         event.preventDefault();
         const data = {};
         console.log(data)
@@ -36,25 +41,38 @@ function AccountSignupForm(){
         data.email = email
         data.password = password
         data.role_id = role_id
+        
         const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}api/accounts`;
+
         const fetchConfig = {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
             'Content-Type': 'application/json',
+            
             },
+        
         }
-
         const response = await fetch (url, fetchConfig);
         console.log(response)
         if (response.ok){
+            login(username, password)
             setUsername('');
             setEmail('');
             setPassword('');
             setRoleId('');
+            
+        const account = await response.json()
+        const NewUsername = account.account.username
+        if (account.account.role_id === 1){
+            navigate(`/client/${NewUsername}`)
+        } else {
+            navigate(`therapy/${NewUsername}`)
         }
+        }
+        
     }
-
+    
     const fetchData = async () => {
       const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}role`
       const response = await fetch (url)
@@ -67,6 +85,8 @@ function AccountSignupForm(){
 
     useEffect (() => {
         fetchData();
+        
+        
     }, [])
 
     return (
@@ -75,23 +95,23 @@ function AccountSignupForm(){
         <div className="row">
           <div className="offset-3 col-6">
             <div className="shadow p-4 mt-4">
-              <h1>Add information</h1>
-              <form onSubmit ={handleSubmit} id="create-new-client-form">
+              <h1>Create account</h1>
+              <form onSubmit ={handleCreateAccount} id="create-new-client-form">
                 <div className="form-floating mb-3">
                   <input onChange={handleUsernameChange} placeholder="username" required type="text" name="username" id="username" className="form-control" value={username}/>
                   <label htmlFor="username">Username</label>
                 </div>
                 <div className="form-floating mb-3">
-                  <input onChange={handleEmailChange} placeholder="email" required type="text" name="email" id="email" className="form-control" value={email}/>
+                  <input onChange={handleEmailChange} placeholder="email" required type="email" name="email" id="email" className="form-control" value={email}/>
                   <label htmlFor="email">email@example.com</label>
                 </div>
                 <div className="form-floating mb-3">
-                  <input onChange={handlePasswordChange} placeholder="password" required type="text" name="password" id="password" className="form-control"  value={password}/>
+                  <input onChange={handlePasswordChange} placeholder="password" required type="password" name="password" id="password" className="form-control"  value={password}/>
                   <label htmlFor="password">Password</label>
                 </div>
                 <div>
                 <select onChange={handleRoleIdChange} required name="role_id" id="role_id" className="form-select" >
-                  <option>  Therapist or Client</option>
+                  <option>Choose role</option>
                   {roleIds.map((role, index) => (
                   <option key={index} value={role.id}>
                     {role.role}

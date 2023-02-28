@@ -9,7 +9,7 @@ from fastapi import (
 )
 from jwtdown_fastapi.authentication import Token
 from .authenticator import authenticator
-from typing import Union, List
+from typing import Union, List, Optional
 
 from pydantic import BaseModel
 
@@ -40,12 +40,31 @@ class AccountForm(BaseModel):
 
 router = APIRouter()
 
+@router.get("/api/protected", response_model=bool)
+async def get_protected(
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    return True
+
 
 
 @router.get("/api/accounts", response_model=Union[List[AccountOut],Error])
 def accounts_list(repo: AccountQueries=Depends(),):
     return repo.get_all_accounts()
 
+
+# @router.get("/api/accounts/{id}", response_model=Optional[AccountOut])
+# def get_one_account(
+#     id: int,
+#     response: Response,
+#     account: dict = Depends(authenticator.get_current_account_data),
+#     repo: AccountQueries = Depends(),
+# ) -> AccountOut:
+#     print(repo)
+#     user = repo.get_one_account(id)
+#     if user is None:
+#         response.status_code = 404
+#     return user
 
 @router.post("/api/accounts", response_model=AccountToken | HttpError)
 async def create_account(
@@ -67,6 +86,8 @@ async def create_account(
     )
     token = await authenticator.login(response, request, form, accounts)
     return AccountToken(account=account, **token.dict())
+
+
 
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(

@@ -5,7 +5,8 @@ import ClientSignupForm from "./ClientSignupForm.js";
 import AccountSignupForm from "./AccountSignupForm.js";
 import Nav from "./Nav.js";
 import ClientLoginForm from "./ClientLoginForm.js";
-import { useToken } from "./Authentication.js";
+import { useToken, AuthProvider} from "./Authentication.js";
+import React ,{useState} from "react";
 
 
 function GetToken() {
@@ -14,17 +15,21 @@ function GetToken() {
 }
 
 function App() {
+
   return (
     <BrowserRouter>
-      <Nav />
+    <AuthProvider>
+      <GetToken />
+        <Nav/>
       <div className="container">
         <Routes>
           <Route path="account" element={<AccountSignupForm />} />
-          <Route path="client/new" element={<ClientSignupForm />} />
+          <Route path="client/:username" element={<ClientSignupForm />} />
           <Route path="/Wishlist" element={<Wishlist />} />
           <Route path="/client/login" element={<ClientLoginForm />} />
         </Routes>
       </div>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

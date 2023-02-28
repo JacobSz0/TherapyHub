@@ -67,6 +67,7 @@ export function useToken() {
   useEffect(() => {
     async function fetchToken() {
       const token = await getTokenInternal();
+      console.log(token, "THIS IS THE USE EFFECT");
       setToken(token);
     }
     if (!token) {
@@ -84,7 +85,7 @@ export function useToken() {
     }
   }
 
- async function login(username, password) {
+  async function login(username, password) {
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}token`;
     const form = new FormData();
     form.append("username", username);
@@ -97,47 +98,34 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      console.log("THIS IS THE TOKEN: ", token);
       return;
     }
     let error = await response.json();
     return handleErrorMessage(error);
   }
 
-
-  async function signup(
-    firstName,
-    lastName,
-    phoneNumber,
-    email,
-    address,
-    password,
-    username
-  ) {
+  async function signup(username, password, email, role_id) {
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}api/accounts`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        phone_number: phoneNumber,
-        email,
-        address,
+        username,
         password,
-        username
+        email,
+        role_id,
       }),
       headers: {
         "Content-Type": "application/json",
       },
     });
     if (response.ok) {
-      await login(email, password);
-      console.log("Signup Successful");
-    } else {
-      return false;
+      await login(username, password);
     }
+    return false;
   }
 
-  async function update(username, password, email, firstName, lastName) {
+  async function update(username, password, email, role_id) {
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}api/accounts`;
     const response = await fetch(url, {
       method: "patch",
@@ -145,8 +133,7 @@ export function useToken() {
         username,
         password,
         email,
-        first_name: firstName,
-        last_name: lastName,
+        role_id
       }),
       headers: {
         "Content-Type": "application/json",
@@ -161,28 +148,3 @@ export function useToken() {
   return { token, login, logout, signup, update };
 }
 
-export const useUser = (token) => {
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    if (!token) {
-      return;
-    }
-
-    async function getUser() {
-      const url = `http://localhost:8080/accounts`;
-      const response = await fetch(url, {
-        credentials: "include",
-      });
-      if (response.ok) {
-        const newUser = await response.json();
-        setUser(newUser);
-      }
-    }
-
-    getUser();
-  }, [token]);
-
-  return user;
-  
-};

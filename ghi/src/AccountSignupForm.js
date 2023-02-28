@@ -17,7 +17,7 @@ function AccountSignupForm(){
         const value = event.target.value;
         setUsername(value)
     }
-    
+
     const handleEmailChange = (event) => {
         const value = event.target.value;
         setEmail(value)
@@ -41,7 +41,7 @@ function AccountSignupForm(){
         data.email = email
         data.password = password
         data.role_id = role_id
-        
+
         const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}api/accounts`;
 
         const fetchConfig = {
@@ -49,48 +49,48 @@ function AccountSignupForm(){
             body: JSON.stringify(data),
             headers: {
             'Content-Type': 'application/json',
-            
+
             },
-        
+
         }
         const response = await fetch (url, fetchConfig);
         console.log(response)
         if (response.ok){
             login(username, password)
             setUsername('');
-            setEmail('');
+            setEmail('')
             setPassword('');
             setRoleId('');
-            
+
         const account = await response.json()
         const NewUsername = account.account.username
         if (account.account.role_id === 1){
             navigate(`/client/${NewUsername}`)
         } else {
-            navigate(`therapy/${NewUsername}`)
+            navigate(`/therapist/${NewUsername}`)
         }
         }
-        
+
     }
-    
+
     const fetchData = async () => {
       const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}role`
       const response = await fetch (url)
         if (response.ok){
             const data = await response.json();
             console.log(data)
-            setRoleIds(data) 
+            setRoleIds(data)
         }
     }
 
     useEffect (() => {
         fetchData();
-        
-        
+
+
     }, [])
 
     return (
-     
+
         <div className="container">
         <div className="row">
           <div className="offset-3 col-6">

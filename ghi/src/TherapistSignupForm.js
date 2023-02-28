@@ -24,6 +24,7 @@ function TherapistSignupForm() {
   const info = JSON.parse(window.atob(base64));
   console.log(info)
   setAccount_id(info.account.id)
+  }
 
   const handleNameChange = (event) => {
     const value = event.target.value;
@@ -70,28 +71,6 @@ function TherapistSignupForm() {
     setLanguages(value);
   };
 
-  //
-  // const handleAccount_idChange = (event) => {
-  //   setAccount_id(value);
-  // };
-
-  // const [account, setAccount] = useState([]);
-  // const getAccount = async () => {
-  //   const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}api/accounts`;
-  //   const response = await fetch(url);
-
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     const account = data.account;
-  //     setAccount(account);
-  //   }
-  // };
-
-  // there's gooing to be a call for the data... from the TOKEN...
-    // get from token,
-    // update state above with the account id....
-    //
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -106,6 +85,7 @@ function TherapistSignupForm() {
     data.about_me = about_me;
     data.payment = payment;
     data.languages = languages;
+    data.account_id = account_id;
 
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
     const fetchConfig = {
@@ -270,25 +250,6 @@ function TherapistSignupForm() {
               />
               <label htmlFor="languages">Languages</label>
             </div>
-
-            {/* <div className="mb-3">
-              <select
-                onChange={handleSelectedAccount_idChange}
-                required
-                id="account_id"
-                name="account_id"
-                className="form-select"
-              >
-                <option value="">Choose an Account</option>
-                {account.map((acc) => {
-                  return (
-                    <option key={acc.id} value={acc.id}>
-                      {acc.username}
-                    </option>
-                  );
-                })}
-              </select>
-            </div> */}
             <button className="btn btn-primary">Create</button>
           </form>
         </div>

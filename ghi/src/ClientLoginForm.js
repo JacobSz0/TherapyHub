@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useToken } from "./Authentication.js";
 
-
 function ClientLoginForm() {
   const { token, login } = useToken();
   const [username, setUserName] = useState("");
@@ -38,6 +37,7 @@ function ClientLoginForm() {
                 id="username"
                 className="form-control"
                 value={username}
+                autoComplete="username"
               />
               <label htmlFor="username">username</label>
             </div>
@@ -51,11 +51,14 @@ function ClientLoginForm() {
                 id="password"
                 className="form-control"
                 value={password}
+                autoComplete="current-password"
               />
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">password</label>
             </div>
             <button className="btn btn-primary">Submit</button>
-            <button>Don't have an account? Register here!</button>
+            <button type="button" className="btn btn-link">
+              Don't have an account? Register here!
+            </button>
           </form>
         </div>
       </div>

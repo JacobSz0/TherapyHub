@@ -54,7 +54,6 @@ function AccountSignupForm(){
 
         }
         const response = await fetch (url, fetchConfig);
-        console.log(response)
         if (response.ok){
             login(username, password)
             setUsername('');
@@ -85,8 +84,6 @@ function AccountSignupForm(){
 
     useEffect (() => {
         fetchData();
-
-
     }, [])
 
     return (

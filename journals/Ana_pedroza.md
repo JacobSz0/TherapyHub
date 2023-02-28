@@ -21,15 +21,10 @@ I worked with Rosheen to fix this bug: "Error: Cannot find module ‘/app/npm in
 
 Today, I worked on;
 
-* update_therapy ans delete therapy.
+* update_therapy and delete therapy.
 
 I worked on the endpoint for updating and deleting therapy instances. Now, we are able to update every instance of therapy and delete them if we choose to do so.
 
-Today, I worked on;
-
-* fix bug in package.json.
-
-I worked with Rosheen to fix this bug: "Error: Cannot find module ‘/app/npm install -g npm@9.5.0’therapy-hub-ghi-1". We spent almost all afternoon on it. We tried deleting the repo and docker container to fix the problem, and made some changes in the Docker YAML. However, none of these attempts worked. We eventually solved the problem by reinstalling the npm directly in the GHI file and adding "start": "node ./windows-setup.js && ./node_modules/.bin/react-scripts start" to the package.json file.
 
 ## February 19, 2023
 
@@ -74,4 +69,14 @@ Today, I worked on;
 * Today, we connected the back-end with the front-end and created an account signup form..
 
 Today, I learned how to connect the back-end to the front-end and retrieve information from the back-end to display it on the front-end. I realized that we were missing CORS, so I added the CORSMiddleware to the main.py file. In addition, I collaborated with Will to implement an account signup feature in the front-end, allowing new therapists or clients to sign up.
+
+
+## February 24, 2023
+
+Today, I worked on;
+
+* add information Form.
+
+Today, I worked on implementing a form where a new client can fill out personal information. Once the client fills out the account form, they are redirected to the add information form. I have almost finished the form, but I am having trouble passing a value from the account form to the add information form. I hope I can solve this problem with a SEIR. 
+ 
  

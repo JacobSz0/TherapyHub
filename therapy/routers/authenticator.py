@@ -33,3 +33,5 @@ class MyAuthenticator(Authenticator):
 
 
 authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
+
+print("aut#####################",authenticator)

@@ -10,7 +10,7 @@ import { useToken, AuthProvider } from "./Authentication.js";
 import React, { useState, useEffect } from "react";
 import MainPage from "./MainPage.js";
 import TherapistLoginForm from "./TherapistLoginForm.js"
-import TherapistList from './TherapistList'
+import TherapistList from "./TherapistList";
 
 
 function GetToken() {

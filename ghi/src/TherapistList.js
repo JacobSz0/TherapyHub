@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 //Hello
+import { Multiselect } from "multiselect-react-dropdown";
+
+
+
 function TherapistList({ therapists, getTherapists }){
 
   const cardStyle = {
@@ -8,8 +12,9 @@ function TherapistList({ therapists, getTherapists }){
     padding: '10px',
   };
 
-
-const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedSpecialties, setSelectedSpecialties] = useState([]);
+  const [selectedPayments, setSelectedPayments] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [listZipcodes, setListZipcodes] = useState([]);
   const [zip_code, setZipCode] = useState(searchParams.get('zip_code'));
   const [radius, setRadius] = useState(searchParams.get('radius'));
@@ -82,6 +87,77 @@ const [searchParams, setSearchParams] = useSearchParams();
           value={radius}
         />
         <label>Radius(Miles)</label>
+
+<Multiselect
+  style={{searchBox: {width: "500px"}}}
+  placeholder="Filter"
+  displayValue="key"
+  groupBy="cat"
+    onRemove={(selectedList, removedItem) => {
+    if (removedItem.cat === "Specialty") {
+      setSelectedSpecialties(selectedList);
+    } else if (removedItem.cat === "Payment") {
+      setSelectedPayments(selectedList);
+    }
+  }}
+  onSelect={(selectedList, selectedItem) => {
+    if (selectedItem.cat === "Specialty") {
+      setSelectedSpecialties(selectedList);
+    } else if (selectedItem.cat === "Payment") {
+      setSelectedPayments(selectedList);
+    }
+  }}  options={[
+    {
+      cat: 'Specialty',
+      key: 'Anxiety'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Depression'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Individual'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Couples'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Child & Adolescents'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Trauma'
+    },
+    {
+      cat: 'Payment',
+      key: 'Cash'
+    },
+        {
+      cat: 'Payment',
+      key: 'Anthem'
+    },
+        {
+      cat: 'Payment',
+      key: 'Kaiser Permamente'
+    },
+        {
+      cat: 'Payment',
+      key: 'Healthnet'
+    },
+        {
+      cat: 'Payment',
+      key: 'State Farm'
+    },
+        {
+      cat: 'Payment',
+      key: 'Progressive'
+    }
+  ]}
+  showCheckbox
+/>
         <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
           Search
         </button>

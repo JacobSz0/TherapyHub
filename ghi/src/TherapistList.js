@@ -7,10 +7,10 @@ import { Multiselect } from "multiselect-react-dropdown";
 
 function TherapistList({ therapists, getTherapists }){
 
-  const cardStyle = {
-    margin: '10px',
-    padding: '10px',
-  };
+  // const cardStyle = {
+  //   margin: '10px',
+  //   padding: '10px',
+  // };
 
   const [selectedSpecialties, setSelectedSpecialties] = useState([]);
   const [selectedPayments, setSelectedPayments] = useState([]);
@@ -18,6 +18,8 @@ function TherapistList({ therapists, getTherapists }){
   const [listZipcodes, setListZipcodes] = useState([]);
   const [zip_code, setZipCode] = useState(searchParams.get('zip_code'));
   const [radius, setRadius] = useState(searchParams.get('radius'));
+  console.log(selectedSpecialties)
+  console.log(selectedPayments)
 
   useEffect(() => {
     const handleSearch = async () => {
@@ -26,7 +28,7 @@ function TherapistList({ therapists, getTherapists }){
         radius,
       };
 
-      const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}32zipcode?zip_code=${zip_code}&radius=${radius}`;
+      const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}zipcode?zip_code=${zip_code}&radius=${radius}`;
       const fetchConfig = {
         method: 'POST',
         body: JSON.stringify(data),
@@ -93,20 +95,21 @@ function TherapistList({ therapists, getTherapists }){
   placeholder="Filter"
   displayValue="key"
   groupBy="cat"
-    onRemove={(selectedList, removedItem) => {
+  onRemove={(selectedList, removedItem) => {
     if (removedItem.cat === "Specialty") {
-      setSelectedSpecialties(selectedList);
+      setSelectedSpecialties(selectedSpecialties.filter(item => item !== removedItem.key));
     } else if (removedItem.cat === "Payment") {
-      setSelectedPayments(selectedList);
+      setSelectedPayments(selectedPayments.filter(item => item !== removedItem.key));
     }
   }}
   onSelect={(selectedList, selectedItem) => {
     if (selectedItem.cat === "Specialty") {
-      setSelectedSpecialties(selectedList);
+      setSelectedSpecialties([...selectedSpecialties, selectedItem.key]);
     } else if (selectedItem.cat === "Payment") {
-      setSelectedPayments(selectedList);
+      setSelectedPayments([...selectedPayments, selectedItem.key]);
     }
-  }}  options={[
+  }}
+  options={[
     {
       cat: 'Specialty',
       key: 'Anxiety'
@@ -162,9 +165,13 @@ function TherapistList({ therapists, getTherapists }){
           Search
         </button>
       </form>
-      {therapists.filter(therapist => listZipcodes.includes(therapist.zipcode)).map((therapist) => (
+      {therapists.filter(therapist =>
+   listZipcodes.includes(therapist.zipcode) &&
+   (selectedSpecialties.length === 0 || therapist.specialties.split(",").some(specialty => selectedSpecialties.includes(specialty))) &&
+   (selectedPayments.length === 0 || therapist.payment.split(",").some(payment => selectedPayments.includes(payment)))
+).map((therapist) => (
         <div key={therapist.id} className="col-sm-10">
-          <div className="card bg-light mb-3" style={cardStyle}>
+          <div className="card bg-light mb-3">
             <div className="row g-0">
               <div className="col-md-4">
                 <img src={therapist.picture} className="img-fluid rounded-start" alt="Therapist" />
@@ -183,6 +190,7 @@ function TherapistList({ therapists, getTherapists }){
                    , {' '}
                   { therapist.state }
                 </p>
+                <a href="#" className="btn btn-primary stretched-link">Learn more!</a>
                 </div>
               </div>
             </div>

@@ -185,7 +185,7 @@ function TherapistList({ therapists, getTherapists }){
                    , {' '}
                   { therapist.state }
                 </p>
-                <a href="#" className="btn btn-primary stretched-link">Learn more!</a>
+                <a href={`${process.env.REACT_APP_THERAPYHUB_API_HOST}therapist/detail/${therapist.id}`} className="btn btn-primary stretched-link">Learn more!</a>
                 </div>
               </div>
             </div>
@@ -197,3 +197,9 @@ function TherapistList({ therapists, getTherapists }){
 }
 
 export default TherapistList;
+
+
+/*
+Authorization stuff
+const [loggedIn, setLoggedIn] = useState(localStorage.access ? true : false)
+*/

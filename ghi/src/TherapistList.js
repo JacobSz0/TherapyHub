@@ -168,28 +168,14 @@ function TherapistList({ therapists }){
                   <h6 className="card-subtitle mb-2 text-muted">
                     {therapist.license_information}
                   </h6>
-                    <p className="card-text">
-                    {therapist.specialties.map((specialty, i) => (
-                        <span key={i}>
-                        {specialty}
-                        {i !== therapist.specialties.length - 1 && ", "}
-                        </span>
-                    ))}
-                    </p>
-                    <p className="card-text">
-                    {therapist.payment.map((payment, i) => (
-                        <span key={i}>
-                            {payment}
-                            {i !== therapist.payment.length -1 && ", "}
-                        </span>
-                    ))}
-                  </p>
+                    {therapist.specialties && (
+                  <p className="card-text">{therapist.specialties.join(', ')}</p>
+                    )}
+                    {therapist.payment && (
+                  <p className="card-text">{therapist.payment.join(', ')}</p>
+                    )}
                   <p className="card-text">
-                  { therapist.city}
-                   , {' '}
-                  { therapist.state }
-                   {' '}
-                  { therapist.zipcode }
+                  {therapist.city}, {therapist.state}, {therapist.zipcode}
                 </p>
                 <a href={`/therapist/detail/${therapist.id}`} className="btn btn-primary stretched-link">Learn more!</a>
                 </div>

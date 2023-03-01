@@ -150,6 +150,34 @@ class ClientRepository:
             print(e)
             return {"message": "Could not view that client"}
 
+
+    def get_client_by_account_id(self, account_id: int) -> Optional[ClientOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT *
+                        FROM client
+                        WHERE account_id = %s
+                        """,
+                        [account_id]
+                    )
+                    record = result.fetchone()
+                    return ClientOut(
+                        id=record[0],
+                        name=record[1],
+                        city=record[2],
+                        state=record[3],
+                        zipcode=record[4],
+                        additional_notes=record[5],
+                        account_id=record[6],
+                        wish_list=record[7]
+                    )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not view that client"}
+
     def delete_client(self, client_id: int) -> bool:
         try:
             with pool.connection() as conn:

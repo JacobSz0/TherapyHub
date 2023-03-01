@@ -1,40 +1,59 @@
-import React, {useRef, useEffect, useState } from "react";
-import { useToken } from "./Authentication"
-import { useNavigate } from 'react-router-dom';
-import { Multiselect } from "multiselect-react-dropdown";
+import React, { useEffect, useState } from "react";
+import { useToken } from "./Authentication";
 
 
-function TherapistSignupForm() {
+function TherapistUpdateForm() {
   const [name, setName] = useState("");
   const [license_information, setLicense_information] = useState("");
   const [state, setState] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [picture, setPicture] = useState("");
+  const [specialties, setSpecialties] = useState("");
   const [about_me, setAbout_me] = useState("");
+  const [payment, setPayment] = useState("");
   const [languages, setLanguages] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
   const [account_id, setAccount_id] = useState("");
-  const [city, setCity] = useState("");
   const { token, login } = useToken();
-  const [selectedSpecialties, setSelectedSpecialties] = useState([]);
-  const [selectedPayments, setSelectedPayments] = useState([]);
+  const [therapy_id, setTherapy_id] = useState("");
 
-  const specialtiesRef = useRef();
-  const paymentRef = useRef();
 
-  const resetValues = () => {
-    specialtiesRef.current.resetSelectedValues();
-    paymentRef.current.resetSelectedValues();
+useEffect(() => {
+  async function get_by_account_id() {
+    const response = await fetch(
+      `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapistacc/?account_id=${account_id}`
+    );
+    var therapistdata = await response.json();
+    setName(therapistdata.name);
+    setLicense_information(therapistdata.license_information);
+    setState(therapistdata.state);
+    setZipcode(therapistdata.zipcode);
+    setPicture(therapistdata.picture);
+    setSpecialties(therapistdata.specialties);
+    setAbout_me(therapistdata.about_me);
+    setPayment(therapistdata.payment);
+    setLanguages(therapistdata.languages);
+    setTherapy_id(therapistdata.id);
   }
 
+    get_by_account_id();
 
-  const navigate = useNavigate();
+}, []);
+
+
+
+
+
+//   async function YaMom(){
+//   const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client?account_id=${account_id}`);
+//   var testData = await response.json();
+//   if (response.ok){console.log(testData)}
+// }
 
   function parseJwt(data) {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
+    console.log(info);
     setAccount_id(info.account.id);
   }
 
@@ -42,11 +61,6 @@ function TherapistSignupForm() {
     const value = event.target.value;
     setName(value);
   };
-
-  const handleCityChange = (event) => {
-    const value = event.target.value;
-    setCity(value)
-  }
 
   const handleLicense_informationChange = (event) => {
     const value = event.target.value;
@@ -68,17 +82,19 @@ function TherapistSignupForm() {
     setPicture(value);
   };
 
-  const handleSpecialtiesChange = (selectedList, selectedItem) => {
-  setSelectedSpecialties(selectedList.map(item => item.value));
-};
+  const handleSpecialtiesChange = (event) => {
+    const value = event.target.value;
+    setSpecialties(value);
+  };
 
   const handleAbout_meChange = (event) => {
     const value = event.target.value;
     setAbout_me(value);
   };
 
-  const handlePaymentChange = (selectedList, selectedItem) => {
-    setSelectedPayments(selectedList.map(item => item.value));
+  const handlePaymentChange = (event) => {
+    const value = event.target.value;
+    setPayment(value);
   };
 
   const handleLanguagesChange = (event) => {
@@ -86,38 +102,25 @@ function TherapistSignupForm() {
     setLanguages(value);
   };
 
-  const handleEmailChange = (event) => {
-    const value = event.target.value;
-    setEmail(value);
-  };
-
-  const handlePhoneChange = (event) => {
-    const value = event.target.value;
-    setPhone(value);
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {};
+    console.log(data);
     data.name = name;
     data.license_information = license_information;
-    data.city = city;
     data.state = state;
     data.zipcode = zipcode;
     data.picture = picture;
-    data.specialties = selectedSpecialties;
+    data.specialties = specialties;
     data.about_me = about_me;
-    data.payment = selectedPayments;
+    data.payment = payment;
     data.languages = languages;
-    data.phone = phone;
-    data.email = email;
     data.account_id = account_id;
-    console.log(data)
 
-    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
+    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}/therapy/${therapy_id}`;
     const fetchConfig = {
-      method: "post",
+      method: "PUT",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
@@ -126,25 +129,19 @@ function TherapistSignupForm() {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
+      const newTherapist = await response.json();
+      console.log(newTherapist);
+
       setName("");
       setLicense_information("");
-      setCity("");
       setState("");
       setZipcode("");
       setPicture("");
-      setSelectedSpecialties([]);
+      setSpecialties("");
       setAbout_me("");
-      setSelectedPayments([]);
+      setPayment("");
       setLanguages("");
-      setEmail("");
-      setPhone("");
-      resetValues();
-
-      const newTherapist = await response.json();
-      console.log(newTherapist)
-      const therapist_id = newTherapist.id
-      navigate(`/therapist/detail/${therapist_id}`)
-
+      setTherapy_id("");
     }
   };
 
@@ -152,7 +149,8 @@ function TherapistSignupForm() {
     if (token) {
       parseJwt(token);
     }
-  }, [token]);
+  }, [token],
+);
 
   return (
     <div className="row">
@@ -173,6 +171,7 @@ function TherapistSignupForm() {
               />
               <label htmlFor="name">Name</label>
             </div>
+
             <div className="form-floating mb-3">
               <input
                 onChange={handleLicense_informationChange}
@@ -186,19 +185,7 @@ function TherapistSignupForm() {
               />
               <label htmlFor="license_information">License Information</label>
             </div>
-            <div className="form-floating mb-3">
-              <input
-                onChange={handleCityChange}
-                value={city}
-                placeholder="city"
-                required
-                type="text"
-                name="city"
-                id="city"
-                className="form-control"
-              />
-              <label htmlFor="city">City</label>
-            </div>
+
             <div className="form-floating mb-3">
               <input
                 onChange={handleStateChange}
@@ -229,34 +216,6 @@ function TherapistSignupForm() {
 
             <div className="form-floating mb-3">
               <input
-                onChange={handleEmailChange}
-                value={email}
-                placeholder="email"
-                required
-                type="text"
-                name="email"
-                id="email"
-                className="form-control"
-              />
-              <label htmlFor="email">Email</label>
-            </div>
-
-            <div className="form-floating mb-3">
-              <input
-                onChange={handlePhoneChange}
-                value={phone}
-                placeholder="phone"
-                required
-                type="text"
-                name="phone"
-                id="phone"
-                className="form-control"
-              />
-              <label htmlFor="phone">Phone</label>
-            </div>
-
-            <div className="form-floating mb-3">
-              <input
                 onChange={handlePictureChange}
                 value={picture}
                 placeholder="picture"
@@ -270,57 +229,17 @@ function TherapistSignupForm() {
             </div>
 
             <div className="form-floating mb-3">
-              <Multiselect
+              <input
                 onChange={handleSpecialtiesChange}
+                value={specialties}
+                placeholder="specialties"
                 required
-                value={selectedSpecialties}
-                placeholder="Specialties"
+                type="text"
                 name="specialties"
                 id="specialties"
-                className="form-select"
-                displayValue="key"
-                ref={specialtiesRef}
-                onRemove={(selectedList, removedItem) => {
-                  setSelectedSpecialties(
-                    selectedSpecialties.filter(
-                      (item) => item !== removedItem.key
-                    )
-                  );
-                }}
-                onSelect={(selectedList, selectedItem) => {
-                  setSelectedSpecialties([
-                    ...selectedSpecialties,
-                    selectedItem.key,
-                  ]);
-                }}
-                options={[
-                  {
-                    cat: "Specialty",
-                    key: "Anxiety",
-                  },
-                  {
-                    cat: "Specialty",
-                    key: "Depression",
-                  },
-                  {
-                    cat: "Specialty",
-                    key: "Individual",
-                  },
-                  {
-                    cat: "Specialty",
-                    key: "Couples",
-                  },
-                  {
-                    cat: "Specialty",
-                    key: "Child & Adolescents",
-                  },
-                  {
-                    cat: "Specialty",
-                    key: "Trauma",
-                  },
-                ]}
-                showCheckbox
+                className="form-control"
               />
+              <label htmlFor="specialties">Specialties</label>
             </div>
 
             <div className="form-floating mb-3">
@@ -338,52 +257,17 @@ function TherapistSignupForm() {
             </div>
 
             <div className="form-floating mb-3">
-              <Multiselect
+              <input
                 onChange={handlePaymentChange}
-                value={selectedPayments}
+                value={payment}
+                placeholder="payment"
                 required
+                type="text"
                 name="payment"
                 id="payment"
-                className="form-select"
-                placeholder="Payment"
-                displayValue="key"
-                ref={paymentRef}
-                onRemove={(selectedList, removedItem) => {
-                  setSelectedPayments(
-                    selectedPayments.filter((item) => item !== removedItem.key)
-                  );
-                }}
-                onSelect={(selectedList, selectedItem) => {
-                  setSelectedPayments([...selectedPayments, selectedItem.key]);
-                }}
-                options={[
-                  {
-                    cat: "Payment",
-                    key: "Cash",
-                  },
-                  {
-                    cat: "Payment",
-                    key: "Anthem",
-                  },
-                  {
-                    cat: "Payment",
-                    key: "Kaiser Permamente",
-                  },
-                  {
-                    cat: "Payment",
-                    key: "Healthnet",
-                  },
-                  {
-                    cat: "Payment",
-                    key: "State Farm",
-                  },
-                  {
-                    cat: "Payment",
-                    key: "Progressive",
-                  },
-                ]}
-                showCheckbox
+                className="form-control"
               />
+              <label htmlFor="payment">Payment</label>
             </div>
 
             <div className="form-floating mb-3">
@@ -407,4 +291,4 @@ function TherapistSignupForm() {
   );
 }
 
-export default TherapistSignupForm;
+export default TherapistUpdateForm;

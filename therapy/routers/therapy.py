@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Response
 from typing import Union, List, Optional
 from queries.therapy import (
     TherapyIn, TherapyOut,
-    TherapyRepository, Error, 
+    TherapyRepository, Error,
 )
 
 router = APIRouter()
@@ -46,3 +46,13 @@ def delete_therapy(
     return repo.delete_therapy(therapy_id)
 
 
+@router.get("/therapistacc/", response_model=Optional[TherapyOut])
+def get_client_by_account_id(
+    account_id: int,
+    response: Response,
+    repo: TherapyRepository = Depends(),
+) -> TherapyOut:
+    therapist = repo.get_therapist_by_account_id(account_id)
+    if therapist is None:
+        response.status_code = 404
+    return therapist

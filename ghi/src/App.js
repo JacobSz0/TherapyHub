@@ -12,6 +12,8 @@ import MainPage from "./MainPage.js";
 import TherapistLoginForm from "./TherapistLoginForm.js"
 import TherapistProfile from "./TherapistProfile";
 import TherapistList from "./TherapistList";
+import TherapistUpdateForm from "./TherapistUpdateForm";
+import ClientUpdateForm from "./ClientUpdateForm";
 
 
 function GetToken() {
@@ -56,6 +58,9 @@ function App() {
               <Route path="/therapist/login" element={<TherapistLoginForm />} />
               <Route path="/therapist/detail/:id" element={<TherapistProfile />} />
               <Route path="therapists/" element={<TherapistList therapists={therapists} getTherapists={getTherapists} />} />
+              <Route path="/therapist/login" element={<TherapistLoginForm />} />
+              <Route path="therapist/update" element={<TherapistUpdateForm />} />
+              <Route path="client/update" element={<ClientUpdateForm />} />
           </Routes>
           </div>
       </AuthProvider>

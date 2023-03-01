@@ -18,6 +18,8 @@ class TherapyIn(BaseModel):
     about_me: str
     payment: list
     languages: str
+    email: str
+    phone: str
     account_id : int
 
 class TherapyOut(BaseModel):
@@ -32,6 +34,8 @@ class TherapyOut(BaseModel):
     about_me: str
     payment: list
     languages: str
+    email: str
+    phone: str
     account_id : int
 
 
@@ -56,9 +60,11 @@ class TherapyRepository:
                             about_me,
                             payment,
                             languages,
+                            email,
+                            phone,
                             account_id)
                         VALUES
-                            (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
@@ -72,6 +78,8 @@ class TherapyRepository:
                             therapy.about_me,
                             therapy.payment,
                             therapy.languages,
+                            therapy.email,
+                            therapy.phone,
                             therapy.account_id,
                         ],
                     )
@@ -101,7 +109,7 @@ class TherapyRepository:
                     license_information=record[2], city=record[3], state=record[4],
                     zipcode=record[5], picture=record[6],
                     specialties=record[7], about_me=record[8], payment=record[9],
-                    languages=record[10], account_id=record[11]) for record in db]
+                    languages=record[10], email=record[11], phone=record[12], account_id=record[13]) for record in db]
         except Exception:
             return {"message": "Create did not work"}
 
@@ -122,7 +130,7 @@ class TherapyRepository:
                     license_information=record[2], city=record[3], state=record[4],
                     zipcode=record[5], picture=record[6],
                     specialties=record[7], about_me=record[8], payment=record[9],
-                    languages=record[10],account_id=record[11])
+                    languages=record[10], email=record[11], phone=record[12], account_id=record[13])
 
         except Exception as e:
             print(e)
@@ -145,6 +153,8 @@ class TherapyRepository:
                             , about_me = %s
                             , payment = %s
                             , languages = %s
+                            , email = %s
+                            , phone = %s
                             , account_id = %s
                         WHERE id = %s
                         """,
@@ -159,6 +169,8 @@ class TherapyRepository:
                             therapy.about_me,
                             therapy.payment,
                             therapy.languages,
+                            therapy.email,
+                            therapy.phone,
                             therapy.account_id,
                             therapy_id
                         ]

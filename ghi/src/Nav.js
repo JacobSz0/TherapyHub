@@ -4,7 +4,7 @@ import { useToken } from "./Authentication.js";
 function Nav() {
   const {token, logout} = useToken();
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-warning">
+    <nav className="navbar navbar-expand-lg navbar-light bg-info">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
           TherapyHub

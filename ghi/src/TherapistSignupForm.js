@@ -97,6 +97,7 @@ const handlePaymentChange = (selectedList, selectedItem) => {
     data.payment = selectedPayments;
     data.languages = languages;
     data.account_id = account_id;
+    console.log(data)
 
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
     const fetchConfig = {

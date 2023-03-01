@@ -5,7 +5,7 @@ import { Multiselect } from "multiselect-react-dropdown";
 
 
 
-function TherapistList({ therapists, getTherapists }){
+function TherapistListTest({ therapists, getTherapists }){
 
   const [selectedSpecialties, setSelectedSpecialties] = useState([]);
   const [selectedPayments, setSelectedPayments] = useState([]);
@@ -160,11 +160,11 @@ function TherapistList({ therapists, getTherapists }){
           Search
         </button>
       </form>
-      {therapists.filter(therapist =>
-   listZipcodes.includes(therapist.zipcode) &&
-   (selectedSpecialties.length === 0 || therapist.specialties.split(",").some(specialty => selectedSpecialties.includes(specialty))) &&
-   (selectedPayments.length === 0 || therapist.payment.split(",").some(payment => selectedPayments.includes(payment)))
-).map((therapist) => (
+          {therapists.filter(therapist =>
+            listZipcodes.includes(therapist.zipcode) &&
+            (selectedSpecialties.length === 0 || therapist.specialties.some(specialty => selectedSpecialties.includes(specialty))) &&
+            (selectedPayments.length === 0 || therapist.payment.some(payment => selectedPayments.includes(payment)))
+          ).map((therapist) => (
         <div key={therapist.id} className="col-sm-10">
           <div className="card bg-light mb-3">
             <div className="row g-0">
@@ -177,13 +177,28 @@ function TherapistList({ therapists, getTherapists }){
                   <h6 className="card-subtitle mb-2 text-muted">
                     {therapist.license_information}
                   </h6>
-                  <p className="card-text">
-                    {therapist.specialties}
+                    <p className="card-text">
+                    {therapist.specialties.map((specialty, i) => (
+                        <span key={i}>
+                        {specialty}
+                        {i !== therapist.specialties.length - 1 && ", "}
+                        </span>
+                    ))}
+                    </p>
+                    <p className="card-text">
+                    {therapist.payment.map((payment, i) => (
+                        <span key={i}>
+                            {payment}
+                            {i !== therapist.payment.length -1 && ", "}
+                        </span>
+                    ))}
                   </p>
                   <p className="card-text">
-                  { therapist.zipcode }
+                  { therapist.city}
                    , {' '}
                   { therapist.state }
+                   {' '}
+                  { therapist.zipcode }
                 </p>
                 <a href={`${process.env.REACT_APP_THERAPYHUB_API_HOST}therapist/detail/${therapist.id}`} className="btn btn-primary stretched-link">Learn more!</a>
                 </div>
@@ -196,85 +211,4 @@ function TherapistList({ therapists, getTherapists }){
   );
 }
 
-export default TherapistList;
-
-
-<Multiselect
-  style={{searchBox: {width: "500px"}}}
-  placeholder="Filter"
-  displayValue="key"
-  groupBy="cat"
-  onRemove={(selectedList, removedItem) => {
-    setSelectedSpecialties(selectedSpecialties.filter(item => item !== removedItem.key));
-  }}
-  onSelect={(selectedList, selectedItem) => {
-      setSelectedSpecialties([...selectedSpecialties, selectedItem.key]);
-  }}
-  options={[
-    {
-      cat: 'Specialty',
-      key: 'Anxiety'
-    },
-    {
-      cat: 'Specialty',
-      key: 'Depression'
-    },
-    {
-      cat: 'Specialty',
-      key: 'Individual'
-    },
-    {
-      cat: 'Specialty',
-      key: 'Couples'
-    },
-    {
-      cat: 'Specialty',
-      key: 'Child & Adolescents'
-    },
-    {
-      cat: 'Specialty',
-      key: 'Trauma'
-    }
-  ]}
-  showCheckbox
-/>
-
-<Multiselect
-  style={{searchBox: {width: "500px"}}}
-  placeholder="Filter"
-  displayValue="key"
-  groupBy="cat"
-  onRemove={(selectedList, removedItem) => {
-    setSelectedPayments(selectedPayments.filter(item => item !== removedItem.key));
-  }}
-  onSelect={(selectedList, selectedItem) => {
-    setSelectedPayments([...selectedPayments, selectedItem.key]);
-  }}
-  options={[
-    {
-      cat: 'Payment',
-      key: 'Cash'
-    },
-        {
-      cat: 'Payment',
-      key: 'Anthem'
-    },
-        {
-      cat: 'Payment',
-      key: 'Kaiser Permamente'
-    },
-        {
-      cat: 'Payment',
-      key: 'Healthnet'
-    },
-        {
-      cat: 'Payment',
-      key: 'State Farm'
-    },
-        {
-      cat: 'Payment',
-      key: 'Progressive'
-    }
-  ]}
-  showCheckbox
-/>
+export default TherapistListTest;

@@ -111,7 +111,7 @@ function TherapistSignupForm() {
       console.log(newTherapist)
       const therapist_id = newTherapist.id
       navigate(`/therapist/detail/${therapist_id}`)
-      
+
     }
   };
 

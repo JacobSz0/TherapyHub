@@ -36,6 +36,17 @@ def get_one_client(
         response.status_code = 404
     return client
 
+@router.get("/clientacc", response_model=Optional[ClientOut])
+def get_client_by_account_id(
+    account_id: int,
+    response: Response,
+    repo: ClientRepository = Depends(),
+) -> ClientOut:
+    client = repo.get_client_by_account_id(account_id)
+    if client is None:
+        response.status_code = 404
+    return client
+
 @router.delete("/client/{client_id}", response_model=bool)
 def delete_client(
     client_id: int,

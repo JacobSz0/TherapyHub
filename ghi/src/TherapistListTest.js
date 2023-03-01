@@ -87,7 +87,7 @@ function TherapistListTest({ therapists, getTherapists }){
 
 <Multiselect
   style={{searchBox: {width: "500px"}}}
-  placeholder="Filter"
+  placeholder="Filters"
   displayValue="key"
   groupBy="cat"
   onRemove={(selectedList, removedItem) => {
@@ -156,10 +156,8 @@ function TherapistListTest({ therapists, getTherapists }){
   ]}
   showCheckbox
 />
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Search
-        </button>
       </form>
+      <p><br></br></p>
           {therapists.filter(therapist =>
             listZipcodes.includes(therapist.zipcode) &&
             (selectedSpecialties.length === 0 || therapist.specialties.some(specialty => selectedSpecialties.includes(specialty))) &&

@@ -55,3 +55,11 @@ Today, I worked on:
 * As a group, we continued to work on our assigned features of the front-end and worked out a few kinks on the back-end.
 
 * I was able to work out all the bugs on my client login page, I was able to creat a therapist login page, and I began to working on the navbar.
+
+## February 28, 2023
+
+Today, I worked on:
+
+* As a group, we worked together to debug eachothers code and we were able to finish most of our front-end pages/forms/lists.
+
+* I was able to successfully redirect the links in both the client and therapist login pages to their respective endpoints.

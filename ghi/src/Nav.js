@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { useToken } from "./Authentication.js";
 
 function Nav() {
+  const {token, logout} = useToken();
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-info">
+    <nav className="navbar navbar-expand-lg navbar-light bg-warning">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
           TherapyHub
@@ -29,6 +31,13 @@ function Nav() {
               <NavLink className="nav-link" to="/therapist/login">
                 Therapist
               </NavLink>
+            </li>
+            <li className="nav-item">
+              {token ? (
+                <button className="btn" onClick={logout}>
+                  Logout
+                </button>
+              ): null }
             </li>
           </ul>
         </div>

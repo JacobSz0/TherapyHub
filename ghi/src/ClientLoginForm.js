@@ -56,7 +56,13 @@ function ClientLoginForm() {
               <label htmlFor="password">password</label>
             </div>
             <button className="btn btn-primary">Submit</button>
-            <button type="button" className="btn btn-link">
+            <button
+              type="button"
+              className="btn btn-link"
+              onClick={() =>
+                (window.location.href = `/account`)
+              }
+            >
               Don't have an account? Register here!
             </button>
           </form>

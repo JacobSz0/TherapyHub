@@ -10,7 +10,8 @@ import { useToken, AuthProvider } from "./Authentication.js";
 import React, { useState, useEffect } from "react";
 import MainPage from "./MainPage.js";
 import TherapistLoginForm from "./TherapistLoginForm.js"
-import TherapistList from './TherapistList'
+import TherapistProfile from "./TherapistProfile";
+import TherapistList from "./TherapistList";
 import TherapistUpdateForm from "./TherapistUpdateForm";
 import ClientUpdateForm from "./ClientUpdateForm";
 
@@ -55,6 +56,7 @@ function App() {
               <Route path="/client/login" element={<ClientLoginForm />} />
               <Route path="/therapist/:username" element={<TherapistSignupForm />} />
               <Route path="/therapist/login" element={<TherapistLoginForm />} />
+              <Route path="/therapist/detail/:id" element={<TherapistProfile />} />
               <Route path="therapists/" element={<TherapistList therapists={therapists} getTherapists={getTherapists} />} />
               <Route path="/therapist/login" element={<TherapistLoginForm />} />
               <Route path="therapist/update" element={<TherapistUpdateForm />} />
@@ -67,32 +69,3 @@ function App() {
 }
 
 export default App;
-
-// const [launch_info, setLaunchInfo] = useState([]);
-// const [error, setError] = useState(null);
-
-// useEffect(() => {
-//   async function getData() {
-//     let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-//     console.log('fastapi url: ', url);
-//     let response = await fetch(url);
-//     console.log("------- hello? -------");
-//     let data = await response.json();
-
-//     if (response.ok) {
-//       console.log("got launch data!");
-//       setLaunchInfo(data.launch_details);
-//     } else {
-//       console.log("drat! something happened");
-//       setError(data.message);
-//     }
-//   }
-//   getData();
-// }, [])
-
-// return (
-//   <div>
-//     <ErrorNotification error={error} />
-//     <Construct info={launch_info} />
-//   </div>
-// );

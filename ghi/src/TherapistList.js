@@ -83,6 +83,7 @@ function TherapistList({ therapists, getTherapists }){
           Search
         </button>
       </form>
+      <p><br></br></p>
       {therapists.filter(therapist => listZipcodes.includes(therapist.zipcode)).map((therapist) => (
         <div key={therapist.id} className="col-sm-10">
           <div className="card bg-light mb-3">

@@ -44,6 +44,8 @@ steps = [
             About_me TEXT NOT NULL,
             payment TEXT [],
             languages TEXT NOT NULL,
+            email VARCHAR(100) NOT NULL,
+            phone VARCHAR(100) NOT NULL,
             account_id INTEGER NOT NULL REFERENCES accounts(id)
         );
         """,

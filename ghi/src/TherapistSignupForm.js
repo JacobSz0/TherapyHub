@@ -12,6 +12,8 @@ function TherapistSignupForm() {
   const [picture, setPicture] = useState("");
   const [about_me, setAbout_me] = useState("");
   const [languages, setLanguages] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [account_id, setAccount_id] = useState("");
   const [city, setCity] = useState("");
   const { token, login } = useToken();
@@ -75,13 +77,23 @@ function TherapistSignupForm() {
     setAbout_me(value);
   };
 
-const handlePaymentChange = (selectedList, selectedItem) => {
-  setSelectedPayments(selectedList.map(item => item.value));
-};
+  const handlePaymentChange = (selectedList, selectedItem) => {
+    setSelectedPayments(selectedList.map(item => item.value));
+  };
 
   const handleLanguagesChange = (event) => {
     const value = event.target.value;
     setLanguages(value);
+  };
+
+  const handleEmailChange = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+  };
+
+  const handlePhoneChange = (event) => {
+    const value = event.target.value;
+    setPhone(value);
   };
 
   const handleSubmit = async (event) => {
@@ -98,6 +110,8 @@ const handlePaymentChange = (selectedList, selectedItem) => {
     data.about_me = about_me;
     data.payment = selectedPayments;
     data.languages = languages;
+    data.phone = phone;
+    data.email = email;
     data.account_id = account_id;
     console.log(data)
 
@@ -122,6 +136,8 @@ const handlePaymentChange = (selectedList, selectedItem) => {
       setAbout_me("");
       setSelectedPayments([]);
       setLanguages("");
+      setEmail("");
+      setPhone("");
       resetValues();
 
       const newTherapist = await response.json();
@@ -214,6 +230,34 @@ const handlePaymentChange = (selectedList, selectedItem) => {
 
             <div className="form-floating mb-3">
               <input
+                onChange={handleEmailChange}
+                value={email}
+                placeholder="email"
+                required
+                type="text"
+                name="email"
+                id="email"
+                className="form-control"
+              />
+              <label htmlFor="email">Email</label>
+            </div>
+
+            <div className="form-floating mb-3">
+              <input
+                onChange={handlePhoneChange}
+                value={phone}
+                placeholder="phone"
+                required
+                type="text"
+                name="phone"
+                id="phone"
+                className="form-control"
+              />
+              <label htmlFor="phone">Phone</label>
+            </div>
+
+            <div className="form-floating mb-3">
+              <input
                 onChange={handlePictureChange}
                 value={picture}
                 placeholder="picture"
@@ -229,7 +273,8 @@ const handlePaymentChange = (selectedList, selectedItem) => {
             <div className="form-floating mb-3">
               <Multiselect
                 onChange={handleSpecialtiesChange}
-                required value={selectedSpecialties}
+                required
+                value={selectedSpecialties}
                 placeholder="Specialties"
                 name="specialties"
                 id="specialties"
@@ -237,36 +282,43 @@ const handlePaymentChange = (selectedList, selectedItem) => {
                 displayValue="key"
                 ref={specialtiesRef}
                 onRemove={(selectedList, removedItem) => {
-                  setSelectedSpecialties(selectedSpecialties.filter(item => item !== removedItem.key));
+                  setSelectedSpecialties(
+                    selectedSpecialties.filter(
+                      (item) => item !== removedItem.key
+                    )
+                  );
                 }}
                 onSelect={(selectedList, selectedItem) => {
-                    setSelectedSpecialties([...selectedSpecialties, selectedItem.key]);
+                  setSelectedSpecialties([
+                    ...selectedSpecialties,
+                    selectedItem.key,
+                  ]);
                 }}
                 options={[
                   {
-                    cat: 'Specialty',
-                    key: 'Anxiety'
+                    cat: "Specialty",
+                    key: "Anxiety",
                   },
                   {
-                    cat: 'Specialty',
-                    key: 'Depression'
+                    cat: "Specialty",
+                    key: "Depression",
                   },
                   {
-                    cat: 'Specialty',
-                    key: 'Individual'
+                    cat: "Specialty",
+                    key: "Individual",
                   },
                   {
-                    cat: 'Specialty',
-                    key: 'Couples'
+                    cat: "Specialty",
+                    key: "Couples",
                   },
                   {
-                    cat: 'Specialty',
-                    key: 'Child & Adolescents'
+                    cat: "Specialty",
+                    key: "Child & Adolescents",
                   },
                   {
-                    cat: 'Specialty',
-                    key: 'Trauma'
-                  }
+                    cat: "Specialty",
+                    key: "Trauma",
+                  },
                 ]}
                 showCheckbox
               />
@@ -288,7 +340,7 @@ const handlePaymentChange = (selectedList, selectedItem) => {
 
             <div className="form-floating mb-3">
               <Multiselect
-                  onChange={handlePaymentChange}
+                onChange={handlePaymentChange}
                 value={selectedPayments}
                 required
                 name="payment"
@@ -298,36 +350,38 @@ const handlePaymentChange = (selectedList, selectedItem) => {
                 displayValue="key"
                 ref={paymentRef}
                 onRemove={(selectedList, removedItem) => {
-                  setSelectedPayments(selectedPayments.filter(item => item !== removedItem.key));
+                  setSelectedPayments(
+                    selectedPayments.filter((item) => item !== removedItem.key)
+                  );
                 }}
                 onSelect={(selectedList, selectedItem) => {
                   setSelectedPayments([...selectedPayments, selectedItem.key]);
                 }}
                 options={[
                   {
-                    cat: 'Payment',
-                    key: 'Cash'
+                    cat: "Payment",
+                    key: "Cash",
                   },
-                      {
-                    cat: 'Payment',
-                    key: 'Anthem'
+                  {
+                    cat: "Payment",
+                    key: "Anthem",
                   },
-                      {
-                    cat: 'Payment',
-                    key: 'Kaiser Permamente'
+                  {
+                    cat: "Payment",
+                    key: "Kaiser Permamente",
                   },
-                      {
-                    cat: 'Payment',
-                    key: 'Healthnet'
+                  {
+                    cat: "Payment",
+                    key: "Healthnet",
                   },
-                      {
-                    cat: 'Payment',
-                    key: 'State Farm'
+                  {
+                    cat: "Payment",
+                    key: "State Farm",
                   },
-                      {
-                    cat: 'Payment',
-                    key: 'Progressive'
-                  }
+                  {
+                    cat: "Payment",
+                    key: "Progressive",
+                  },
                 ]}
                 showCheckbox
               />

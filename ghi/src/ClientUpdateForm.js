@@ -12,34 +12,37 @@ function ClientUpdateForm() {
   const [client_id, setClient_id] = useState("");
   const { token, login } = useToken();
 
-  useEffect(() => {
-    async function get_by_account_id() {
-    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc/?account_id=${account_id}`);
-      var clientdata = await response.json();
-      setName(clientdata.name);
-      setCity(clientdata.city);
-      setState(clientdata.state);
-      setAdditional_notes(clientdata.additional_notes);
-      setWish_list(clientdata.wish_list);
-      setClient_id(clientdata.id);
-    }
-
-    get_by_account_id();
-  }, []);
-
-  //   async function YaMom(){
-  //   const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client?account_id=${account_id}`);
-  //   var testData = await response.json();
-  //   if (response.ok){console.log(testData)}
-  // }
+  async function get_by_account_id(acc_id) {
+    const response = await fetch(
+      `${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc?account_id=${acc_id}`
+    );
+    var clientdata = await response.json();
+    console.log(clientdata)
+    setName(clientdata.name);
+    setCity(clientdata.city);
+    setState(clientdata.state);
+    setAdditional_notes(clientdata.additional_notes);
+    setWish_list(clientdata.wish_list);
+    setClient_id(clientdata.id);
+  }
 
   function parseJwt(data) {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
     // console.log(info);
-    setAccount_id(info.account.id);
+    return info.account.id;
   }
+
+  useEffect(() => {
+    async function getData() {
+      if (token) {
+        const acc_id = parseJwt(token);
+        get_by_account_id(acc_id);
+      }
+    }
+    getData();
+  }, [token]);
 
   const handleNameChange = (event) => {
     const value = event.target.value;
@@ -66,10 +69,10 @@ function ClientUpdateForm() {
     setAdditional_notes(value);
   };
 
-  const handleWishListChange = (event) => {
-    event.preventDefault();
-    setWish_list([...wish_list, ""]);
-  };
+  // const handleWishListChange = (event) => {
+  //   event.preventDefault();
+  //   setWish_list([...wish_list, ""]);
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -109,15 +112,10 @@ function ClientUpdateForm() {
       setState("");
       setZipcode("");
       setAdditional_notes("");
-      setClient_id("");
+      // setClient_id("");
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      parseJwt(token);
-    }
-  }, [token]);
 
   return (
     <div className="container">

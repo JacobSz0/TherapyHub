@@ -43,7 +43,7 @@ def delete_client(
 ) -> bool:
     return repo.delete_client(client_id)
 
-@router.get("/clientacc/{account_id}", response_model=Optional[ClientOut])
+@router.get("/clientacc/", response_model=Optional[ClientOut])
 def get_client_by_account_id(
     account_id: int,
     response: Response,

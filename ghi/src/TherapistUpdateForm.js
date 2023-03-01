@@ -20,7 +20,7 @@ function TherapistUpdateForm() {
 useEffect(() => {
   async function get_by_account_id() {
     const response = await fetch(
-      `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapistacc?account_id=${account_id}`
+      `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapistacc/?account_id=${account_id}`
     );
     var therapistdata = await response.json();
     setName(therapistdata.name);

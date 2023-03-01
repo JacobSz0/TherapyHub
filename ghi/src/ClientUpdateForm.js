@@ -9,21 +9,19 @@ function ClientUpdateForm() {
   const [additional_notes, setAdditional_notes] = useState("");
   const [account_id, setAccount_id] = useState("");
   const [wish_list, setWish_list] = useState([]);
-  const { token, login } = useToken();
   const [client_id, setClient_id] = useState("");
+  const { token, login } = useToken();
 
   useEffect(() => {
     async function get_by_account_id() {
-    const response = await fetch(
-        `${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc/${account_id}`
-      );
+    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc/?account_id=${account_id}`);
       var clientdata = await response.json();
       setName(clientdata.name);
       setCity(clientdata.city);
       setState(clientdata.state);
       setAdditional_notes(clientdata.additional_notes);
-      setAccount_id(clientdata.account_id);
       setWish_list(clientdata.wish_list);
+      setClient_id(clientdata.id);
     }
 
     get_by_account_id();
@@ -77,6 +75,7 @@ function ClientUpdateForm() {
     event.preventDefault();
 
     const data = {};
+    // data.id=client_id;
     data.name = name;
     data.city = city;
     data.state = state;
@@ -85,9 +84,15 @@ function ClientUpdateForm() {
     data.account_id = account_id;
     data.wish_list = wish_list;
 
-    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}/client/${client_id}`;
+    //   async function YaMom(){
+    //   const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client?account_id=${account_id}`);
+    //   var testData = await response.json();
+    //   if (response.ok){console.log(testData)}
+    // }
+
+    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}client/client_id=${client_id}`;
     const fetchConfig = {
-      method: "put",
+      method: "PUT",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
@@ -186,7 +191,7 @@ function ClientUpdateForm() {
                 />
                 <label htmlFor="additional_notes">Notes</label>
               </div>
-              <button className="btn btn-success btn-primary">Create</button>
+              <button className="btn btn-success btn-primary">UPDATE</button>
             </form>
           </div>
         </div>

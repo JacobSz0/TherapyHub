@@ -1,78 +1,147 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useToken } from "./Authentication";
+import { useParams } from "react-router-dom";
 
-const TherapistProfile = () => {
-  const [profileData, setProfileData] = useState({
-    id: 0,
-    name: "",
-    license_information: "",
-    state: "",
-    zipcode: 0,
-    picture: "",
-    specialties: "",
-    about_me: "",
-    payment: "",
-    languages: "",
-    account_id: 0
-  });
+function  TherapistProfile (){
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setProfileData({ ...profileData, [name]: value });
+  const [therapist, setTherapistDetail] = useState({});
+  const {id} = useParams();
+  const { token, login } = useToken();
+
+
+  const fetchTherapist = async () => {
+    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy/${id}`
+    const response = await fetch (url)
+        if (response.ok){
+            const data = await response.json();
+            console.log("data******",data)
+            setTherapistDetail(data)
   }
+  
+  
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = {}
-        data.name
-        data.license_information = city;
-        data.state = state;
-        data.zipcode = zipcode;
-        data.additional_notes = additional_notes;
-        data.account_id = account_id;
-        data.wish_list = wish_list
-        
-        const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy${id}`;
-        const fetchConfig = {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-            'Content-Type': 'application/json',
-            },
-        }
   }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Name:</label>
-      <input type="text" name="name" value={profileData.name} onChange={handleChange} />
-
-      <label htmlFor="license_information">License Information:</label>
-      <input type="text" name="license_information" value={profileData.license_information} onChange={handleChange} />
-
-      <label htmlFor="state">State:</label>
-      <input type="text" name="state" value={profileData.state} onChange={handleChange} />
-
-      <label htmlFor="zipcode">Zipcode:</label>
-      <input type="number" name="zipcode" value={profileData.zipcode} onChange={handleChange} />
-
-      <label htmlFor="picture">Picture:</label>
-      <input type="text" name="picture" value={profileData.picture} onChange={handleChange} />
-
-      <label htmlFor="specialties">Specialties:</label>
-      <input type="text" name="specialties" value={profileData.specialties} onChange={handleChange} />
-
-      <label htmlFor="about_me">About Me:</label>
-      <input type="text" name="about_me" value={profileData.about_me} onChange={handleChange} />
-
-      <label htmlFor="payment">Payment:</label>
-      <input type="text" name="payment" value={profileData.payment} onChange={handleChange} />
-
-      <label htmlFor="languages">Languages:</label>
-      <input type="text" name="languages" value={profileData.languages} onChange={handleChange} />
-
-      <button type="submit">Save Profile</button>
-    </form>
-  );
-};
+  useEffect (() => {
+        fetchTherapist();
+    }, [])
+ return (
+  <div className="row">
+  <p> <br></br> </p>
+  <h1 className="text-center">Therapist Profile</h1>
+  <div className="row justify-content-center">
+        <div className="col-sm-10">
+          <div className="card bg-light mb-3">
+            <div className="row g-0">
+              <div className="col-md-4 d-flex justify-content-center align-items-center">
+                <img src={therapist.picture} className="col-md-4 d-flex justify-content-center align-items-center" alt="Therapist" />
+              </div>
+              <div className="col-md-8">
+                <div className="card-body">
+              <div className="form-floating mb-3">
+              <input
+                defaultValue={therapist.name}
+                placeholder="Name"
+                required
+                type="text"
+                name="Name"
+                id="Name"
+                className="form-control"
+              />
+              <label htmlFor="Name">Name</label>
+              </div>
+              <div className="form-floating mb-3">
+              <input
+                defaultValue={therapist.license_information}
+                placeholder="license_information"
+                required
+                type="text"
+                name="license_information"
+                id="license_information"
+                className="form-control"
+              />
+              <label htmlFor="license_information">License Information</label>
+              </div>
+              <div className="form-floating mb-3">
+              <input
+                defaultValue={therapist.state}
+                placeholder="state"
+                required
+                type="text"
+                name="state"
+                id="state"
+                className="form-control"
+              />
+              <label htmlFor="state">State</label>
+              </div>
+              <div className="form-floating mb-3">
+              <input
+                defaultValue={therapist.zipcode}
+                placeholder="zipcode"
+                required
+                type="text"
+                name="zipcode"
+                id="zipcode"
+                className="form-control"
+              />
+              <label htmlFor="zipcode">Zip code</label>
+              </div>
+            <div className="form-floating mb-3">
+              <input
+                defaultValue={therapist.about_me}
+                placeholder="about_me"
+                required
+                type="text"
+                name="about_me"
+                id="about_me"
+                className="form-control"
+              />
+              <label htmlFor="about_me">About Me</label>
+              </div>
+            <div className="form-floating mb-3">
+              <input
+                defaultValue={therapist.specialties}
+                placeholder="specialties"
+                required
+                type="text"
+                name="specialties"
+                id="specialties"
+                className="form-control"
+              />
+              <label htmlFor="specialties">Specialties</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                defaultValue={therapist.payment}
+                placeholder="payment"
+                required
+                type="text"
+                name="payment"
+                id="payment"
+                className="form-control"
+              />
+              <label htmlFor="payment">Payment</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                defaultValue={therapist.languages}
+                placeholder="languages"
+                required
+                type="text"
+                name="languages"
+                id="languages"
+                className="form-control"
+              />
+              <label htmlFor="languages">Languages</label>
+            </div>
+                <a href="#" className="btn btn-primary stretched-link">add to wish list!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+ )
+}
 
 export default TherapistProfile;

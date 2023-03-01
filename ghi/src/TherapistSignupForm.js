@@ -1,6 +1,8 @@
 import React, {useRef, useEffect, useState } from "react";
-import { useToken } from "./Authentication";
+import { useToken } from "./Authentication"
+import { useNavigate } from 'react-router-dom';
 import { Multiselect } from "multiselect-react-dropdown";
+
 
 function TherapistSignupForm() {
   const [name, setName] = useState("");
@@ -25,7 +27,7 @@ function TherapistSignupForm() {
   }
 
 
-
+  const navigate = useNavigate();
 
   function parseJwt(data) {
     const base64Url = data.split(".")[1];
@@ -110,8 +112,6 @@ const handlePaymentChange = (selectedList, selectedItem) => {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      const newTherapist = await response.json();
-
       setName("");
       setLicense_information("");
       setCity("");
@@ -123,6 +123,12 @@ const handlePaymentChange = (selectedList, selectedItem) => {
       setSelectedPayments([]);
       setLanguages("");
       resetValues();
+
+      const newTherapist = await response.json();
+      console.log(newTherapist)
+      const therapist_id = newTherapist.id
+      navigate(`/therapist/detail/${therapist_id}`)
+
     }
   };
 

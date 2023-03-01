@@ -87,5 +87,12 @@ Today, I worked on;
 * access to token and decode it.
 
 Today, I worked on accessing and decoding a token. Finally, I was able to successfully access the account_id by implementing authentication in the front end and passing the token value to app.js. With this, I was able to successfully add the value account-id when the client fill out the add information form. 
- 
+
+## February 28, 2023
+
+Today, I worked on;
+
+* create a therapist profile
+
+ I worked on creating a therapist profile. I successfully created the profile and now therapists have access to their detail page. Additionally, I merged our changes to the main branch, ensuring it is up-to-date. I also collaborated with Jacob to implement the 'add to wishlist' button.", we haven't be able to make it work yet. 
  

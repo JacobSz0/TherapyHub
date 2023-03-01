@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useToken } from "./Authentication"
-
+import { useNavigate } from 'react-router-dom';
 
 function TherapistSignupForm() {
 
@@ -16,7 +16,7 @@ function TherapistSignupForm() {
   const [account_id, setAccount_id] = useState("");
   const { token, login } = useToken();
 
-
+  const navigate = useNavigate();
 
   function parseJwt(data) {
   const base64Url = data.split(".")[1];
@@ -98,9 +98,6 @@ function TherapistSignupForm() {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      const newTherapist = await response.json();
-      console.log(newTherapist);
-
       setName("");
       setLicense_information("");
       setState("");
@@ -110,6 +107,11 @@ function TherapistSignupForm() {
       setAbout_me("");
       setPayment("");
       setLanguages("");
+      const newTherapist = await response.json();
+      console.log(newTherapist)
+      const therapist_id = newTherapist.id
+      navigate(`/therapist/detail/${therapist_id}`)
+
     }
   };
 

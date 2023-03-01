@@ -87,42 +87,77 @@ function AccountSignupForm(){
     }, [])
 
     return (
-
-        <div className="container">
+      <div className="container">
         <div className="row">
           <div className="offset-3 col-6">
             <div className="shadow p-4 mt-4">
               <h1>Create account</h1>
-              <form onSubmit ={handleCreateAccount} id="create-new-client-form">
+              <form onSubmit={handleCreateAccount} id="create-new-client-form">
                 <div className="form-floating mb-3">
-                  <input onChange={handleUsernameChange} placeholder="username" required type="text" name="username" id="username" className="form-control" value={username}/>
+                  <input
+                    onChange={handleUsernameChange}
+                    placeholder="username"
+                    required
+                    type="text"
+                    name="username"
+                    id="username"
+                    className="form-control"
+                    value={username}
+                  />
                   <label htmlFor="username">Username</label>
                 </div>
                 <div className="form-floating mb-3">
-                  <input onChange={handleEmailChange} placeholder="email" required type="email" name="email" id="email" className="form-control" value={email}/>
+                  <input
+                    onChange={handleEmailChange}
+                    placeholder="email"
+                    required
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="form-control"
+                    value={email}
+                    autoComplete="username"
+                  />
                   <label htmlFor="email">email@example.com</label>
                 </div>
                 <div className="form-floating mb-3">
-                  <input onChange={handlePasswordChange} placeholder="password" required type="password" name="password" id="password" className="form-control"  value={password}/>
+                  <input
+                    onChange={handlePasswordChange}
+                    placeholder="password"
+                    required
+                    type="password"
+                    name="password"
+                    id="password"
+                    className="form-control"
+                    value={password}
+                    autoComplete="email"
+                  />
                   <label htmlFor="password">Password</label>
                 </div>
                 <div>
-                <select onChange={handleRoleIdChange} required name="role_id" id="role_id" className="form-select" >
-                  <option>Choose role</option>
-                  {roleIds.map((role, index) => (
-                  <option key={index} value={role.id}>
-                    {role.role}
-                  </option>
-                ))}
-                </select>
+                  <select
+                    onChange={handleRoleIdChange}
+                    required
+                    name="role_id"
+                    id="role_id"
+                    className="form-select"
+                    autoComplete="current-password"
+                  >
+                    <option>Choose role</option>
+                    {roleIds.map((role, index) => (
+                      <option key={index} value={role.id}>
+                        {role.role}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-                <button className="btn btn-success btn-primary">Create</button>
+                <button className="btn btn-primary">Create</button>
               </form>
             </div>
           </div>
         </div>
       </div>
- )
+    );
 }
 
 export default AccountSignupForm

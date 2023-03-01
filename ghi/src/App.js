@@ -10,7 +10,9 @@ import { useToken, AuthProvider } from "./Authentication.js";
 import React, { useState, useEffect } from "react";
 import MainPage from "./MainPage.js";
 import TherapistLoginForm from "./TherapistLoginForm.js"
+import TherapistProfile from "./TherapistProfile";
 import TherapistList from "./TherapistList";
+
 
 function GetToken() {
   useToken();
@@ -52,6 +54,7 @@ function App() {
               <Route path="/client/login" element={<ClientLoginForm />} />
               <Route path="/therapist/:username" element={<TherapistSignupForm />} />
               <Route path="/therapist/login" element={<TherapistLoginForm />} />
+              <Route path="/therapist/detail/:id" element={<TherapistProfile />} />
               <Route path="therapists/" element={<TherapistList therapists={therapists} getTherapists={getTherapists} />} />
           </Routes>
           </div>

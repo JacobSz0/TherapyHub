@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Multiselect } from "multiselect-react-dropdown";
 
 
-function TherapistList({ therapists, getTherapists }){
+function TherapistList({ therapists }){
 
   const [selectedSpecialties, setSelectedSpecialties] = useState([]);
   const [selectedPayments, setSelectedPayments] = useState([]);
@@ -37,10 +37,10 @@ function TherapistList({ therapists, getTherapists }){
     handleSearch();
   }, [zip_code, radius]);
 
-  const handleSearch = (event) => {
-    event.preventDefault();
-    setSearchParams({ zip_code, radius });
-  };
+  // const handleSearch = (event) => {
+  //   event.preventDefault();
+  //   setSearchParams({ zip_code, radius });
+  // };
 
   const handleZipcodeChange = (event) => {
     const value = event.target.value

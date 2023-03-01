@@ -17,8 +17,8 @@ function  TherapistProfile (){
             console.log("data******",data)
             setTherapistDetail(data)
   }
-  
-  
+
+
 
   }
   useEffect (() => {

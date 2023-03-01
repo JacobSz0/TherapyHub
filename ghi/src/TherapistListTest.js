@@ -64,13 +64,12 @@ function TherapistListTest({ therapists, getTherapists }){
 
   return (
     <div className="row justify-content-center">
-      <form onSubmit={handleSearch} className="form-inline mt-3">
+      <form className="form-inline mt-3">
         <input
           onChange={handleZipcodeChange}
           className="form-control mr-sm-2 search-input"
           type="search"
           placeholder="Zipcode"
-          aria-label="Search"
           value={zip_code}
         />
         <label>Zipcode</label>
@@ -80,7 +79,6 @@ function TherapistListTest({ therapists, getTherapists }){
           className="form-control mr-sm-2 search-input"
           type="search"
           placeholder="Miles"
-          aria-label="Search"
           value={radius}
         />
         <label>Radius(Miles)</label>
@@ -198,7 +196,7 @@ function TherapistListTest({ therapists, getTherapists }){
                    {' '}
                   { therapist.zipcode }
                 </p>
-                <a href={`${process.env.REACT_APP_THERAPYHUB_API_HOST}therapist/detail/${therapist.id}`} className="btn btn-primary stretched-link">Learn more!</a>
+                <a href={`/therapist/detail/${therapist.id}`} className="btn btn-primary stretched-link">Learn more!</a>
                 </div>
               </div>
             </div>

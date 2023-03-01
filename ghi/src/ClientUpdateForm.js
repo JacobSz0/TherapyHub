@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useToken } from "./Authentication";
+import { useNavigate } from "react-router-dom";
 
 function ClientUpdateForm() {
   const [name, setName] = useState("");
@@ -12,6 +13,9 @@ function ClientUpdateForm() {
   const [client_id, setClient_id] = useState("");
   const { token, login } = useToken();
 
+  const navigate = useNavigate();
+
+
   async function get_by_account_id(acc_id) {
     const response = await fetch(
       `${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc?account_id=${acc_id}`
@@ -21,6 +25,7 @@ function ClientUpdateForm() {
     setName(clientdata.name);
     setCity(clientdata.city);
     setState(clientdata.state);
+    setZipcode(clientdata.zipcode);
     setAdditional_notes(clientdata.additional_notes);
     setWish_list(clientdata.wish_list);
     setClient_id(clientdata.id);
@@ -31,7 +36,6 @@ function ClientUpdateForm() {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
-    // console.log(info);
     return info.account.id;
   }
 
@@ -70,16 +74,10 @@ function ClientUpdateForm() {
     setAdditional_notes(value);
   };
 
-  // const handleWishListChange = (event) => {
-  //   event.preventDefault();
-  //   setWish_list([...wish_list, ""]);
-  // };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {};
-    // data.id=client_id;
     data.name = name;
     data.city = city;
     data.state = state;
@@ -87,12 +85,6 @@ function ClientUpdateForm() {
     data.additional_notes = additional_notes;
     data.account_id = account_id;
     data.wish_list = wish_list;
-
-    //   async function YaMom(){
-    //   const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client?account_id=${account_id}`);
-    //   var testData = await response.json();
-    //   if (response.ok){console.log(testData)}
-    // }
 
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${client_id}`;
     const fetchConfig = {
@@ -113,7 +105,9 @@ function ClientUpdateForm() {
       setState("");
       setZipcode("");
       setAdditional_notes("");
-      // setClient_id("");
+
+
+      navigate(0);
     }
   };
 
@@ -123,7 +117,7 @@ function ClientUpdateForm() {
       <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
-            <h1>Add information</h1>
+            <h1>Edit Profile</h1>
             <form onSubmit={handleSubmit} id="create-new-employee-form">
               <div className="form-floating mb-3">
                 <input

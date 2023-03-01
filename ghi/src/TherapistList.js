@@ -11,8 +11,6 @@ function TherapistList({ therapists, getTherapists }){
   const [listZipcodes, setListZipcodes] = useState([]);
   const [zip_code, setZipCode] = useState(searchParams.get('zip_code'));
   const [radius, setRadius] = useState(searchParams.get('radius'));
-  console.log(selectedSpecialties)
-  console.log(selectedPayments)
 
   useEffect(() => {
     const handleSearch = async () => {
@@ -34,7 +32,6 @@ function TherapistList({ therapists, getTherapists }){
       if (response.ok) {
         const listZipcodes = await response.json();
         setListZipcodes(listZipcodes);
-        console.log(listZipcodes);
       }
     };
     handleSearch();

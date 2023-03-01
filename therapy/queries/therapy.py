@@ -123,7 +123,7 @@ class TherapyRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not view that therapist"}
-    
+
     def update_therapy(self, therapy_id: int, therapy: TherapyIn) -> Union[TherapyOut, Error]:
         try:
             with pool.connection() as conn:
@@ -179,7 +179,25 @@ class TherapyRepository:
             print(e)
             return False
 
+    def get_therapist_by_account_id(self, account_id: int) -> Optional[TherapyOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT *
+                        FROM therapy
+                        WHERE account_id = %s
+                        """,
+                        [account_id]
+                    )
+                    record = result.fetchone()
+                    return TherapyOut(id=record[0], name=record[1],
+                    license_information=record[2], state=record[3],
+                    zipcode=record[4], picture=record[5],
+                    specialties=record[6], about_me=record[7], payment=record[8],
+                    languages=record[9],account_id=record[10])
 
-
-
-
+        except Exception as e:
+            print(e)
+            return {"message": "Could not view that therapist"}

@@ -24,6 +24,7 @@ function ClientUpdateForm() {
     setAdditional_notes(clientdata.additional_notes);
     setWish_list(clientdata.wish_list);
     setClient_id(clientdata.id);
+    setAccount_id(clientdata.account_id)
   }
 
   function parseJwt(data) {
@@ -93,7 +94,7 @@ function ClientUpdateForm() {
     //   if (response.ok){console.log(testData)}
     // }
 
-    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}client/client_id=${client_id}`;
+    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${client_id}`;
     const fetchConfig = {
       method: "PUT",
       body: JSON.stringify(data),

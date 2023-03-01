@@ -36,12 +36,13 @@ steps = [
             id SERIAL PRIMARY KEY NOT NULL,
             name VARCHAR(100) NOT NULL,
             license_information VARCHAR(100) NOT NULL,
+            city VARCHAR(100) NOT NULL,
             state VARCHAR(100) NOT NULL,
             zipcode INTEGER NOT NULL,
             picture TEXT NOT NULL,
-            specialties TEXT NOT NULL,
+            specialties TEXT [],
             About_me TEXT NOT NULL,
-            payment TEXT NOT NULL,
+            payment TEXT [],
             languages TEXT NOT NULL,
             account_id INTEGER NOT NULL REFERENCES accounts(id)
         );

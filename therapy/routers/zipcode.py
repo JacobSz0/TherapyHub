@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, Response
 from typing import Union, List, Optional
-import requests, json
+import json
+import requests
 
 router = APIRouter()
 

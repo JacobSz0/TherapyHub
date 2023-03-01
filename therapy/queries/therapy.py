@@ -10,12 +10,13 @@ class Error(BaseModel):
 class TherapyIn(BaseModel):
     name: str
     license_information: str
+    city: str
     state: str
     zipcode: int
     picture: str
-    specialties: str
+    specialties: list
     about_me: str
-    payment: str
+    payment: list
     languages: str
     account_id : int
 
@@ -23,12 +24,13 @@ class TherapyOut(BaseModel):
     id: int
     name: str
     license_information: str
+    city: str
     state: str
     zipcode: int
     picture: str
-    specialties: str
+    specialties: list
     about_me: str
-    payment: str
+    payment: list
     languages: str
     account_id : int
 
@@ -46,6 +48,7 @@ class TherapyRepository:
                         INSERT INTO therapy
                             (name,
                             license_information,
+                            city,
                             state,
                             zipcode,
                             picture,
@@ -55,12 +58,13 @@ class TherapyRepository:
                             languages,
                             account_id)
                         VALUES
-                            (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
                             therapy.name,
                             therapy.license_information,
+                            therapy.city,
                             therapy.state,
                             therapy.zipcode,
                             therapy.picture,
@@ -94,10 +98,10 @@ class TherapyRepository:
                     )
                     print(result)
                     return [TherapyOut(id=record[0], name=record[1],
-                    license_information=record[2], state=record[3],
-                    zipcode=record[4], picture=record[5],
-                    specialties=record[6], about_me=record[7], payment=record[8],
-                    languages=record[9], account_id=record[10]) for record in db]
+                    license_information=record[2], city=record[3], state=record[4],
+                    zipcode=record[5], picture=record[6],
+                    specialties=record[7], about_me=record[8], payment=record[9],
+                    languages=record[10], account_id=record[11]) for record in db]
         except Exception:
             return {"message": "Create did not work"}
 
@@ -115,15 +119,15 @@ class TherapyRepository:
                     )
                     record = result.fetchone()
                     return TherapyOut(id=record[0], name=record[1],
-                    license_information=record[2], state=record[3],
-                    zipcode=record[4], picture=record[5],
-                    specialties=record[6], about_me=record[7], payment=record[8],
-                    languages=record[9],account_id=record[10])
+                    license_information=record[2], city=record[3], state=record[4],
+                    zipcode=record[5], picture=record[6],
+                    specialties=record[7], about_me=record[8], payment=record[9],
+                    languages=record[10],account_id=record[11])
 
         except Exception as e:
             print(e)
             return {"message": "Could not view that therapist"}
-    
+
     def update_therapy(self, therapy_id: int, therapy: TherapyIn) -> Union[TherapyOut, Error]:
         try:
             with pool.connection() as conn:
@@ -133,6 +137,7 @@ class TherapyRepository:
                         UPDATE therapy
                         SET name = %s
                             , license_information = %s
+                            , city = %s
                             , state = %s
                             , zipcode = %s
                             , picture = %s
@@ -146,6 +151,7 @@ class TherapyRepository:
                         [
                             therapy.name,
                             therapy.license_information,
+                            therapy.city,
                             therapy.state,
                             therapy.zipcode,
                             therapy.picture,
@@ -178,8 +184,3 @@ class TherapyRepository:
         except Exception as e:
             print(e)
             return False
-
-
-
-
-

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useToken } from "./Authentication.js";
+import { useNavigate } from 'react-router-dom';
 
 function TherapistLoginForm() {
   const { token, login } = useToken();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  
 
+  const navigate = useNavigate();
   const handleUsernameChange = (event) => {
     const value = event.target.value;
     setUserName(value);
@@ -19,6 +22,7 @@ function TherapistLoginForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await login(username, password);
+    navigate(`/`)
   };
 
   return (
@@ -57,7 +61,7 @@ function TherapistLoginForm() {
             </div>
             <button
               className="btn btn-outline-info my-2 my-sm-0"
-              onClick={() => (window.location.href = `/therapist/detail/:id`)}
+             
             >
               Submit
             </button>

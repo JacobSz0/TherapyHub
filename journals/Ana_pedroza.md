@@ -95,4 +95,13 @@ Today, I worked on;
 * create a therapist profile
 
  I worked on creating a therapist profile. I successfully created the profile and now therapists have access to their detail page. Additionally, I merged our changes to the main branch, ensuring it is up-to-date. I also collaborated with Jacob to implement the 'add to wishlist' button.", we haven't be able to make it work yet. 
+
+
+ ## March 01, 2023
+
+Today, I worked on;
+
+* update the profile therapist and merge 
+
+ I updated the therapist form to make it look better. I also added a function in the navigation bar so that the therapist can see the "Update" button when they are logged in. As a team, we worked on fixing the Flake8 errors to make the pipeline pass, and we started working on deployment.
  

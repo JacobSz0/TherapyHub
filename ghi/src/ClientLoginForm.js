@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useToken } from "./Authentication.js";
+import { useParams, useNavigate } from "react-router-dom";
 
 function ClientLoginForm() {
   const { token, login } = useToken();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const { clientId } = useParams();
+  const [redirect, setRedirect] = useState();
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     const value = event.target.value;
@@ -18,8 +22,14 @@ function ClientLoginForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await login(username, password);
+    const response = await login(username, password);
+    console.log(response);
+    navigate("/client/detail");
   };
+
+  if (redirect) {
+    navigate(`/client/detail/${token}`);
+  }
 
   return (
     <div className="row">
@@ -55,13 +65,13 @@ function ClientLoginForm() {
               />
               <label htmlFor="password">password</label>
             </div>
-            <button className="btn btn-primary">Submit</button>
+            <button className="btn btn-outline-info my-2 my-sm-0" type="submit">
+              Submit
+            </button>
             <button
               type="button"
               className="btn btn-link"
-              onClick={() =>
-                (window.location.href = `/account`)
-              }
+              onClick={() => (window.location.href = `/account`)}
             >
               Don't have an account? Register here!
             </button>

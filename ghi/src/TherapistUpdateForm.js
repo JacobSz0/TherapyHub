@@ -426,7 +426,9 @@ function TherapistUpdateForm() {
               />
               <label htmlFor="languages">Languages</label>
             </div>
-            <button className="btn btn-primary">UPDATE</button>
+            <button className="btn btn-outline-info my-2 my-sm-0">
+              Update
+            </button>
           </form>
         </div>
       </div>

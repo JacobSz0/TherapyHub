@@ -149,9 +149,14 @@ function AccountSignupForm(){
                     ))}
                   </select>
                 </div>
-                <p> <br></br></p>
+                <p>
+                  {" "}
+                  <br></br>
+                </p>
                 <div>
-                <button className="btn btn-primary">Create</button>
+                  <button className="btn btn-outline-info my-2 my-sm-0">
+                    Create
+                  </button>
                 </div>
               </form>
             </div>

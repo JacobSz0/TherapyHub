@@ -399,7 +399,9 @@ function TherapistSignupForm() {
               />
               <label htmlFor="languages">Languages</label>
             </div>
-            <button className="btn btn-primary">Create</button>
+            <button className="btn btn-outline-info my-2 my-sm-0">
+              Create
+            </button>
           </form>
         </div>
       </div>

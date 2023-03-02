@@ -55,12 +55,16 @@ function TherapistLoginForm() {
               />
               <label htmlFor="password">password</label>
             </div>
-            <button className="btn btn-primary">Submit</button>
+            <button
+              className="btn btn-outline-info my-2 my-sm-0"
+              onClick={() => (window.location.href = `/therapist/detail/:id`)}
+            >
+              Submit
+            </button>
             <button
               type="button"
               className="btn btn-link"
-              onClick={() => (window.location.href = `/account`)
-              }
+              onClick={() => (window.location.href = `/therapist/detail/2`)}
             >
               Don't have an account? Register here!
             </button>

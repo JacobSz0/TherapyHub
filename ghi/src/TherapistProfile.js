@@ -97,116 +97,146 @@ function TherapistProfile(){
 
 
  return (
-  <div className="row">
-  <p> <br></br> </p>
-  <div className="main-body">
-    <div className="row">
-      <div className="col-lg-4">
-        <div className="card">
-          <div className="card-body">
-            <div className="d-flex flex-column align-items-center text-center">
-              <img src={therapist.picture} alt="Admin" className="rounded-circle p-1 bg-primary" width="110" />
-              <div className="mt-3">
-                <p className="text-secondary mb-1">{therapist.name}</p>
-                <p className="text-muted font-size-sm">{therapist.city}, {therapist.state}, {therapist.zipcode}</p>
-                {addButton ?
-                <button className="btn btn-outline-primary" type="button" onClick={() => updateAddClient()}>Add to Wishlist</button>
-              : null}
-              {deleteButton ?
-                <button className="btn btn-outline-primary" type="button" onClick={() => updateDeleteClient()}>DELETE</button>
-              : null}
-              </div>
-            </div>
-						</div>
-					</div>
-				</div>
-        <p> <br></br> </p>
-				<div className="col-lg-8">
-					<div className="card">
-						<div className="card-body">
-							<div className="row mb-3">
-								<div className="col-sm-3">
-									<h6 className="mb-0">Full Name</h6>
-								</div>
-								<div className="col-sm-9 text-secondary">
-									<h6 className="mb-0">{therapist.name}</h6>
-								</div>
-							</div>
-              <div className="row mb-3">
-								<div className="col-sm-3">
-									<h6 className="mb-0">Phone</h6>
-								</div>
-								<div className="col-sm-9 text-secondary">
-									<h6 className="mb-0">{therapist.phone}</h6>
-								</div>
-							</div>
-              <div className="row mb-3">
-								<div className="col-sm-3">
-									<h6 className="mb-0">Email</h6>
-								</div>
-								<div className="col-sm-9 text-secondary">
-									<h6 className="mb-0">{therapist.email}</h6>
-								</div>
-							</div>
-							<div className="row mb-3">
-								<div className="col-sm-3">
-									<h6 className="mb-0">License Information</h6>
-								</div>
-								<div className="col-sm-9 text-secondary">
-									<h6 className="mb-0">{therapist.license_information}</h6>
-								</div>
-							</div>
-							<div className="row mb-3">
-								<div className="col-sm-3">
-									<h6 className="mb-0">Specialties</h6>
-								</div>
-								<div className="col-sm-9 text-secondary">
-                {therapist.specialties && (
-                  <h6 className="mb-0">{therapist.specialties.join(', ')}</h6>
-                )}
-              </div>
-							</div>
-							<div className="row mb-3">
-								<div className="col-sm-3">
-									<h6 className="mb-0">Payment</h6>
-								</div>
-								<div className="col-sm-9 text-secondary">
-                {therapist.payment && (
-                  <h6 className="mb-0">{therapist.payment.join(', ')}</h6>
-                )}
-              </div>
-							</div>
-							<div className="row mb-3">
-								<div className="col-sm-3">
-									<h6 className="mb-0">Languages</h6>
-								</div>
-								<div className="col-sm-9 text-secondary">
-									<h6 className="mb-0">{therapist.languages}</h6>
-								</div>
-							</div>
-							<div className="row">
-								<div className="col-sm-3"></div>
-							</div>
-						</div>
-					</div>
-          <p> <br></br> </p>
-					<div className="row">
-						<div className="col-sm-12">
-							<div className="card">
-								<div className="card-body">
-									<h5 className="d-flex align-items-center mb-3">About Me</h5>
-                  <div className="col-sm-9 text-secondary">
-                  <p className="text-secondary mb-1">{therapist.about_me}</p>
-								</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-  );
+   <div className="row">
+     <p>
+       {" "}
+       <br></br>{" "}
+     </p>
+     <div className="main-body">
+       <div className="row">
+         <div className="col-lg-4">
+           <div className="card">
+             <div className="card-body">
+               <div className="d-flex flex-column align-items-center text-center">
+                 <img
+                   src={therapist.picture}
+                   alt="Admin"
+                   className="rounded-circle p-1 bg-primary"
+                   width="110"
+                 />
+                 <div className="mt-3">
+                   <p className="text-secondary mb-1">{therapist.name}</p>
+                   <p className="text-muted font-size-sm">
+                     {therapist.city}, {therapist.state}, {therapist.zipcode}
+                   </p>
+                   {addButton ? (
+                     <button
+                       className="btn btn-outline-info my-2 my-sm-0"
+                       type="button"
+                       onClick={() => updateAddClient()}
+                     >
+                       Add to Wishlist
+                     </button>
+                   ) : null}
+                   {deleteButton ? (
+                     <button
+                       className="btn btn-outline-info my-2 my-sm-0"
+                       type="button"
+                       onClick={() => updateDeleteClient()}
+                     >
+                       DELETE
+                     </button>
+                   ) : null}
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <p>
+           {" "}
+           <br></br>{" "}
+         </p>
+         <div className="col-lg-8">
+           <div className="card">
+             <div className="card-body">
+               <div className="row mb-3">
+                 <div className="col-sm-3">
+                   <h6 className="mb-0">Full Name</h6>
+                 </div>
+                 <div className="col-sm-9 text-secondary">
+                   <h6 className="mb-0">{therapist.name}</h6>
+                 </div>
+               </div>
+               <div className="row mb-3">
+                 <div className="col-sm-3">
+                   <h6 className="mb-0">Phone</h6>
+                 </div>
+                 <div className="col-sm-9 text-secondary">
+                   <h6 className="mb-0">{therapist.phone}</h6>
+                 </div>
+               </div>
+               <div className="row mb-3">
+                 <div className="col-sm-3">
+                   <h6 className="mb-0">Email</h6>
+                 </div>
+                 <div className="col-sm-9 text-secondary">
+                   <h6 className="mb-0">{therapist.email}</h6>
+                 </div>
+               </div>
+               <div className="row mb-3">
+                 <div className="col-sm-3">
+                   <h6 className="mb-0">License Information</h6>
+                 </div>
+                 <div className="col-sm-9 text-secondary">
+                   <h6 className="mb-0">{therapist.license_information}</h6>
+                 </div>
+               </div>
+               <div className="row mb-3">
+                 <div className="col-sm-3">
+                   <h6 className="mb-0">Specialties</h6>
+                 </div>
+                 <div className="col-sm-9 text-secondary">
+                   {therapist.specialties && (
+                     <h6 className="mb-0">
+                       {therapist.specialties.join(", ")}
+                     </h6>
+                   )}
+                 </div>
+               </div>
+               <div className="row mb-3">
+                 <div className="col-sm-3">
+                   <h6 className="mb-0">Payment</h6>
+                 </div>
+                 <div className="col-sm-9 text-secondary">
+                   {therapist.payment && (
+                     <h6 className="mb-0">{therapist.payment.join(", ")}</h6>
+                   )}
+                 </div>
+               </div>
+               <div className="row mb-3">
+                 <div className="col-sm-3">
+                   <h6 className="mb-0">Languages</h6>
+                 </div>
+                 <div className="col-sm-9 text-secondary">
+                   <h6 className="mb-0">{therapist.languages}</h6>
+                 </div>
+               </div>
+               <div className="row">
+                 <div className="col-sm-3"></div>
+               </div>
+             </div>
+           </div>
+           <p>
+             {" "}
+             <br></br>{" "}
+           </p>
+           <div className="row">
+             <div className="col-sm-12">
+               <div className="card">
+                 <div className="card-body">
+                   <h5 className="d-flex align-items-center mb-3">About Me</h5>
+                   <div className="col-sm-9 text-secondary">
+                     <p className="text-secondary mb-1">{therapist.about_me}</p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ );
 }
 
 export default TherapistProfile;

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useToken } from "./Authentication";
 import { useParams } from "react-router-dom";
 
-function  TherapistProfile (){
-
+function TherapistProfile(){
   const [therapist, setTherapistDetail] = useState({});
+  const [currentClient, setClient] = useState([]);
+  const [addButton, setAdd] = useState(false)
+  const [deleteButton, setDelete] = useState(false)
   const {id} = useParams();
   const { token, login } = useToken();
 
@@ -12,6 +14,7 @@ function  TherapistProfile (){
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
+    console.lgo (info, "inf")
     return info.account.id
   }
 
@@ -22,11 +25,66 @@ function  TherapistProfile (){
             const data = await response.json();
             console.log("data******",data)
             setTherapistDetail(data)
+            return(data.id)
+  }
+  }
+
+  async function getClient(account_id, therID) {
+    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client?account_id=${account_id}`);
+    if (response.ok){
+      var clientData = await response.json()
+      if (clientData[0]?.wish_list.includes(JSON.stringify(therID))){
+        setAdd(false)
+        setDelete(true)
+      }
+      else if (clientData[0]?.wish_list){
+        setAdd(true)
+        setDelete(false)
+      }
+      setClient(clientData)
+    }
   }
 
 
-
+  async function updateAddClient() {
+    var therID=JSON.stringify(therapist.id)
+    var clientDataL=currentClient[0]
+    clientDataL.wish_list.push(therID)
+      try {
+        const responseBack = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${clientDataL.id}`, {
+          method: 'PUT',
+          body: JSON.stringify(clientDataL),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const clientDataF = await responseBack.json();
+        setAdd(false)
+        setDelete(true)
+      } catch (error) {
+        console.error(error);
+      }
   }
+
+  const updateDeleteClient = async () => {
+    try {
+      var therID=JSON.stringify(therapist.id)
+      var clientDataL=currentClient[0]
+      clientDataL.wish_list.splice(clientDataL.wish_list.indexOf(therID), 1);
+      const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${clientDataL.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(clientDataL),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const clientData = await response.json();
+      if (response.ok){getClient()}
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect (() => {
     async function getData(){
       const therID = await fetchTherapist();

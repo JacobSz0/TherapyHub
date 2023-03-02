@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Multiselect } from "multiselect-react-dropdown";
 
 
-function TherapistList({ therapists, getTherapists }){
+function TherapistList({ therapists }){
 
-
+  const [selectedSpecialties, setSelectedSpecialties] = useState([]);
+  const [selectedPayments, setSelectedPayments] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [listZipcodes, setListZipcodes] = useState([]);
   const [zip_code, setZipCode] = useState(searchParams.get('zip_code'));
   const [radius, setRadius] = useState(searchParams.get('radius'));
-
 
   useEffect(() => {
     const handleSearch = async () => {
@@ -31,16 +32,15 @@ function TherapistList({ therapists, getTherapists }){
       if (response.ok) {
         const listZipcodes = await response.json();
         setListZipcodes(listZipcodes);
-        console.log(listZipcodes);
       }
     };
     handleSearch();
   }, [zip_code, radius]);
 
-  const handleSearch = (event) => {
-    event.preventDefault();
-    setSearchParams({ zip_code, radius });
-  };
+  // const handleSearch = (event) => {
+  //   event.preventDefault();
+  //   setSearchParams({ zip_code, radius });
+  // };
 
   const handleZipcodeChange = (event) => {
     const value = event.target.value
@@ -59,13 +59,12 @@ function TherapistList({ therapists, getTherapists }){
 
   return (
     <div className="row justify-content-center">
-      <form onSubmit={handleSearch} className="form-inline mt-3">
+      <form className="form-inline mt-3">
         <input
           onChange={handleZipcodeChange}
           className="form-control mr-sm-2 search-input"
           type="search"
           placeholder="Zipcode"
-          aria-label="Search"
           value={zip_code}
         />
         <label>Zipcode</label>
@@ -75,16 +74,88 @@ function TherapistList({ therapists, getTherapists }){
           className="form-control mr-sm-2 search-input"
           type="search"
           placeholder="Miles"
-          aria-label="Search"
           value={radius}
         />
         <label>Radius(Miles)</label>
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Search
-        </button>
+
+<Multiselect
+  style={{searchBox: {width: "500px"}}}
+  placeholder="Filters"
+  displayValue="key"
+  groupBy="cat"
+  onRemove={(selectedList, removedItem) => {
+    if (removedItem.cat === "Specialty") {
+      setSelectedSpecialties(selectedSpecialties.filter(item => item !== removedItem.key));
+    } else if (removedItem.cat === "Payment") {
+      setSelectedPayments(selectedPayments.filter(item => item !== removedItem.key));
+    }
+  }}
+  onSelect={(selectedList, selectedItem) => {
+    if (selectedItem.cat === "Specialty") {
+      setSelectedSpecialties([...selectedSpecialties, selectedItem.key]);
+    } else if (selectedItem.cat === "Payment") {
+      setSelectedPayments([...selectedPayments, selectedItem.key]);
+    }
+  }}
+  options={[
+    {
+      cat: 'Specialty',
+      key: 'Anxiety'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Depression'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Individual'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Couples'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Child & Adolescents'
+    },
+    {
+      cat: 'Specialty',
+      key: 'Trauma'
+    },
+    {
+      cat: 'Payment',
+      key: 'Cash'
+    },
+        {
+      cat: 'Payment',
+      key: 'Anthem'
+    },
+        {
+      cat: 'Payment',
+      key: 'Kaiser Permamente'
+    },
+        {
+      cat: 'Payment',
+      key: 'Healthnet'
+    },
+        {
+      cat: 'Payment',
+      key: 'State Farm'
+    },
+        {
+      cat: 'Payment',
+      key: 'Progressive'
+    }
+  ]}
+  showCheckbox
+/>
       </form>
       <p><br></br></p>
-      {therapists.filter(therapist => listZipcodes.includes(therapist.zipcode)).map((therapist) => (
+          {therapists.filter(therapist =>
+            listZipcodes.includes(therapist.zipcode) &&
+            (selectedSpecialties.length === 0 || therapist.specialties.some(specialty => selectedSpecialties.includes(specialty))) &&
+            (selectedPayments.length === 0 || therapist.payment.some(payment => selectedPayments.includes(payment)))
+          ).map((therapist) => (
         <div key={therapist.id} className="col-sm-10">
           <div className="card bg-light mb-3">
             <div className="row g-0">
@@ -97,15 +168,16 @@ function TherapistList({ therapists, getTherapists }){
                   <h6 className="card-subtitle mb-2 text-muted">
                     {therapist.license_information}
                   </h6>
+                    {therapist.specialties && (
+                  <p className="card-text">{therapist.specialties.join(', ')}</p>
+                    )}
+                    {therapist.payment && (
+                  <p className="card-text">{therapist.payment.join(', ')}</p>
+                    )}
                   <p className="card-text">
-                    {therapist.specialties}
-                  </p>
-                  <p className="card-text">
-                  { therapist.zipcode }
-                   , {' '}
-                  { therapist.state }
+                  {therapist.city}, {therapist.state}, {therapist.zipcode}
                 </p>
-                <a href="#" className="btn btn-primary stretched-link">Learn more!</a>
+                <a href={`/therapist/detail/${therapist.id}`} className="btn btn-primary stretched-link">Learn more!</a>
                 </div>
               </div>
             </div>

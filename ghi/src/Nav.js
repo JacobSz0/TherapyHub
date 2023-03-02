@@ -1,8 +1,26 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useToken } from "./Authentication.js";
+import React, { useState, useEffect } from 'react';
 
 function Nav() {
   const {token, logout} = useToken();
+  const [role_id, SetRoleId] = useState();
+  
+  
+  function parseJwt(data) {
+    const base64Url = data.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    const info = JSON.parse(window.atob(base64));
+    SetRoleId(info.account.role_id)
+
+  }
+
+  useEffect (() => {
+      if (token) {
+      parseJwt(token);
+    }
+  }, [token]);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
       <div className="container-fluid">
@@ -28,6 +46,11 @@ function Nav() {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="account">
+                Signup
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/therapist/login">
                 Therapist
               </NavLink>
@@ -39,6 +62,14 @@ function Nav() {
                 </button>
               ): null }
             </li>
+            <li className="nav-item">
+            {role_id === 2 ?  (
+            <NavLink className="nav-link" to="/therapist/login">
+              {/* make sure to change the the path to update therapy */}
+              Update Profile
+            </NavLink>
+        ) : null}
+        </li>
           </ul>
         </div>
       </div>

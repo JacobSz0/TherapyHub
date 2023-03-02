@@ -64,7 +64,7 @@ function TherapistLoginForm() {
             <button
               type="button"
               className="btn btn-link"
-              onClick={() => (window.location.href = `/therapist/detail/2`)}
+              onClick={() => (window.location.href = `/account`)}
             >
               Don't have an account? Register here!
             </button>

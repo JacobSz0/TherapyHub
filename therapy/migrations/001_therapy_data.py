@@ -23,7 +23,6 @@ steps = [
             role_id INTEGER NOT NULL REFERENCES roles(id)
         );
         """,
-
         # "Down" SQL statement
         """
         DROP TABLE accounts;
@@ -54,7 +53,6 @@ steps = [
         DROP TABLE therapy;
         """,
     ],
-
     [
         """
         CREATE TABLE client (
@@ -72,5 +70,5 @@ steps = [
         """
         DROP TABLE client;
         """,
-    ]
+    ],
 ]

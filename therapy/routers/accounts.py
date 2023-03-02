@@ -1,5 +1,4 @@
 from fastapi import (
-    UploadFile,
     Depends,
     HTTPException,
     status,
@@ -9,7 +8,7 @@ from fastapi import (
 )
 from jwtdown_fastapi.authentication import Token
 from .authenticator import authenticator
-from typing import Union, List, Optional
+from typing import Union, List
 
 from pydantic import BaseModel
 
@@ -22,8 +21,8 @@ from queries.accounts import (
     RoleIn,
     RoleOut,
     RoleQueries,
-
 )
+
 
 class AccountToken(Token):
     account: AccountOut
@@ -38,7 +37,9 @@ class AccountForm(BaseModel):
     email: str
     password: str
 
+
 router = APIRouter()
+
 
 @router.get("/api/protected", response_model=bool)
 async def get_protected(
@@ -47,9 +48,10 @@ async def get_protected(
     return True
 
 
-
-@router.get("/api/accounts", response_model=Union[List[AccountOut],Error])
-def accounts_list(repo: AccountQueries=Depends(),):
+@router.get("/api/accounts", response_model=Union[List[AccountOut], Error])
+def accounts_list(
+    repo: AccountQueries = Depends(),
+):
     return repo.get_all_accounts()
 
 
@@ -65,6 +67,7 @@ def accounts_list(repo: AccountQueries=Depends(),):
 #     if user is None:
 #         response.status_code = 404
 #     return user
+
 
 @router.post("/api/accounts", response_model=AccountToken | HttpError)
 async def create_account(
@@ -88,7 +91,6 @@ async def create_account(
     return AccountToken(account=account, **token.dict())
 
 
-
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
@@ -100,6 +102,7 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
+
 
 @router.delete("/api/accounts/{id}", response_model=bool)
 def delete_account(

@@ -6,6 +6,7 @@ from queries.pool import pool
 class Error(BaseModel):
     message: str
 
+
 class ClientIn(BaseModel):
     name: str
     city: str
@@ -14,7 +15,6 @@ class ClientIn(BaseModel):
     additional_notes: str
     account_id: int
     wish_list: list
-
 
 
 class ClientOut(BaseModel):
@@ -26,7 +26,6 @@ class ClientOut(BaseModel):
     additional_notes: str
     account_id: int
     wish_list: list
-
 
 
 class ClientRepository:
@@ -58,7 +57,7 @@ class ClientRepository:
                             client.zipcode,
                             client.additional_notes,
                             client.account_id,
-                            client.wish_list
+                            client.wish_list,
                         ],
                     )
                     id = result.fetchone()[0]
@@ -77,20 +76,30 @@ class ClientRepository:
                 # get a cursor (something to run SQL with)
                 with conn.cursor() as db:
                     # Run our INSERT statement
-                    result = db.execute(
+                    db.execute(
                         """
                         SELECT * FROM client
                         """
                     )
-                    return [ClientOut(id=record[0],
-                    name=record[1], city=record[2],
-                    state=record[3], zipcode=record[4],
-                    additional_notes=record[5], account_id=record[6], wish_list=record[7]) for record in db]
+                    return [
+                        ClientOut(
+                            id=record[0],
+                            name=record[1],
+                            city=record[2],
+                            state=record[3],
+                            zipcode=record[4],
+                            additional_notes=record[5],
+                            account_id=record[6],
+                            wish_list=record[7],
+                        )
+                        for record in db
+                    ]
         except Exception:
             return {"message": "Can't get list"}
 
-
-    def update_client(self, client_id: int, client: ClientIn) -> Union[ClientOut, Error]:
+    def update_client(
+        self, client_id: int, client: ClientIn
+    ) -> Union[ClientOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -115,7 +124,7 @@ class ClientRepository:
                             client.account_id,
                             client.wish_list,
                             client_id,
-                        ]
+                        ],
                     )
                     old_data = client.dict()
                     return ClientOut(id=client_id, **old_data)
@@ -133,7 +142,7 @@ class ClientRepository:
                         FROM client
                         WHERE id = %s
                         """,
-                        [client_id]
+                        [client_id],
                     )
                     record = result.fetchone()
                     return ClientOut(
@@ -144,12 +153,11 @@ class ClientRepository:
                         zipcode=record[4],
                         additional_notes=record[5],
                         account_id=record[6],
-                        wish_list=record[7]
+                        wish_list=record[7],
                     )
         except Exception as e:
             print(e)
             return {"message": "Could not view that client"}
-
 
     def get_client_by_account_id(self, account_id: int) -> Optional[ClientOut]:
         try:
@@ -161,7 +169,7 @@ class ClientRepository:
                         FROM client
                         WHERE account_id = %s
                         """,
-                        [account_id]
+                        [account_id],
                     )
                     record = result.fetchone()
                     return ClientOut(
@@ -172,7 +180,7 @@ class ClientRepository:
                         zipcode=record[4],
                         additional_notes=record[5],
                         account_id=record[6],
-                        wish_list=record[7]
+                        wish_list=record[7],
                     )
         except Exception as e:
             print(e)
@@ -187,37 +195,9 @@ class ClientRepository:
                         DELETE FROM client
                         WHERE id = %s
                         """,
-                        [client_id]
+                        [client_id],
                     )
                     return True
         except Exception as e:
             print(e)
             return False
-
-    def get_client_by_account_id(self, account_id: int) -> Optional[ClientOut]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    result = db.execute(
-                        """
-                        SELECT *
-                        FROM client
-                        WHERE account_id = %s
-                        """,
-                        [account_id]
-                    )
-                    record = result.fetchone()
-                    return ClientOut(
-                        id=record[0],
-                        name=record[1],
-                        city=record[2],
-                        state=record[3],
-                        zipcode=record[4],
-                        additional_notes=record[5],
-                        account_id=record[6],
-                        wish_list=record[7]
-                    )
-
-        except Exception as e:
-            print(e)
-            return {"message": "Could not view that therapist"}

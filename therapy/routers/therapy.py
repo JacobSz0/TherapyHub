@@ -1,8 +1,10 @@
 from fastapi import APIRouter, Depends, Response
 from typing import Union, List, Optional
 from queries.therapy import (
-    TherapyIn, TherapyOut,
-    TherapyRepository, Error,
+    TherapyIn,
+    TherapyOut,
+    TherapyRepository,
+    Error,
 )
 
 router = APIRouter()
@@ -13,11 +15,13 @@ def create_therapy(therapy: TherapyIn, repo: TherapyRepository = Depends()):
     print("therapy", therapy)
     return repo.create_therapy(therapy)
 
+
 @router.get("/therapy", response_model=Union[List[TherapyOut], Error])
 def get_all(
     repo: TherapyRepository = Depends(),
 ):
     return repo.get_all()
+
 
 @router.get("/therapy/{therapy_id}", response_model=Optional[TherapyOut])
 def get_one_therapist(
@@ -30,6 +34,7 @@ def get_one_therapist(
         response.status_code = 404
     return therapy
 
+
 @router.put("/therapy/{therapy_id}", response_model=Union[TherapyOut, Error])
 def update_therapy(
     therapy_id: int,
@@ -37,6 +42,7 @@ def update_therapy(
     repo: TherapyRepository = Depends(),
 ) -> Union[Error, TherapyOut]:
     return repo.update_therapy(therapy_id, therapy)
+
 
 @router.delete("/therapy/{therapy_id}", response_model=bool)
 def delete_therapy(

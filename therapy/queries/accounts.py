@@ -6,11 +6,13 @@ from typing import List, Union
 class Error(BaseModel):
     message: str
 
+
 class AccountIn(BaseModel):
     username: str
     email: str
     password: str
     role_id: int
+
 
 class AccountOut(BaseModel):
     id: int
@@ -18,23 +20,29 @@ class AccountOut(BaseModel):
     email: str
     role_id: int
 
+
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
+
 class RoleIn(BaseModel):
     role: str
+
 
 class RoleOut(BaseModel):
     id: int
     role: str
 
+
 class DuplicateAccountError(ValueError):
     pass
 
 
-
 class AccountQueries:
-    def create(self, info: AccountIn, hashed_password: str,
+    def create(
+        self,
+        info: AccountIn,
+        hashed_password: str,
     ) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -75,10 +83,9 @@ class AccountQueries:
                     record = {}
                     for i, column in enumerate(cur.description):
                         record[column.name] = row[i]
-                        print("**********",record)
+                        print("**********", record)
                 return record
 
-                
     def get_all_accounts(self) -> Union[Error, List[AccountOut]]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -88,12 +95,16 @@ class AccountQueries:
                 FROM accounts
                 """
                 )
-                results =[
-                    AccountOut(id=row[0], username=row[1], email=row[2], role_id=row[3])
+                results = [
+                    AccountOut(
+                        id=row[0],
+                        username=row[1],
+                        email=row[2],
+                        role_id=row[3],
+                    )
                     for row in cur.fetchall()
                 ]
                 return results
-
 
     def delete(self, id: int) -> bool:
         try:
@@ -110,7 +121,6 @@ class AccountQueries:
         except Exception as e:
             print(e)
             return False
-
 
 
 class RoleQueries:
@@ -131,6 +141,7 @@ class RoleQueries:
                 )
                 id = result.fetchone()[0]
                 return self.role_in_out(id, role)
+
     def roles(self) -> Union[List[RoleOut], Error]:
         try:
             with pool.connection() as conn:

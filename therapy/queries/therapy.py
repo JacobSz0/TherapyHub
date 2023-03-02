@@ -20,7 +20,8 @@ class TherapyIn(BaseModel):
     languages: str
     email: str
     phone: str
-    account_id : int
+    account_id: int
+
 
 class TherapyOut(BaseModel):
     id: int
@@ -36,7 +37,7 @@ class TherapyOut(BaseModel):
     languages: str
     email: str
     phone: str
-    account_id : int
+    account_id: int
 
 
 class TherapyRepository:
@@ -64,7 +65,10 @@ class TherapyRepository:
                             phone,
                             account_id)
                         VALUES
-                            (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                            (
+                                %s, %s, %s, %s, %s, %s,
+                                %s, %s, %s, %s, %s, %s, %s
+                                )
                         RETURNING id;
                         """,
                         [
@@ -105,11 +109,25 @@ class TherapyRepository:
                         """
                     )
                     print(result)
-                    return [TherapyOut(id=record[0], name=record[1],
-                    license_information=record[2], city=record[3], state=record[4],
-                    zipcode=record[5], picture=record[6],
-                    specialties=record[7], about_me=record[8], payment=record[9],
-                    languages=record[10], email=record[11], phone=record[12], account_id=record[13]) for record in db]
+                    return [
+                        TherapyOut(
+                            id=record[0],
+                            name=record[1],
+                            license_information=record[2],
+                            city=record[3],
+                            state=record[4],
+                            zipcode=record[5],
+                            picture=record[6],
+                            specialties=record[7],
+                            about_me=record[8],
+                            payment=record[9],
+                            languages=record[10],
+                            email=record[11],
+                            phone=record[12],
+                            account_id=record[13],
+                        )
+                        for record in db
+                    ]
         except Exception:
             return {"message": "Create did not work"}
 
@@ -123,20 +141,33 @@ class TherapyRepository:
                         FROM therapy
                         WHERE id = %s
                         """,
-                        [therapy_id]
+                        [therapy_id],
                     )
                     record = result.fetchone()
-                    return TherapyOut(id=record[0], name=record[1],
-                    license_information=record[2], city=record[3], state=record[4],
-                    zipcode=record[5], picture=record[6],
-                    specialties=record[7], about_me=record[8], payment=record[9],
-                    languages=record[10], email=record[11], phone=record[12], account_id=record[13])
+                    return TherapyOut(
+                        id=record[0],
+                        name=record[1],
+                        license_information=record[2],
+                        city=record[3],
+                        state=record[4],
+                        zipcode=record[5],
+                        picture=record[6],
+                        specialties=record[7],
+                        about_me=record[8],
+                        payment=record[9],
+                        languages=record[10],
+                        email=record[11],
+                        phone=record[12],
+                        account_id=record[13],
+                    )
 
         except Exception as e:
             print(e)
             return {"message": "Could not view that therapist"}
 
-    def update_therapy(self, therapy_id: int, therapy: TherapyIn) -> Union[TherapyOut, Error]:
+    def update_therapy(
+        self, therapy_id: int, therapy: TherapyIn
+    ) -> Union[TherapyOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -172,8 +203,8 @@ class TherapyRepository:
                             therapy.email,
                             therapy.phone,
                             therapy.account_id,
-                            therapy_id
-                        ]
+                            therapy_id,
+                        ],
                     )
                     old_data = therapy.dict()
                     return TherapyOut(id=therapy_id, **old_data)
@@ -190,7 +221,7 @@ class TherapyRepository:
                         DElETE FROM therapy
                         WHERE id = %s
                         """,
-                        [therapy_id]
+                        [therapy_id],
                     )
                     return True
         except Exception as e:

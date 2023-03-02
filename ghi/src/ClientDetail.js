@@ -20,22 +20,22 @@ function ClientLandingPage() {
 
 
   return (
-<div class="card text-center">
-  <div class="card-header">Hello</div>
-  <div class="card-body">
-    <h5 class="card-title">Welcome back!</h5>
-    <p class="card-text">What would you like to do today?</p>
-    <a href="/Wishlist" class="btn btn-link">
+<div className="card text-center">
+  <div className="card-header">Hello</div>
+  <div className="card-body">
+    <h5 className="card-title">Welcome back!</h5>
+    <p className="card-text">What would you like to do today?</p>
+    <a href="/Wishlist" className="btn btn-link">
       View your wishlist
     </a>
-    <a href="/client/update" class="btn btn-link">
+    <a href="/client/update" className="btn btn-link">
       Update your account information
     </a>
-    <a href="/" class="btn btn-link">
+    <a href="/" className="btn btn-link">
       Browse therapists
     </a>
   </div>
-  <div class="card-footer text-muted"></div>
+  <div className="card-footer text-muted"></div>
 </div>
   );
 }

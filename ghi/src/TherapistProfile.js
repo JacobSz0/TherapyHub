@@ -14,6 +14,7 @@ function TherapistProfile(){
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
+    console.lgo (info, "inf")
     return info.account.id
   }
 
@@ -86,9 +87,9 @@ function TherapistProfile(){
 
   useEffect (() => {
     async function getData(){
+      const therID = await fetchTherapist();
       if (token) {
         const account_id = parseJwt(token);
-        const therID = await fetchTherapist();
         getClient(account_id, therID)
       }
     }
@@ -99,126 +100,114 @@ function TherapistProfile(){
  return (
   <div className="row">
   <p> <br></br> </p>
-  <h1 className="text-center">Therapist Profile</h1>
-  <div className="row justify-content-center">
-        <div className="col-sm-10">
-          <div className="card bg-light mb-3">
-            <div className="row g-0">
-              <div className="col-md-4 d-flex justify-content-center align-items-center">
-                <img src={therapist.picture} className="col-md-4 d-flex justify-content-center align-items-center" alt="Therapist" />
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-              <div className="form-floating mb-3">
-              <input
-                defaultValue={therapist.name}
-                placeholder="Name"
-                required
-                type="text"
-                name="Name"
-                id="Name"
-                className="form-control"
-              />
-              <label htmlFor="Name">Name</label>
-              </div>
-              <div className="form-floating mb-3">
-              <input
-                defaultValue={therapist.license_information}
-                placeholder="license_information"
-                required
-                type="text"
-                name="license_information"
-                id="license_information"
-                className="form-control"
-              />
-              <label htmlFor="license_information">License Information</label>
-              </div>
-              <div className="form-floating mb-3">
-              <input
-                defaultValue={therapist.state}
-                placeholder="state"
-                required
-                type="text"
-                name="state"
-                id="state"
-                className="form-control"
-              />
-              <label htmlFor="state">State</label>
-              </div>
-              <div className="form-floating mb-3">
-              <input
-                defaultValue={therapist.zipcode}
-                placeholder="zipcode"
-                required
-                type="text"
-                name="zipcode"
-                id="zipcode"
-                className="form-control"
-              />
-              <label htmlFor="zipcode">Zip code</label>
-              </div>
-            <div className="form-floating mb-3">
-              <input
-                defaultValue={therapist.about_me}
-                placeholder="about_me"
-                required
-                type="text"
-                name="about_me"
-                id="about_me"
-                className="form-control"
-              />
-              <label htmlFor="about_me">About Me</label>
-              </div>
-            <div className="form-floating mb-3">
-              <input
-                defaultValue={therapist.specialties}
-                placeholder="specialties"
-                required
-                type="text"
-                name="specialties"
-                id="specialties"
-                className="form-control"
-              />
-              <label htmlFor="specialties">Specialties</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                defaultValue={therapist.payment}
-                placeholder="payment"
-                required
-                type="text"
-                name="payment"
-                id="payment"
-                className="form-control"
-              />
-              <label htmlFor="payment">Payment</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                defaultValue={therapist.languages}
-                placeholder="languages"
-                required
-                type="text"
-                name="languages"
-                id="languages"
-                className="form-control"
-              />
-              <label htmlFor="languages">Languages</label>
-            </div>
-              {addButton ?
-                <button type="button" onClick={() => updateAddClient()}>Add to Wishlist</button>
+  <div className="main-body">
+    <div className="row">
+      <div className="col-lg-4">
+        <div className="card">
+          <div className="card-body">
+            <div className="d-flex flex-column align-items-center text-center">
+              <img src={therapist.picture} alt="Admin" className="rounded-circle p-1 bg-primary" width="110" />
+              <div className="mt-3">
+                <p className="text-secondary mb-1">{therapist.name}</p>
+                <p className="text-muted font-size-sm">{therapist.city}, {therapist.state}, {therapist.zipcode}</p>
+                {addButton ?
+                <button className="btn btn-outline-primary" type="button" onClick={() => updateAddClient()}>Add to Wishlist</button>
               : null}
               {deleteButton ?
-                <button type="button" onClick={() => updateDeleteClient()}>DELETE</button>
+                <button className="btn btn-outline-primary" type="button" onClick={() => updateDeleteClient()}>DELETE</button>
               : null}
-                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
- )
+						</div>
+					</div>
+				</div>
+        <p> <br></br> </p>
+				<div className="col-lg-8">
+					<div className="card">
+						<div className="card-body">
+							<div className="row mb-3">
+								<div className="col-sm-3">
+									<h6 className="mb-0">Full Name</h6>
+								</div>
+								<div className="col-sm-9 text-secondary">
+									<h6 className="mb-0">{therapist.name}</h6>
+								</div>
+							</div>
+              <div className="row mb-3">
+								<div className="col-sm-3">
+									<h6 className="mb-0">Phone</h6>
+								</div>
+								<div className="col-sm-9 text-secondary">
+									<h6 className="mb-0">{therapist.phone}</h6>
+								</div>
+							</div>
+              <div className="row mb-3">
+								<div className="col-sm-3">
+									<h6 className="mb-0">Email</h6>
+								</div>
+								<div className="col-sm-9 text-secondary">
+									<h6 className="mb-0">{therapist.email}</h6>
+								</div>
+							</div>
+							<div className="row mb-3">
+								<div className="col-sm-3">
+									<h6 className="mb-0">License Information</h6>
+								</div>
+								<div className="col-sm-9 text-secondary">
+									<h6 className="mb-0">{therapist.license_information}</h6>
+								</div>
+							</div>
+							<div className="row mb-3">
+								<div className="col-sm-3">
+									<h6 className="mb-0">Specialties</h6>
+								</div>
+								<div className="col-sm-9 text-secondary">
+                {therapist.specialties && (
+                  <h6 className="mb-0">{therapist.specialties.join(', ')}</h6>
+                )}
+              </div>
+							</div>
+							<div className="row mb-3">
+								<div className="col-sm-3">
+									<h6 className="mb-0">Payment</h6>
+								</div>
+								<div className="col-sm-9 text-secondary">
+                {therapist.payment && (
+                  <h6 className="mb-0">{therapist.payment.join(', ')}</h6>
+                )}
+              </div>
+							</div>
+							<div className="row mb-3">
+								<div className="col-sm-3">
+									<h6 className="mb-0">Languages</h6>
+								</div>
+								<div className="col-sm-9 text-secondary">
+									<h6 className="mb-0">{therapist.languages}</h6>
+								</div>
+							</div>
+							<div className="row">
+								<div className="col-sm-3"></div>
+							</div>
+						</div>
+					</div>
+          <p> <br></br> </p>
+					<div className="row">
+						<div className="col-sm-12">
+							<div className="card">
+								<div className="card-body">
+									<h5 className="d-flex align-items-center mb-3">About Me</h5>
+                  <div className="col-sm-9 text-secondary">
+                  <p className="text-secondary mb-1">{therapist.about_me}</p>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  );
 }
 
 export default TherapistProfile;

@@ -55,7 +55,7 @@ function ClientSignupForm(){
 
     const handleWishListChange = (event) =>{
         event.preventDefault();
-        setWishList([...wish_list, ''])
+        setWishList([])
     }
 
     const handleSubmit = async (event) => {
@@ -79,15 +79,13 @@ function ClientSignupForm(){
             },
         }
         const response = await fetch (url, fetchConfig)
-        if (response.ok)
+        if (response.ok){
             setName('');
             setCity('');
             setState('');
             setZipcode('');
             setAdditionalNote('');
-
-            // setWishList('');
-
+        }
         }
 
     useEffect (() => {

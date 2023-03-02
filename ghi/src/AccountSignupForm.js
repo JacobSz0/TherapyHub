@@ -36,7 +36,6 @@ function AccountSignupForm(){
     const handleCreateAccount = async (event) =>{
         event.preventDefault();
         const data = {};
-        console.log(data)
         data.username = username
         data.email = email
         data.password = password
@@ -77,7 +76,6 @@ function AccountSignupForm(){
       const response = await fetch (url)
         if (response.ok){
             const data = await response.json();
-            console.log(data)
             setRoleIds(data)
         }
     }
@@ -151,7 +149,10 @@ function AccountSignupForm(){
                     ))}
                   </select>
                 </div>
+                <p> <br></br></p>
+                <div>
                 <button className="btn btn-primary">Create</button>
+                </div>
               </form>
             </div>
           </div>

@@ -13,7 +13,7 @@ function Nav() {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
-    console.log(info.account.id)
+    
     
     setAccountId(info.account.id)
     SetRoleId(info.account.role_id)
@@ -24,7 +24,7 @@ function Nav() {
     const response = await fetch (url)
     if (response.ok){
       const data = await response.json();
-      console.log(data)
+      
       for (let key in data) {
         if (data[key]["account_id"] == accountId) {
           setTherapistID(data[key]["id"])
@@ -86,6 +86,13 @@ function Nav() {
               <li className="nav-item">
                 <NavLink className="nav-link" to="client/detail/">
                   Profile
+                </NavLink>
+              </li>
+            )}
+            {isLoggedIn && role_id === 1 && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="client/update">
+                  Update Profile
                 </NavLink>
               </li>
             )}

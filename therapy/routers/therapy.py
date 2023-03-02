@@ -46,8 +46,8 @@ def delete_therapy(
     return repo.delete_therapy(therapy_id)
 
 
-@router.get("/therapistacc/", response_model=Optional[TherapyOut])
-def get_client_by_account_id(
+@router.get("/therapistacc", response_model=Optional[TherapyOut])
+def get_therapist_by_account_id(
     account_id: int,
     response: Response,
     repo: TherapyRepository = Depends(),

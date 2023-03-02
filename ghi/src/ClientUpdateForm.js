@@ -112,85 +112,85 @@ function ClientUpdateForm() {
   };
 
 
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
-            <h1>Edit Profile</h1>
-            <form onSubmit={handleSubmit} id="create-new-employee-form">
-              <div className="form-floating mb-3">
-                <input
-                  onChange={handleNameChange}
-                  placeholder="Name"
-                  required
-                  type="text"
-                  name="name"
-                  id="name"
-                  className="form-control"
-                  value={name}
-                />
-                <label htmlFor="name">Name</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  onChange={handleCityChange}
-                  placeholder="city"
-                  required
-                  type="text"
-                  name="city"
-                  id="city"
-                  className="form-control"
-                  value={city}
-                />
-                <label htmlFor="city">City</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  onChange={handleStateChange}
-                  placeholder="state"
-                  required
-                  type="text"
-                  name="state"
-                  id="state"
-                  className="form-control"
-                  value={state}
-                />
-                <label htmlFor="state">State</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  onChange={handleZipCodeChange}
-                  placeholder="zipcode"
-                  required
-                  type="text"
-                  name="zipcode"
-                  id="zipcode"
-                  className="form-control"
-                  value={zipcode}
-                />
-                <label htmlFor="zipcode">ZIP code</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  onChange={handleAdditionalNotesChange}
-                  placeholder="additional_notes"
-                  required
-                  type="text"
-                  name="additional_notes"
-                  id="additional_notes"
-                  className="form-control"
-                  value={additional_notes}
-                />
-                <label htmlFor="additional_notes">Notes</label>
-              </div>
-              <button className="btn btn-success btn-primary">UPDATE</button>
-            </form>
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="offset-3 col-6">
+            <div className="shadow p-4 mt-4">
+              <h1>Edit Profile</h1>
+              <form onSubmit={handleSubmit} id="create-new-employee-form">
+                <div className="form-floating mb-3">
+                  <input
+                    onChange={handleNameChange}
+                    placeholder="Name"
+                    required
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="form-control"
+                    value={name}
+                  />
+                  <label htmlFor="name">Name</label>
+                </div>
+                <div className="form-floating mb-3">
+                  <input
+                    onChange={handleCityChange}
+                    placeholder="city"
+                    required
+                    type="text"
+                    name="city"
+                    id="city"
+                    className="form-control"
+                    value={city}
+                  />
+                  <label htmlFor="city">City</label>
+                </div>
+                <div className="form-floating mb-3">
+                  <input
+                    onChange={handleStateChange}
+                    placeholder="state"
+                    required
+                    type="text"
+                    name="state"
+                    id="state"
+                    className="form-control"
+                    value={state}
+                  />
+                  <label htmlFor="state">State</label>
+                </div>
+                <div className="form-floating mb-3">
+                  <input
+                    onChange={handleZipCodeChange}
+                    placeholder="zipcode"
+                    required
+                    type="text"
+                    name="zipcode"
+                    id="zipcode"
+                    className="form-control"
+                    value={zipcode}
+                  />
+                  <label htmlFor="zipcode">ZIP code</label>
+                </div>
+                <div className="form-floating mb-3">
+                  <input
+                    onChange={handleAdditionalNotesChange}
+                    placeholder="additional_notes"
+                    required
+                    type="text"
+                    name="additional_notes"
+                    id="additional_notes"
+                    className="form-control"
+                    value={additional_notes}
+                  />
+                  <label htmlFor="additional_notes">Notes</label>
+                </div>
+                <button className="btn btn-success btn-primary">UPDATE</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
-export default ClientUpdateForm;
+  export default ClientUpdateForm;

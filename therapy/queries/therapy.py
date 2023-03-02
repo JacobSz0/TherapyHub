@@ -196,3 +196,29 @@ class TherapyRepository:
         except Exception as e:
             print(e)
             return False
+
+
+    def get_therapist_by_account_id(self, account_id: int) -> Optional[TherapyOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT *
+                        FROM therapy
+                        WHERE account_id = %s
+                        """,
+                        [account_id]
+                    )
+                    record = result.fetchone()
+                    return TherapyOut(id=record[0], name=record[1],
+                    license_information=record[2], city=record[3],
+                    state=record[4], zipcode=record[5],
+                    picture=record[6], specialties=record[7],
+                    about_me=record[8], payment=record[9],
+                    languages=record[10], email=record[11],
+                    phone=record[12], account_id=record[13])
+
+        except Exception as e:
+            print(e)
+            return {"message": "Could not view that therapist"}

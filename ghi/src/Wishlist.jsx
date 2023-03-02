@@ -81,14 +81,19 @@ const Wishlist = () => {
                     <h6 className="card-subtitle mb-2 text-muted">
                       {i.license_information}
                     </h6>
-                    <p className="card-text">
-                      {i.specialties}
-                    </p>
+                    {i.specialties && (
+                  <p className="card-text">{i.specialties.join(', ')}</p>
+                    )}
+                    {i.payment && (
+                  <p className="card-text">{i.payment.join(', ')}</p>
+                    )}
                     <p className="card-text">
                     { i.city }, { i.state } { i.zipcode }
                   </p>
                   </div>
-                  <button type="button" onClick={() => updateClient(i.id)} style={deleteStyle}>DELETE</button>
+                    <a href={`/therapist/detail/${i.id}`} className="btn btn-primary">Learn more!</a>
+                  <p></p>
+                  <button className="btn btn-primary" type="button" onClick={() => updateClient(i.id)} style={deleteStyle}>DELETE</button>
                 </div>
               </div>
             </div>

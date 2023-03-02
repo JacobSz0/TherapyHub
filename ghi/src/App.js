@@ -22,23 +22,6 @@ function GetToken() {
 }
 
 function App() {
-  const [therapists, setTherapists] = useState([]);
-
-  const getTherapists = async () => {
-    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
-
-    const response = await fetch(url);
-
-    if (response.ok) {
-      const data = await response.json();
-      const therapists = data;
-      setTherapists(therapists);
-    }
-  };
-
-  useEffect(() => {
-    getTherapists();
-  }, []);
 
   return (
     <BrowserRouter>
@@ -61,15 +44,7 @@ function App() {
               path="/therapist/detail/:id"
               element={<TherapistProfile />}
             />
-            <Route
-              path="/therapists/"
-              element={
-                <TherapistList
-                  therapists={therapists}
-                  getTherapists={getTherapists}
-                />
-              }
-            />
+            <Route path="/therapists/"element={<TherapistList />} />
             <Route path="therapist/update" element={<TherapistUpdateForm />} />
             <Route path="client/client/client/update" element={<ClientUpdateForm />} />
             <Route path="/client/detail" element={<ClientDetail />} />

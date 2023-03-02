@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Multiselect } from "multiselect-react-dropdown";
 
 
-function TherapistList({ therapists }){
+function TherapistList(){
 
   const [selectedSpecialties, setSelectedSpecialties] = useState([]);
   const [selectedPayments, setSelectedPayments] = useState([]);
@@ -11,6 +11,20 @@ function TherapistList({ therapists }){
   const [listZipcodes, setListZipcodes] = useState([]);
   const [zip_code, setZipCode] = useState(searchParams.get('zip_code'));
   const [radius, setRadius] = useState(searchParams.get('radius'));
+  const [therapists, setTherapists] = useState([]);
+
+  const getTherapists = async () => {
+    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
+
+    const response = await fetch(url);
+
+    if (response.ok) {
+      const data = await response.json();
+      const therapists = data;
+      setTherapists(therapists);
+    }
+  };
+
 
   useEffect(() => {
     const handleSearch = async () => {
@@ -34,13 +48,9 @@ function TherapistList({ therapists }){
         setListZipcodes(listZipcodes);
       }
     };
+    getTherapists();
     handleSearch();
   }, [zip_code, radius]);
-
-  // const handleSearch = (event) => {
-  //   event.preventDefault();
-  //   setSearchParams({ zip_code, radius });
-  // };
 
   const handleZipcodeChange = (event) => {
     const value = event.target.value

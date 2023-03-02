@@ -24,7 +24,7 @@ function ClientLoginForm() {
     event.preventDefault();
     const response = await login(username, password);
     console.log(response);
-    navigate("/client/detail");
+    navigate("/");
   };
 
   if (redirect) {

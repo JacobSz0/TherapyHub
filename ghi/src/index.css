@@ -22,3 +22,16 @@ code {
   width: 150px;
   display: inline-block;
 }
+.nav-link {
+  display: inline-block;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  flex: 1;
+  margin: 10px;
+}

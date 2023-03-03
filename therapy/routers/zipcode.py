@@ -1,13 +1,15 @@
 from fastapi import APIRouter
 import json
 import requests
+import os
 
 router = APIRouter()
 
 
 @router.post("/zipcode")
 def zipcode_request(zip_code, radius):
-    headers = {"apikey": "71995470-b871-11ed-8e1d-4fdd4a93ede0"}
+    print("----------", os.environ.get("ZIPCODE_API_KEY"))
+    headers = {"apikey": os.environ.get("ZIPCODE_API_KEY")}
     params = (
         ("code", zip_code),
         ("radius", radius),

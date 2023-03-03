@@ -13,7 +13,6 @@ app.include_router(zipcode.router)
 app.include_router(authenticator.router)
 
 origins = [
-    "http://localhost",
     "http://localhost:3000",
     os.environ.get("CORS_HOST", "REACT_APP_THERAPYHUB_API_HOST"),
 ]

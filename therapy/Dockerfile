@@ -9,8 +9,8 @@ COPY main.py main.py
 
 # Copy all of the subdirectories in your service's directory
 # Modify these instructions to do that
-# COPY queries queries
-# COPY routers routers
+COPY queries queries
+COPY routers routers
 
 
 # If you're using a relational database with migrations,

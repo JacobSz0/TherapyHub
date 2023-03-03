@@ -25,41 +25,40 @@ function MainPage() {
   }
 
   return (
+    <div className="px-4 py-5 my-5 text-center">
+      <img
+        src={logo}
+        className="mx-auto d-block"
+        alt="Responsive image"
+        style={{ objectFit: "contain", width: "100%", height: "100%" }}
+      />
+      <form onSubmit={handleSearch} className="form-inline mt-3">
+        <input
+          onChange={handleZipcodeChange}
+          className="form-control mr-sm-2 search-input"
+          type="search"
+          placeholder="Zipcode"
+          aria-label="Search"
+          value={zip_code}
+        />
+        <label>Zipcode</label>
 
-  <div className="px-4 py-5 my-5 text-center">
-  <img
-    src={logo}
-    className="img-fluid mx-auto d-block"
-    alt="Responsive image"
-    style={{ height: "600px" }}
-  />
-  <form onSubmit={handleSearch} className="form-inline mt-3">
-    <input
-      onChange={handleZipcodeChange}
-      className="form-control mr-sm-2 search-input"
-      type="search"
-      placeholder="Zipcode"
-      aria-label="Search"
-      value={zip_code}
-    />
-    <label>Zipcode</label>
+        <input
+          onChange={handleRadiusChange}
+          className="form-control mr-sm-2 search-input"
+          type="search"
+          placeholder="Radius(Miles)"
+          aria-label="Search"
+          value={radius}
+        />
+        <label>Radius(Miles)</label>
 
-    <input
-      onChange={handleRadiusChange}
-      className="form-control mr-sm-2 search-input"
-      type="search"
-      placeholder="Radius(Miles)"
-      aria-label="Search"
-      value={radius}
-    />
-    <label>Radius(Miles)</label>
-
-      <button className="btn btn-outline-info my-2 my-sm-0" type="submit">
-      Find Your Therapist!
-      </button>
-  </form>
-</div>
-);
+        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Find Your Therapist!
+        </button>
+      </form>
+    </div>
+  );
 }
 
 export default MainPage;

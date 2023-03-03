@@ -46,9 +46,8 @@ function App() {
             />
             <Route path="/therapists/"element={<TherapistList />} />
             <Route path="therapist/update" element={<TherapistUpdateForm />} />
-            <Route path="client/client/client/update" element={<ClientUpdateForm />} />
-            <Route path="/client/detail" element={<ClientDetail />} />
-            {/* <Route path="client/client/detail/:clientId" element={<ClientDetail />} /> */}
+            <Route path="/client/update" element={<ClientUpdateForm />} />
+            <Route path="/client/detail/:id" element={<ClientDetail />} />
             <Route
               path="/therapist/detail"
               element={<TherapistProfile />}

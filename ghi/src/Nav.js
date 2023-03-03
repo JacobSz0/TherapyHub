@@ -1,9 +1,9 @@
 import { NavLink, Link } from "react-router-dom";
 import { useToken } from "./Authentication.js";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function Nav() {
-  const {token, logout} = useToken();
+  const { token, logout } = useToken();
   const [role_id, SetRoleId] = useState();
   const [therapistId, setTherapistID] = useState();
   const [accountId, setAccountId] = useState();
@@ -13,25 +13,23 @@ function Nav() {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
-    console.log(info.account.id)
-    
-    setAccountId(info.account.id)
-    SetRoleId(info.account.role_id)
+
+    setAccountId(info.account.id);
+    SetRoleId(info.account.role_id);
   }
 
   const fetchData = async () => {
-    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`
-    const response = await fetch (url)
-    if (response.ok){
+    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
+    const response = await fetch(url);
+    if (response.ok) {
       const data = await response.json();
-      console.log(data)
       for (let key in data) {
         if (data[key]["account_id"] == accountId) {
-          setTherapistID(data[key]["id"])
+          setTherapistID(data[key]["id"]);
         }
       }
     }
-  }
+  };
 
   useEffect(() => {
     fetchData();
@@ -43,8 +41,7 @@ function Nav() {
     }
   }, [token, accountId]);
 
-
- return (
+  return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
@@ -84,15 +81,22 @@ function Nav() {
             )}
             {isLoggedIn && role_id === 1 && (
               <li className="nav-item">
-                <NavLink className="nav-link" to="client/detail/">
+                <NavLink className="nav-link" to="client/detail/:id">
                   Profile
                 </NavLink>
               </li>
             )}
-            {isLoggedIn && role_id === 1 &&(
+            {isLoggedIn && role_id === 1 && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="client/update">
+                  Update Profile
+                </NavLink>
+              </li>
+            )}
+            {isLoggedIn && role_id === 1 && (
               <>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/Wishlist">
+                  <NavLink className="nav-link" to="/Wishlist/">
                     Wishlist
                   </NavLink>
                 </li>
@@ -100,12 +104,15 @@ function Nav() {
             )}
             {isLoggedIn && role_id === 2 && (
               <li className="nav-item">
-                <NavLink className="nav-link" to={`/therapist/detail/${therapistId}`}>
+                <NavLink
+                  className="nav-link"
+                  to={`/therapist/detail/${therapistId}`}
+                >
                   Profile
                 </NavLink>
               </li>
             )}
-             {isLoggedIn && role_id === 2 && (
+            {isLoggedIn && role_id === 2 && (
               <li className="nav-item">
                 <NavLink className="nav-link" to="therapist/update">
                   Update Profile
@@ -136,5 +143,3 @@ function Nav() {
 }
 
 export default Nav;
-
-

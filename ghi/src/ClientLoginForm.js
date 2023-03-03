@@ -27,10 +27,6 @@ function ClientLoginForm() {
     navigate("/");
   };
 
-  if (redirect) {
-    navigate(`/client/detail/${token}`);
-  }
-
   return (
     <div className="row">
       <div className="offset-3 col-6">

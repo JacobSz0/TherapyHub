@@ -29,7 +29,7 @@ function TherapistList(){
         radius,
       };
 
-      const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}zipcode?zip_code=${zip_code}&radius=${radius}`;
+      const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}zipcode?zip_code=${zip_code ? zip_code : 91343}&radius=${radius ? radius : 1}`;
       const fetchConfig = {
         method: 'POST',
         body: JSON.stringify(data),

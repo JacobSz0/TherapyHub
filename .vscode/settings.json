@@ -3,8 +3,8 @@
   "python.formatting.provider": "black",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": [
-    "therapisdata",
-    "therapistdata"
-  ]
+  "cSpell.words": ["therapisdata", "therapistdata"],
+  "python.testing.unittestArgs": ["-v", "-s", "./therapy", "-p", "test_*.py"],
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestEnabled": true
 }

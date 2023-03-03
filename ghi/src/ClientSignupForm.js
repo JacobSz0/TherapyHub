@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useToken } from "./Authentication";
+import { useNavigate } from "react-router-dom";
 
-function ClientSignupForm() {
-  const [name, setName] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [additional_notes, setAdditionalNote] = useState("");
-  const [account_id, setAccountId] = useState();
-  const [wish_list, setWishList] = useState([]);
-  const { token, login } = useToken();
+function ClientSignupForm(){
 
-  function parseJwt(data) {
+    const[name, setName] = useState("");
+    const[city, setCity] = useState("");
+    const[state, setState] = useState("");
+    const[zipcode, setZipcode] = useState("");
+    const[additional_notes, setAdditionalNote] = useState("");
+    const[account_id, setAccountId] = useState()
+    const[wish_list, setWishList] = useState([]);
+    const { token, login } = useToken();
+    const navigate = useNavigate();
+
+    function parseJwt(data) {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
@@ -80,6 +83,7 @@ function ClientSignupForm() {
       setState("");
       setZipcode("");
       setAdditionalNote("");
+      navigate("/")
     }
   };
 

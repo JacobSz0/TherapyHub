@@ -81,6 +81,13 @@ function Nav() {
             )}
             {isLoggedIn && role_id === 1 && (
               <li className="nav-item">
+                <NavLink className="nav-link" to="/">
+                  Home
+                </NavLink>
+              </li>
+            )}
+            {isLoggedIn && role_id === 1 && (
+              <li className="nav-item">
                 <NavLink className="nav-link" to="client/detail/:id">
                   Profile
                 </NavLink>
@@ -104,6 +111,13 @@ function Nav() {
             )}
             {isLoggedIn && role_id === 2 && (
               <li className="nav-item">
+                <NavLink className="nav-link" to="/">
+                  Home
+                </NavLink>
+              </li>
+            )}
+            {isLoggedIn && role_id === 2 && (
+              <li className="nav-item">
                 <NavLink
                   className="nav-link"
                   to={`/therapist/detail/${therapistId}`}
@@ -116,13 +130,6 @@ function Nav() {
               <li className="nav-item">
                 <NavLink className="nav-link" to="therapist/update">
                   Update Profile
-                </NavLink>
-              </li>
-            )}
-            {isLoggedIn && role_id === 2 && (
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/">
-                  Home
                 </NavLink>
               </li>
             )}

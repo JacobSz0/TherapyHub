@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useToken } from "./Authentication";
 import { useParams } from "react-router-dom";
 
+
 function TherapistProfile(){
   const [therapist, setTherapistDetail] = useState({});
   const [currentClient, setClient] = useState([]);
@@ -9,6 +10,7 @@ function TherapistProfile(){
   const [deleteButton, setDelete] = useState(false)
   const {id} = useParams();
   const { token, login } = useToken();
+  
 
   function parseJwt(data) {
     const base64Url = data.split(".")[1];
@@ -22,7 +24,6 @@ function TherapistProfile(){
     const response = await fetch (url)
         if (response.ok){
             const data = await response.json();
-            console.log("data******",data)
             setTherapistDetail(data)
             return(data.id)
   }

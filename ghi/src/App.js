@@ -48,10 +48,6 @@ function App() {
             <Route path="therapist/update" element={<TherapistUpdateForm />} />
             <Route path="/client/update" element={<ClientUpdateForm />} />
             <Route path="/client/detail/:id" element={<ClientDetail />} />
-            <Route
-              path="/therapist/detail"
-              element={<TherapistProfile />}
-            />
           </Routes>
         </div>
       </AuthProvider>

@@ -104,4 +104,11 @@ Today, I worked on;
 * update the profile therapist and merge 
 
  I updated the therapist form to make it look better. I also added a function in the navigation bar so that the therapist can see the "Update" button when they are logged in. As a team, we worked on fixing the Flake8 errors to make the pipeline pass, and we started working on deployment.
- 
+
+  ## March 02, 2023
+
+Today, I worked on;
+
+* Deployment and navigation bar.
+
+ Today, I worked with Jacob on deployment. We were trying to pass the pipeline with the front end. I also spent some time on navigation bar. Additionally, we helped Nancy debug some of her code. She was having trouble displaying the ID for the client. Although we were not able to solve the entire problem, we did make some progress.

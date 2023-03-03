@@ -9,8 +9,8 @@ function AccountSignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { token, login } = useToken();
-
   const navigate = useNavigate();
+  
 
   const handleUsernameChange = (event) => {
     const value = event.target.value;

@@ -15,6 +15,7 @@ app.include_router(authenticator.router)
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "process.env.REACT_APP_THERAPYHUB_API_HOST",
     os.environ.get("CORS_HOST", "REACT_APP_THERAPYHUB_API_HOST"),
 ]
 

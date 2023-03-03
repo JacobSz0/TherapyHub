@@ -4,10 +4,9 @@ import { Multiselect } from "multiselect-react-dropdown";
 
 
 function TherapistList(){
-
   const [selectedSpecialties, setSelectedSpecialties] = useState([]);
   const [selectedPayments, setSelectedPayments] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [listZipcodes, setListZipcodes] = useState([]);
   const [zip_code, setZipCode] = useState(searchParams.get('zip_code'));
   const [radius, setRadius] = useState(searchParams.get('radius'));
@@ -15,7 +14,6 @@ function TherapistList(){
 
   const getTherapists = async () => {
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
-
     const response = await fetch(url);
 
     if (response.ok) {
@@ -25,9 +23,7 @@ function TherapistList(){
     }
   };
 
-
-  useEffect(() => {
-    const handleSearch = async () => {
+  const handleSearch = async () => {
       const data = {
         zip_code,
         radius,
@@ -48,6 +44,8 @@ function TherapistList(){
         setListZipcodes(listZipcodes);
       }
     };
+
+  useEffect(() => {
     getTherapists();
     handleSearch();
   }, [zip_code, radius]);
@@ -65,7 +63,6 @@ function TherapistList(){
   if (therapists === undefined) {
     return null;
   }
-
 
   return (
     <div className="row justify-content-center">

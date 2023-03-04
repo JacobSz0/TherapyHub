@@ -34,7 +34,7 @@ build-front-end-job:
     # You need to substitute in your real values for
     # GROUP_NAME, PROJECT_NAME, & CAPROVER_NAME below.
     PUBLIC_URL: https://team-swank.gitlab.io/therapy-hub/
-    REACT_APP_THERAPYHUB_API_HOST: https://therapy-hub.nov-pt-13.mod3projects.com
+    REACT_APP_THERAPYHUB_API_HOST: https://therapy-hub.nov-pt-13.mod3projects.com/
   script:
     - cd ghi
     - npm install

@@ -3,10 +3,10 @@ import { useToken } from "./Authentication.js";
 import { useNavigate } from 'react-router-dom';
 
 function TherapistLoginForm() {
-  const { token, login } = useToken();
+  const { login } = useToken();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  
+
 
   const navigate = useNavigate();
   const handleUsernameChange = (event) => {
@@ -61,7 +61,7 @@ function TherapistLoginForm() {
             </div>
             <button
               className="btn btn-outline-info my-2 my-sm-0"
-             
+
             >
               Submit
             </button>

@@ -3,18 +3,19 @@ import { useToken } from "./Authentication";
 
 function ClientLandingPage() {
   const [client_id, setClient_id] = useState({});
-  const { token, login } = useToken();
+  const { token } = useToken();
   const [account_id, setAccountId] = useState();
 
-  async function get_by_account_id(acc_id) {
-    const response = await fetch(
-      `${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc/?account_id=${acc_id}`
-    );
-    var clientdata = await response.json();
-    console.log("HELLOOOO", clientdata);
-    // Update the state with the first client from the response
-    setClient_id(clientdata[0]);
-  }
+  // async function get_by_account_id(acc_id) {
+  //   const response = await fetch(
+  //     `${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc/?account_id=${acc_id}`
+  //   );
+
+  //   var clientdata = await response.json();
+  //   console.log("HELLOOOO", clientdata);
+  //   // Update the state with the first client from the response
+  //   setClient_id(clientdata[0]);
+  // }
 
   function parseJwt(data) {
     const base64Url = data.split(".")[1];

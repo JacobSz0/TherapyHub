@@ -7,7 +7,7 @@ function TherapistList(){
 
   const [selectedSpecialties, setSelectedSpecialties] = useState([]);
   const [selectedPayments, setSelectedPayments] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [listZipcodes, setListZipcodes] = useState([]);
   const [zip_code, setZipCode] = useState(searchParams.get('zip_code'));
   const [radius, setRadius] = useState(searchParams.get('radius'));

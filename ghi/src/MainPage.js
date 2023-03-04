@@ -1,6 +1,6 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import logo from "./imgs/logo.png";
-import { Link, useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function MainPage() {
@@ -29,7 +29,7 @@ function MainPage() {
       <img
         src={logo}
         className="mx-auto d-block"
-        alt="Responsive image"
+        alt=""
         style={{ objectFit: "contain", width: "100%", height: "100%" }}
       />
       <form onSubmit={handleSearch} className="form-inline mt-3">

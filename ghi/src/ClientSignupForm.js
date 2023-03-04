@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useToken } from "./Authentication";
 import { useNavigate } from "react-router-dom";
 
+
 function ClientSignupForm(){
 
     const[name, setName] = useState("");
@@ -10,8 +11,8 @@ function ClientSignupForm(){
     const[zipcode, setZipcode] = useState("");
     const[additional_notes, setAdditionalNote] = useState("");
     const[account_id, setAccountId] = useState()
-    const[wish_list, setWishList] = useState([]);
-    const { token, login } = useToken();
+    const[wish_list] = useState([]);
+    const { token } = useToken();
     const navigate = useNavigate();
 
     function parseJwt(data) {
@@ -46,15 +47,6 @@ function ClientSignupForm(){
     setAdditionalNote(value);
   };
 
-  const handleAccountIdChange = (event) => {
-    const value = event.target.value;
-    setAccountId(value);
-  };
-
-  const handleWishListChange = (event) => {
-    event.preventDefault();
-    setWishList([]);
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();

@@ -23,7 +23,9 @@ function TherapistList(){
     }
   };
 
-  const handleSearch = async () => {
+
+  useEffect(() => {
+      const handleSearch = async () => {
       const data = {
         zip_code,
         radius,
@@ -44,8 +46,6 @@ function TherapistList(){
         setListZipcodes(listZipcodes);
       }
     };
-
-  useEffect(() => {
     getTherapists();
     handleSearch();
   }, [zip_code, radius]);

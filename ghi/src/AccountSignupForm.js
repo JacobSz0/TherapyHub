@@ -9,7 +9,6 @@ function AccountSignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useToken();
-
   const navigate = useNavigate();
 
 

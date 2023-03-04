@@ -10,7 +10,6 @@ function ClientLandingPage() {
   //   const response = await fetch(
   //     `${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc/?account_id=${acc_id}`
   //   );
-
   //   var clientdata = await response.json();
   //   console.log("HELLOOOO", clientdata);
   //   // Update the state with the first client from the response

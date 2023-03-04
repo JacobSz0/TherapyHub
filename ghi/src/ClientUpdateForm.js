@@ -11,7 +11,7 @@ function ClientUpdateForm() {
   const [account_id, setAccount_id] = useState("");
   const [wish_list, setWish_list] = useState([]);
   const [client_id, setClient_id] = useState("");
-  const { token, login } = useToken();
+  const { token } = useToken();
 
   const navigate = useNavigate();
 

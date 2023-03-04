@@ -7,7 +7,6 @@ import TherapistSignupForm from "./TherapistSignupForm";
 import Nav from "./Nav.js";
 import ClientLoginForm from "./ClientLoginForm.js";
 import { useToken, AuthProvider } from "./Authentication.js";
-import React, { useState, useEffect } from "react";
 import MainPage from "./MainPage.js";
 import TherapistLoginForm from "./TherapistLoginForm.js";
 import TherapistProfile from "./TherapistProfile";
@@ -22,9 +21,11 @@ function GetToken() {
 }
 
 function App() {
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, '');
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <AuthProvider>
         <GetToken />
         <Nav />

@@ -28,6 +28,7 @@ services:
       DATABASE_URL: postgresql://therapy:password@postgres/therapy
       WAIT_HOSTS: postgres:5432
       SIGNING_KEY: ${SIGNING_KEY}
+      ZIPCODE_API_KEY: ${ZIPCODE_API_KEY}
       WAIT_BEFORE: 5
       WAIT_TIMEOUT: 60
 

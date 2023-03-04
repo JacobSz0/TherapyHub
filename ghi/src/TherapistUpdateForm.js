@@ -16,7 +16,7 @@ function TherapistUpdateForm() {
   const [email, setEmail] = useState("");
   const [account_id, setAccount_id] = useState("");
   const [city, setCity] = useState("");
-  const { token, login } = useToken();
+  const { token } = useToken();
   const [therapist_id, setTherapist_id] = useState("");
   const [selectedSpecialties, setSelectedSpecialties] = useState([]);
   const [selectedPayments, setSelectedPayments] = useState([]);

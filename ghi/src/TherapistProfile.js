@@ -9,24 +9,14 @@ function TherapistProfile(){
   const [addButton, setAdd] = useState(false)
   const [deleteButton, setDelete] = useState(false)
   const {id} = useParams();
-  const { token, login } = useToken();
-  
+  const { token } = useToken();
+
 
   function parseJwt(data) {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
     return info.account.id
-  }
-
-  const fetchTherapist = async () => {
-    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy/${id}`
-    const response = await fetch (url)
-        if (response.ok){
-            const data = await response.json();
-            setTherapistDetail(data)
-            return(data.id)
-  }
   }
 
   async function getClient(account_id, therID) {
@@ -58,7 +48,7 @@ function TherapistProfile(){
             'Content-Type': 'application/json',
           },
         });
-        const clientDataF = await responseBack.json();
+        await responseBack.json();
         setAdd(false)
         setDelete(true)
       } catch (error) {
@@ -78,7 +68,7 @@ function TherapistProfile(){
           'Content-Type': 'application/json',
         },
       });
-      const clientData = await response.json();
+      await response.json();
       if (response.ok){getClient()}
     } catch (error) {
       console.error(error);
@@ -86,6 +76,15 @@ function TherapistProfile(){
   };
 
   useEffect (() => {
+    const fetchTherapist = async () => {
+    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy/${id}`
+    const response = await fetch (url)
+        if (response.ok){
+            const data = await response.json();
+            setTherapistDetail(data)
+            return(data.id)
+  }
+  }
     async function getData(){
       const therID = await fetchTherapist();
       if (token) {
@@ -94,7 +93,7 @@ function TherapistProfile(){
       }
     }
     getData()
-  }, [token]);
+  }, [token, id]);
 
 
  return (

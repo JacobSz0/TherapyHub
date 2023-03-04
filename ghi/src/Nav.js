@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useToken } from "./Authentication.js";
 import React, { useState, useEffect } from "react";
 
@@ -18,20 +18,20 @@ function Nav() {
     SetRoleId(info.account.role_id);
   }
 
-  const fetchData = async () => {
+
+  useEffect(() => {
+    const fetchData = async () => {
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
       for (let key in data) {
-        if (data[key]["account_id"] == accountId) {
+        if (data[key]["account_id"] === accountId) {
           setTherapistID(data[key]["id"]);
         }
       }
     }
   };
-
-  useEffect(() => {
     fetchData();
     if (token) {
       parseJwt(token);

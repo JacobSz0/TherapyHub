@@ -20,14 +20,16 @@ function TherapistProfile(){
   }
 
   async function getClient(account_id, therID) {
-    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client?account_id=${account_id}`);
+    console.log(`${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc?account_id=${account_id}`)
+    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc?account_id=${account_id}`);
     if (response.ok){
       var clientData = await response.json()
-      if (clientData[0]?.wish_list.includes(JSON.stringify(therID))){
+      console.log(clientData)
+      if (clientData?.wish_list.includes(JSON.stringify(therID))){
         setAdd(false)
         setDelete(true)
       }
-      else if (clientData[0]?.wish_list){
+      else if (clientData?.wish_list){
         setAdd(true)
         setDelete(false)
       }
@@ -38,7 +40,7 @@ function TherapistProfile(){
 
   async function updateAddClient() {
     var therID=JSON.stringify(therapist.id)
-    var clientDataL=currentClient[0]
+    var clientDataL=currentClient
     clientDataL.wish_list.push(therID)
       try {
         const responseBack = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${clientDataL.id}`, {
@@ -49,27 +51,34 @@ function TherapistProfile(){
           },
         });
         await responseBack.json();
+        if (responseBack.ok){
+
         setAdd(false)
         setDelete(true)
+        }
       } catch (error) {
         console.error(error);
       }
   }
 
-  const updateDeleteClient = async () => {
+  async function updateDeleteClient() {
+    var therID=JSON.stringify(therapist.id)
+    var clientDataL=currentClient
+    clientDataL.wish_list.splice(clientDataL.wish_list.indexOf(therID), 1);
     try {
-      var therID=JSON.stringify(therapist.id)
-      var clientDataL=currentClient[0]
-      clientDataL.wish_list.splice(clientDataL.wish_list.indexOf(therID), 1);
-      const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${clientDataL.id}`, {
+      console.log(clientDataL)
+      const responseBack = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${clientDataL.id}`, {
         method: 'PUT',
         body: JSON.stringify(clientDataL),
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      await response.json();
-      if (response.ok){getClient()}
+      await responseBack.json();
+      if (responseBack.ok){
+        setAdd(true)
+        setDelete(false)
+        }
     } catch (error) {
       console.error(error);
     }

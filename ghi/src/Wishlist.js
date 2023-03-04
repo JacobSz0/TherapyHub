@@ -16,15 +16,17 @@ const Wishlist = () => {
   const base64 = base64Url.replace("-", "+").replace("_", "/");
   const info = JSON.parse(window.atob(base64));
   setAccount_id(info.account.id)
+  console.log(info.account.id)
+  return info.account.id
   }
 
-  async function getClients() {
-    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client?account_id=${account_id}`);
+  async function getClients(account_id) {
+    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc?account_id=${account_id}`);
     const response2 = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`);
     if (response.ok && response2.ok) {
       var clientData = await response.json();
+      console.log(clientData)
       var therapyData = await response2.json();
-      clientData=clientData[0]
       var newWishlist=[]
       var wishListInt=[]
       for (var i=0; i<clientData.wish_list.length; i++){
@@ -40,41 +42,21 @@ const Wishlist = () => {
     setWishlist(newWishlist);
   }
   useEffect (() => {
-    if (token) {
-      parseJwt(token);
-    }
-    }, [token]);
 
-  useEffect(() => {
-    async function getClients() {
-    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client?account_id=${account_id}`);
-    const response2 = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`);
-    if (response.ok && response2.ok) {
-      var clientData = await response.json();
-      var therapyData = await response2.json();
-      clientData=clientData[0]
-      var newWishlist=[]
-      var wishListInt=[]
-      for (var i=0; i<clientData.wish_list.length; i++){
-          wishListInt[i]=parseInt(clientData.wish_list[i])
-          for (var therapy=0; therapy<therapyData.length; therapy++){
-              if (wishListInt[i]===therapyData[therapy]["id"]){
-                  newWishlist.push(therapyData[therapy])
-              }
-          }
+    async function getData(){
+      if (token) {
+        const account_id = parseJwt(token);
+        getClients(account_id)
       }
     }
-    setClient(clientData)
-    setWishlist(newWishlist);
-  }
-    getClients()
-  },[account_id])
+    getData()
+  },[token, account_id])
 
-  const updateClient = async (therID) => {
+  const updateClient = async (therID,clID) => {
     try {
       therID=JSON.stringify(therID)
       currentClient.wish_list.splice(currentClient.wish_list.indexOf(therID), 1);
-      const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${currentClient.id}`, {
+      const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${clID}`, {
         method: 'PUT',
         body: JSON.stringify(currentClient),
         headers: {
@@ -82,7 +64,7 @@ const Wishlist = () => {
         },
       });
       await response.json();
-      if (response.ok){getClients()}
+      if (response.ok){getClients(account_id)}
     } catch (error) {
       console.error(error);
     }
@@ -116,7 +98,7 @@ const Wishlist = () => {
                   </div>
                     <a href={`/therapist/detail/${i.id}`} className="btn btn-primary">Learn more!</a>
                   <p></p>
-                  <button className="btn btn-primary" type="button" onClick={() => updateClient(i.id)} style={deleteStyle}>DELETE</button>
+                  <button className="btn btn-primary" type="button" onClick={() => updateClient(i.id, currentClient.id)} style={deleteStyle}>DELETE</button>
                 </div>
               </div>
             </div>

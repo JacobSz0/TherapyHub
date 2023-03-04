@@ -13,7 +13,7 @@ function Nav() {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
-
+    console.log(info.account.id)
     setAccountId(info.account.id);
     SetRoleId(info.account.role_id);
   }

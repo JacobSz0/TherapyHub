@@ -112,3 +112,12 @@ Today, I worked on;
 * Deployment and navigation bar.
 
  Today, I worked with Jacob on deployment. We were trying to pass the pipeline with the front end. I also spent some time on navigation bar. Additionally, we helped Nancy debug some of her code. She was having trouble displaying the ID for the client. Although we were not able to solve the entire problem, we did make some progress.
+
+
+  ## March 03, 2023
+
+Today, I worked on;
+
+* unit test and deployment.
+
+ I worked on unit testing and deployment. I also made some changes to the navigation, and we merged our work. 

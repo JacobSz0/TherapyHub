@@ -3,6 +3,7 @@ import { useToken } from "./Authentication";
 import { useParams } from "react-router-dom";
 
 
+
 function TherapistProfile(){
   const [therapist, setTherapistDetail] = useState({});
   const [currentClient, setClient] = useState([]);
@@ -10,6 +11,7 @@ function TherapistProfile(){
   const [deleteButton, setDelete] = useState(false)
   const {id} = useParams();
   const { token } = useToken();
+  console.log("idtherpistprofile", id)
 
 
   function parseJwt(data) {
@@ -87,10 +89,12 @@ function TherapistProfile(){
   useEffect (() => {
     const fetchTherapist = async () => {
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy/${id}`
+    console.log("id=========",id)
     const response = await fetch (url)
         if (response.ok){
             const data = await response.json();
             setTherapistDetail(data)
+            console.log(data.id)
             return(data.id)
   }
   }
@@ -110,10 +114,11 @@ function TherapistProfile(){
      <p>
        {" "}
        <br></br>{" "}
+       
      </p>
-     <div className="main-body">
+     <div className="mx-auto d-block">
        <div className="row">
-         <div className="col-lg-4">
+         <div className="col-lg-8">
            <div className="card">
              <div className="card-body">
                <div className="d-flex flex-column align-items-center text-center">

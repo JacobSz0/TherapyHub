@@ -2,18 +2,20 @@ import { NavLink } from "react-router-dom";
 import { useToken } from "./Authentication.js";
 import React, { useState, useEffect } from "react";
 
+
 function Nav() {
   const { token, logout } = useToken();
   const [role_id, SetRoleId] = useState();
   const [therapistId, setTherapistID] = useState();
   const [accountId, setAccountId] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(Boolean(token));
-
+  
+  
   function parseJwt(data) {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
-    console.log(info.account.id)
+    console.log("account_id",info.account.id)
     setAccountId(info.account.id);
     SetRoleId(info.account.role_id);
   }
@@ -28,6 +30,7 @@ function Nav() {
       for (let key in data) {
         if (data[key]["account_id"] === accountId) {
           setTherapistID(data[key]["id"]);
+          console.log("id.......", data[key]["id"])
         }
       }
     }
@@ -39,7 +42,12 @@ function Nav() {
     } else {
       setIsLoggedIn(false);
     }
-  }, [token, accountId]);
+  }, [token, accountId, therapistId]);
+
+  function handleProfileLinkClick() {
+    setTherapistID(therapistId + 1);
+  }
+
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
@@ -121,6 +129,7 @@ function Nav() {
                 <NavLink
                   className="nav-link"
                   to={`/therapist/detail/${therapistId}`}
+                  onClick= {handleProfileLinkClick}
                 >
                   Profile
                 </NavLink>

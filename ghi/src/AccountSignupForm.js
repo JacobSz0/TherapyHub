@@ -10,6 +10,8 @@ function AccountSignupForm() {
   const [password, setPassword] = useState("");
   const { login } = useToken();
   const navigate = useNavigate();
+  
+
 
 
   const handleUsernameChange = (event) => {

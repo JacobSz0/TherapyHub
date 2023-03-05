@@ -2,65 +2,65 @@ import React, { useState, useEffect } from 'react';
 import { useToken } from "./Authentication";
 import { useParams } from "react-router-dom";
 
-
-
-function TherapistProfile(){
+function TherapistProfile() {
   const [therapist, setTherapistDetail] = useState({});
-  const [currentClient, setClient] = useState([]);
-  const [addButton, setAdd] = useState(false)
-  const [deleteButton, setDelete] = useState(false)
-  const {id} = useParams();
+  const [currentClient, setClient] = useState({ id: null, wish_list: [] });
+  const [addButton, setAdd] = useState(false);
+  const [deleteButton, setDelete] = useState(false);
+  const { id } = useParams();
   const { token } = useToken();
-  console.log("idtherpistprofile", id)
-
+  console.log("idtherpistprofile", id);
 
   function parseJwt(data) {
-    const base64Url = data.split(".")[1];
-    const base64 = base64Url.replace("-", "+").replace("_", "/");
-    const info = JSON.parse(window.atob(base64));
-    return info.account.id
+    try {
+      const base64Url = data.split(".")[1];
+      const base64 = base64Url.replace("-", "+").replace("_", "/");
+      const info = JSON.parse(window.atob(base64));
+      if (info.account && info.account.id) {
+        return info.account.id;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    return null;
   }
 
   async function getClient(account_id, therID) {
-    console.log(`${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc?account_id=${account_id}`)
-    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc?account_id=${account_id}`);
-    if (response.ok){
-      var clientData = await response.json()
-      console.log(clientData)
-      if (clientData?.wish_list.includes(JSON.stringify(therID))){
-        setAdd(false)
-        setDelete(true)
+    console.log(`${process.env.REACT_APP_THERAPYHUB_API_HOST}api/accounts?account_id=${account_id}`);
+    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}api/accounts?account_id=${account_id}`);
+    if (response.ok) {
+      const clientData = await response.json();
+      console.log(clientData);
+      if (clientData?.wish_list?.includes(therID)) {
+        setAdd(false);
+        setDelete(true);
+      } else if (clientData?.wish_list) {
+        setAdd(true);
+        setDelete(false);
       }
-      else if (clientData?.wish_list){
-        setAdd(true)
-        setDelete(false)
-      }
-      setClient(clientData)
+      setClient(clientData);
     }
   }
 
-
   async function updateAddClient() {
-    var therID=JSON.stringify(therapist.id)
-    var clientDataL=currentClient
-    clientDataL.wish_list.push(therID)
-      try {
-        const responseBack = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${clientDataL.id}`, {
-          method: 'PUT',
-          body: JSON.stringify(clientDataL),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        await responseBack.json();
-        if (responseBack.ok){
-
-        setAdd(false)
-        setDelete(true)
-        }
-      } catch (error) {
-        console.error(error);
+    const therID = JSON.stringify(therapist.id);
+    const clientDataL = { ...currentClient, wish_list: [...currentClient.wish_list, therID] };
+    try {
+      const responseBack = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${clientDataL.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(clientDataL),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      await responseBack.json();
+      if (responseBack.ok) {
+        setAdd(false);
+        setDelete(true);
       }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function updateDeleteClient() {
@@ -114,7 +114,7 @@ function TherapistProfile(){
      <p>
        {" "}
        <br></br>{" "}
-       
+
      </p>
      <div className="mx-auto d-block">
        <div className="row">

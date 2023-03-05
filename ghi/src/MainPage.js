@@ -53,7 +53,7 @@ function MainPage() {
         />
         <label>Radius(Miles)</label>
 
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+        <button className="btn btn-outline-info my-2 my-sm-0" type="submit">
           Find Your Therapist!
         </button>
       </form>

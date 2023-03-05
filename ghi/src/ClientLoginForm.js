@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useToken } from "./Authentication.js";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function ClientLoginForm() {
-  const { login } = useToken();
+  const { token, login } = useToken();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const { clientId } = useParams();
+  const [redirect, setRedirect] = useState();
   const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
@@ -18,12 +20,16 @@ function ClientLoginForm() {
     setPassword(value);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  try {
     const response = await login(username, password);
     console.log(response);
     navigate("/");
-  };
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     <div className="row">

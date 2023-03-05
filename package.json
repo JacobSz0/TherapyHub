@@ -6,6 +6,7 @@
     "react-router-dom": "^6.8.1"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "jquery": "^3.6.3",
     "multiselect-react-dropdown": "^2.0.25"
   }

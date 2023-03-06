@@ -17,7 +17,6 @@ const Wishlist = () => {
   const base64 = base64Url.replace("-", "+").replace("_", "/");
   const info = JSON.parse(window.atob(base64));
   setAccount_id(info.account.id)
-  console.log(info.account.id)
   return info.account.id
   }
 
@@ -26,7 +25,6 @@ const Wishlist = () => {
     const response2 = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`);
     if (response.ok && response2.ok) {
       var clientData = await response.json();
-      console.log(clientData)
       var therapyData = await response2.json();
       var newWishlist=[]
       var wishListInt=[]
@@ -73,7 +71,6 @@ const Wishlist = () => {
 
   return(
     <div>
-      {console.log(myWishlist)}
       {!myWishlist[0] ? (
         <div style={{textAlign: "center"}}>
           <br></br>

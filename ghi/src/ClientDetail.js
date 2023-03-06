@@ -6,21 +6,11 @@ function ClientLandingPage() {
   const { token } = useToken();
   const [account_id, setAccountId] = useState();
 
-  // async function get_by_account_id(acc_id) {
-  //   const response = await fetch(
-  //     `${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc/?account_id=${acc_id}`
-  //   );
-  //   var clientdata = await response.json();
-  //   console.log("HELLOOOO", clientdata);
-  //   // Update the state with the first client from the response
-  //   setClient_id(clientdata[0]);
-  // }
 
   function parseJwt(data) {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
-    console.log("hello", info.account.id);
     return info.account.id; // Return the account ID
   }
 
@@ -40,11 +30,8 @@ function ClientLandingPage() {
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         for (let key in data) {
-          console.log(data[key]["account_id"]);
           if (data[key]["account_id"] === account_id) {
-            console.log("hellooooo", data[key]["id"]);
             setClient_id(data[key]); // Update the client ID state with the correct client
           }
         }

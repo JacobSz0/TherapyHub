@@ -113,7 +113,6 @@ function TherapistSignupForm() {
     data.phone = phone;
     data.email = email;
     data.account_id = account_id;
-    console.log(data)
 
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
     const fetchConfig = {
@@ -141,7 +140,6 @@ function TherapistSignupForm() {
       resetValues();
 
       const newTherapist = await response.json();
-      console.log(newTherapist)
       const therapist_id = newTherapist.id
       navigate(`/therapist/detail/${therapist_id}`)
 

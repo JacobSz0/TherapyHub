@@ -8,7 +8,6 @@ const Foot = () => {
         const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}zenquotes`);
             if (response.ok) {
                 var quoteData = await response.json();
-                console.log(quoteData)
                 if (quoteData==='"Too many requests. Obtain an auth key for unlimited access." - zenquotes.io'){
                     quoteData="Just one small positive thought in the morning can change your whole day."
                 }

@@ -21,7 +21,6 @@ function ClientUpdateForm() {
       `${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc?account_id=${acc_id}`
     );
     var clientdata = await response.json();
-    console.log(clientdata)
     setName(clientdata.name);
     setCity(clientdata.city);
     setState(clientdata.state);
@@ -97,8 +96,7 @@ function ClientUpdateForm() {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      const newClient = await response.json();
-      console.log(newClient);
+      await response.json();
 
       setName("");
       setCity("");
@@ -107,7 +105,7 @@ function ClientUpdateForm() {
       setAdditional_notes("");
 
 
-      navigate(0);
+      navigate(`/`);
     }
   };
 

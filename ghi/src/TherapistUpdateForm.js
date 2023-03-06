@@ -36,7 +36,6 @@ function TherapistUpdateForm() {
       `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapistacc/?account_id=${acc_id}`
     );
     var therapistdata = await response.json();
-    console.log(therapistdata)
     setName(therapistdata.name);
     setLicense_information(therapistdata.license_information);
     setState(therapistdata.state);
@@ -146,8 +145,6 @@ function TherapistUpdateForm() {
     data.phone = phone;
     data.account_id = account_id;
 
-    console.log(data)
-
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy/${therapist_id}`;
     const fetchConfig = {
       method: "PUT",
@@ -159,8 +156,7 @@ function TherapistUpdateForm() {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      const newTherapist = await response.json();
-      console.log(newTherapist);
+      await response.json();
 
       setName("");
       setLicense_information("");
@@ -176,7 +172,7 @@ function TherapistUpdateForm() {
       setPhone("");
       resetValues();
 
-      navigate(0);
+      navigate("/");
     }
   };
 

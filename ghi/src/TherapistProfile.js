@@ -9,7 +9,6 @@ function TherapistProfile() {
   const [deleteButton, setDelete] = useState(false);
   const { id } = useParams();
   const { token } = useToken();
-  console.log("idtherpistprofile", id);
 
   function parseJwt(data) {
     try {
@@ -30,7 +29,6 @@ function TherapistProfile() {
       const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc?account_id=${account_id}`)
       if (response.ok) {
         const clientData = await response.json();
-        console.log(clientData);
         if (clientData?.wish_list.includes(therID)) {
           setAdd(false);
           setDelete(true);
@@ -69,7 +67,6 @@ function TherapistProfile() {
     var clientDataL=currentClient
     clientDataL.wish_list.splice(clientDataL.wish_list.indexOf(therID), 1);
     try {
-      console.log(clientDataL)
       const responseBack = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}client/${clientDataL.id}`, {
         method: 'PUT',
         body: JSON.stringify(clientDataL),
@@ -90,12 +87,10 @@ function TherapistProfile() {
   useEffect (() => {
     const fetchTherapist = async () => {
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy/${id}`
-    console.log("id=========",id)
     const response = await fetch (url)
         if (response.ok){
             const data = await response.json();
             setTherapistDetail(data)
-            console.log(data.id)
             return(data.id)
   }
   }

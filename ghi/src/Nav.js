@@ -13,10 +13,23 @@ function Nav() {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
-    console.log(info.account.id)
     setAccountId(info.account.id);
     SetRoleId(info.account.role_id);
   }
+
+
+  const fetchData = async () => {
+    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      for (let key in data) {
+        if (data[key]["account_id"] === accountId) {
+          setTherapistID(data[key]["id"]);
+        }
+      }
+    }
+  };
 
 
   useEffect(() => {
@@ -80,28 +93,22 @@ function Nav() {
               </>
             )}
             {isLoggedIn && role_id === 1 && (
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/">
-                  Home
-                </NavLink>
-              </li>
-            )}
-            {isLoggedIn && role_id === 1 && (
-              <li className="nav-item">
-                <NavLink className="nav-link" to="client/detail/:id">
-                  Profile
-                </NavLink>
-              </li>
-            )}
-            {isLoggedIn && role_id === 1 && (
-              <li className="nav-item">
-                <NavLink className="nav-link" to="client/update">
-                  Update Profile
-                </NavLink>
-              </li>
-            )}
-            {isLoggedIn && role_id === 1 && (
               <>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/">
+                    Home
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="client/detail/:id">
+                    Profile
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="client/update">
+                    Update Profile
+                  </NavLink>
+                </li>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/Wishlist/">
                     Wishlist
@@ -110,28 +117,27 @@ function Nav() {
               </>
             )}
             {isLoggedIn && role_id === 2 && (
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/">
-                  Home
-                </NavLink>
-              </li>
-            )}
-            {isLoggedIn && role_id === 2 && (
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  to={`/therapist/detail/${therapistId}`}
-                >
-                  Profile
-                </NavLink>
-              </li>
-            )}
-            {isLoggedIn && role_id === 2 && (
-              <li className="nav-item">
-                <NavLink className="nav-link" to="therapist/update">
-                  Update Profile
-                </NavLink>
-              </li>
+              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/">
+                    Home
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    onClick={fetchData()}
+                    className="nav-link"
+                    to={`/therapist/detail/${therapistId}`}
+                  >
+                    Profile
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="therapist/update">
+                    Update Profile
+                  </NavLink>
+                </li>
+              </>
             )}
             {isLoggedIn && (
               <>

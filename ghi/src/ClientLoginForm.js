@@ -23,7 +23,7 @@ const handleSubmit = async (event) => {
   try {
     const response = await login(username, password);
     console.log(response);
-    navigate("/");
+    navigate("/client/detail/:id");
   } catch (error) {
     console.error(error);
   }

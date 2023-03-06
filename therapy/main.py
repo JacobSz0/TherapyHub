@@ -16,7 +16,6 @@ origins = [
     "http://localhost",
     "http://localhost:3000",
     "http://localhost:8080",
-    "http://localhost:8090",
     os.environ.get("CORS_HOST", "REACT_APP_THERAPYHUB_API_HOST"),
     'http://localhost:8090'
 ]

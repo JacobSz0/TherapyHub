@@ -60,9 +60,6 @@ function TherapistList(){
     setRadius(value);
   };
 
-  if (therapists === undefined) {
-    return null;
-  }
 
   return (
     <div className="row justify-content-center">

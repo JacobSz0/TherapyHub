@@ -8,7 +8,6 @@ router = APIRouter()
 
 @router.post("/zipcode")
 def zipcode_request(zip_code, radius):
-    print("----------", os.environ.get("ZIPCODE_API_KEY"))
     headers = {"apikey": os.environ.get("ZIPCODE_API_KEY")}
     params = (
         ("code", zip_code),
@@ -30,3 +29,12 @@ def zipcode_request(zip_code, radius):
     print(zipcode_list)
     zipcode_list = json.dumps(zipcode_list)
     return zipcode_list
+
+
+@router.get("/zenquotes")
+def zen_quote():
+    response = requests.get("https://zenquotes.io/api/random")
+    quote = json.loads(response.text)
+    quote = '"' + quote[0]["q"] + '" - ' + quote[0]["a"]
+    print(quote)
+    return quote

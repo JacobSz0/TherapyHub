@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, HTTPException
 from typing import Union, List, Optional
 from queries.client import ClientIn, ClientOut, ClientRepository, Error
 
@@ -46,6 +46,10 @@ def get_client_by_account_id(
     repo: ClientRepository = Depends(),
 ) -> ClientOut:
     client = repo.get_client_by_account_id(account_id)
+    if client == {"message": "Could not view that client"}:
+        raise HTTPException(
+            status_code=200,
+            detail="Client not found for this account")
     if client is None:
         response.status_code = 404
     return client

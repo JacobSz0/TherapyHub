@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useToken } from "./Authentication"
+import logo from "./imgs/doughnut.png"
 
 
 const cardStyle = {margin: '10px', padding: '10px'};
@@ -72,39 +73,60 @@ const Wishlist = () => {
 
   return(
     <div>
-      {myWishlist.map((i) => {
-        return (
-          <div key={i.id} className="col-sm-10">
-            <div className="card bg-light mb-3" style={cardStyle}>
-              <div className="row g-0">
-                <div className="col-md-4">
-                  <img src={i.picture} className="img-fluid rounded-start" alt="Therapist" />
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body">
-                    <h5 className="card-title">{i.name}</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">
-                      {i.license_information}
-                    </h6>
-                    {i.specialties && (
-                  <p className="card-text">{i.specialties.join(', ')}</p>
-                    )}
-                    {i.payment && (
-                  <p className="card-text">{i.payment.join(', ')}</p>
-                    )}
-                    <p className="card-text">
-                    { i.city }, { i.state } { i.zipcode }
-                  </p>
+      {console.log(myWishlist)}
+      {!myWishlist[0] ? (
+        <div style={{textAlign: "center"}}>
+          <br></br>
+          <br></br>
+          <br></br>
+          <h4>You don't have any theripists in your wishlist.</h4>
+          <br></br>
+                <img
+        src={logo}
+        className="mx-auto d-block"
+        alt=""
+        style={{ objectFit: "contain", width: "50%", height: "50%" }}
+      />
+          <br></br>
+          <h4>Why don't you go find some and add them to your wishlist!</h4>
+          <br></br>
+          <br></br>
+          <br></br>
+        </div>
+      ) : null}
+        {myWishlist.map((i) => {
+          return (
+            <div key={i.id} className="col-sm-10">
+              <div className="card bg-light mb-3" style={cardStyle}>
+                <div className="row g-0">
+                  <div className="col-md-4">
+                    <img src={i.picture} className="img-fluid rounded-start" alt="Therapist" />
                   </div>
-                    <a href={`/therapist/detail/${i.id}`} className="btn btn-primary">Learn more!</a>
-                  <p></p>
-                  <button className="btn btn-primary" type="button" onClick={() => updateClient(i.id, currentClient.id)} style={deleteStyle}>DELETE</button>
+                  <div className="col-md-8">
+                    <div className="card-body">
+                      <h5 className="card-title">{i.name}</h5>
+                      <h6 className="card-subtitle mb-2 text-muted">
+                        {i.license_information}
+                      </h6>
+                      {i.specialties && (
+                    <p className="card-text">{i.specialties.join(', ')}</p>
+                      )}
+                      {i.payment && (
+                    <p className="card-text">{i.payment.join(', ')}</p>
+                      )}
+                      <p className="card-text">
+                      { i.city }, { i.state } { i.zipcode }
+                    </p>
+                    </div>
+                      <a href={`/therapist/detail/${i.id}`} className="btn btn-primary">Learn more!</a>
+                    <p></p>
+                    <button className="btn btn-primary" type="button" onClick={() => updateClient(i.id, currentClient.id)} style={deleteStyle}>DELETE</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   )
 

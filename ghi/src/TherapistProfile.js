@@ -26,20 +26,21 @@ function TherapistProfile() {
   }
 
   async function getClient(account_id, therID) {
-    console.log(`${process.env.REACT_APP_THERAPYHUB_API_HOST}api/accounts?account_id=${account_id}`);
-    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}api/accounts?account_id=${account_id}`);
-    if (response.ok) {
-      const clientData = await response.json();
-      console.log(clientData);
-      if (clientData?.wish_list?.includes(therID)) {
-        setAdd(false);
-        setDelete(true);
-      } else if (clientData?.wish_list) {
-        setAdd(true);
-        setDelete(false);
+    try{
+      const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}clientacc?account_id=${account_id}`)
+      if (response.ok) {
+        const clientData = await response.json();
+        console.log(clientData);
+        if (clientData?.wish_list.includes(therID)) {
+          setAdd(false);
+          setDelete(true);
+        } else if (clientData?.wish_list) {
+          setAdd(true);
+          setDelete(false);
+        }
+        setClient(clientData);
       }
-      setClient(clientData);
-    }
+    }catch(error){console.log("No Client Detected")}
   }
 
   async function updateAddClient() {

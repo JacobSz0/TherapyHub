@@ -14,6 +14,7 @@ import TherapistList from "./TherapistList";
 import TherapistUpdateForm from "./TherapistUpdateForm";
 import ClientUpdateForm from "./ClientUpdateForm";
 import ClientDetail from "./ClientDetail";
+import Foot from "./Foot"
 import React from 'react';
 
 function GetToken() {
@@ -52,6 +53,7 @@ function App() {
             <Route path="/client/detail/:id" element={<ClientDetail />} />
           </Routes>
         </div>
+        <Foot/>
       </AuthProvider>
     </BrowserRouter>
   );

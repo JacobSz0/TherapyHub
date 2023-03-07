@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useToken } from "./Authentication";
 import { useParams } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function TherapistProfile() {
   const [therapist, setTherapistDetail] = useState({});
@@ -9,6 +10,8 @@ function TherapistProfile() {
   const [deleteButton, setDelete] = useState(false);
   const { id } = useParams();
   const { token } = useToken();
+  const navigate = useNavigate();
+  const goBack = () => {navigate(-1)}
 
   function parseJwt(data) {
     try {
@@ -116,7 +119,13 @@ function TherapistProfile() {
        <div className="row">
          <div className="col-lg-8">
            <div className="card">
+
              <div className="card-body">
+              <button
+                className="btn btn-outline-info my-2 my-sm-0"
+                type="button"
+                onClick={goBack}>Back
+              </button>
                <div className="d-flex flex-column align-items-center text-center">
                  <img
                    src={therapist.picture}

@@ -6,11 +6,11 @@ function Contact() {
       <div className="card mt-4 ml-4" style={{ width: '30rem' }}>
         <div className="card-body">
           <h2 className="card-title">TherapyHub HQ</h2>
-          <p className="card-text"><a href="mailto:swank@example.com">Email: swank@example.com</a></p>
-          <p className="card-text">Phone: 555-555-5555</p>
-          <p className="card-text">Address: 123 Main Street, Funkytown USA 12345</p>
+          <p className="card-text">Email: <a href="mailto:therapyhub@swank.com">therapyhub@swank.com</a></p>
+          <p className="card-text">Phone: 310-553-8755</p>
+          <p className="card-text">Address: 123 Wisteria Lane, Funkytown USA 51423</p>
           <div>
-            <h2>Hours of operation:</h2>
+            <h2>Business Hours:</h2>
             <table className="table">
               <thead>
                 <tr>

@@ -55,20 +55,6 @@ def accounts_list(
     return repo.get_all_accounts()
 
 
-# @router.get("/api/accounts/{id}", response_model=Optional[AccountOut])
-# def get_one_account(
-#     id: int,
-#     response: Response,
-#     account: dict = Depends(authenticator.get_current_account_data),
-#     repo: AccountQueries = Depends(),
-# ) -> AccountOut:
-#     print(repo)
-#     user = repo.get_one_account(id)
-#     if user is None:
-#         response.status_code = 404
-#     return user
-
-
 @router.post("/api/accounts", response_model=AccountToken | HttpError)
 async def create_account(
     info: AccountIn,

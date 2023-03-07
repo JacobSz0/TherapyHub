@@ -12,7 +12,7 @@ services:
           - postgres-data:/var/lib/postgresql/data
       environment:
           - POSTGRES_MULTIPLE_DATABASES=therapy
-          - POSTGRES_PASSWORD=test-databases
+          - POSTGRES_PASSWORD=test
       ports:
           - 15432:5432
 
@@ -25,7 +25,7 @@ services:
     volumes:
       - ./therapy:/app
     environment:
-      DATABASE_URL: postgresql://therapy:password@postgres/therapy
+      DATABASE_URL: ${DATABASE_URL}
       WAIT_HOSTS: postgres:5432
       SIGNING_KEY: ${SIGNING_KEY}
       ZIPCODE_API_KEY: ${ZIPCODE_API_KEY}

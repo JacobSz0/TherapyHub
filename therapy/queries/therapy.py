@@ -90,7 +90,6 @@ class TherapyRepository:
                     id = result.fetchone()[0]
                     # Return new data
                     old_data = therapy.dict()
-                    print("old_dta**************", old_data)
                     return TherapyOut(id=id, **old_data)
                     # return self.vacation_in_to_out(id, vacation)
         except Exception:
@@ -103,12 +102,11 @@ class TherapyRepository:
                 # get a cursor (something to run SQL with)
                 with conn.cursor() as db:
                     # Run our INSERT statement
-                    result = db.execute(
+                    db.execute(
                         """
                         SELECT * FROM therapy
                         """
                     )
-                    print(result)
                     return [
                         TherapyOut(
                             id=record[0],

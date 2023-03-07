@@ -83,7 +83,6 @@ class AccountQueries:
                     record = {}
                     for i, column in enumerate(cur.description):
                         record[column.name] = row[i]
-                        print("**********", record)
                 return record
 
     def get_all_accounts(self) -> Union[Error, List[AccountOut]]:

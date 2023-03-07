@@ -61,3 +61,13 @@ Today I continued to work on updating the create therapy form. I was able to get
 ## March 2, 2023
 
 I made some small edits to the therapist list page, removed some unused code. I added a “learn more button” to the therapist cards in the Wishlist. I worked with my group to troubleshoot some blockers a team member was having. As a group we worked on deployment and unit tests. I created a unit test for get therapists and create a therapist.
+
+
+## March 3, 2023
+
+I made some small fixes to an error I was receiving in my therapist list by adding default values to the zip code and radius values. I assisted group members with unit tests. I created an additional unit test. Group and I worked on deployment and correcting pipeline errors.
+
+
+## March 6, 2023
+
+As a team we worked on deployment. As a team we worked on cleaning our code and removing all console.log and print statements. I worked with a SEIR to identify an issue with the 3rd party api being used for the project. The SEIR and I corrected the issue. As a team we discussed possible stretch goals. I completed a stretch goal to add a back button to the therapist profile pages to take a user back to the previous screen without having to hit the back button on the browser.

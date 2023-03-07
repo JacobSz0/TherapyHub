@@ -42,35 +42,48 @@ function ClientLandingPage() {
   }, [account_id]);
 
   return (
-    <div className="card">
-      <div className="card-body">
-        <div className="row">
-          <div className="col-sm-7 card text-center">
-            <h1>Welcome back, {client_id.name}!</h1>
-            <div className="card text-left">
-              <p></p>
-              <p></p>
-              <p></p>
-              <h4 className="card-text">What would you like to do today?</h4>
-              <a href="/Wishlist">You can view your wishlist here</a>
-              <a href="/">Haven't found a therapist you absolutely love? Keep browsing!</a>
-            </div>
-          </div>
-          <div className="col-sm-3">
-            <div className="card">
-              <div className="card-body">
-                <h4 className="card-title">Account details:</h4>
-                <p className="card-text">Name: {client_id.name}</p>
-                <p className="card-text">City: {client_id.city}</p>
-                <p className="card-text">State: {client_id.state}</p>
-                <p className="card-text">Zip Code: {client_id.zipcode}</p>
-                <p className="card-text">Notes: {client_id.additional_notes}</p>
-              </div>
-            </div>
+    <div className="row">
+      <div className="col-sm-4">
+        <div className="card text-center">
+          <div className="card-body">
+            <img
+              src="https://cdn.vectorstock.com/i/preview-1x/29/75/hand-drawn-doodle-simple-set-of-gender-related-vector-45002975.jpg"
+              className="img-thumbnail"
+              alt="..."
+              width="200">
+            </img>
+            <p></p>
+            <h4 className="card-title"><strong>Account details:</strong></h4>
+            <p className="card-text"><strong>Name:</strong> {client_id.name}</p>
+            <p className="card-text"><strong>City:</strong> {client_id.city}</p>
+            <p className="card-text"><strong>State:</strong> {client_id.state}</p>
+            <p className="card-text"><strong>Zip Code:</strong> {client_id.zipcode}</p>
+            <p className="card-text"><strong>Notes:</strong> {client_id.additional_notes}</p>
           </div>
         </div>
       </div>
-    </div>
+      <div className="col-sm-7">
+        <div className="card text-center">
+          <div className="card-body">
+            <p></p>
+            <p></p>
+            <p></p>
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/008/652/535/small/yoga-lotus-pose-icon-logo-concept-meditation-yoga-minimal-symbol-health-spa-meditation-harmony-zen-logotype-creative-graphic-sign-design-template-vector.jpg" alt="..." width="225"></img>
+            <h1>Welcome back, {client_id.name}!
+            </h1>
+            <p></p>
+              <h5 className="card-text">What would you like to do today?</h5>
+              <p></p>
+              <a href="/Wishlist">You can view your wishlist here</a>
+              <p></p>
+              <a href="/">Haven't found a therapist you absolutely love? Keep browsing!</a>
+              <p></p>
+              <p></p>
+              <p></p>
+          </div>
+            </div>
+          </div>
+        </div>
   );
 }
 

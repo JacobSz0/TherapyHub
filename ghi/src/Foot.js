@@ -30,7 +30,7 @@ const Foot = () => {
                 <span>Authors: SWANK Team: Nancy Chavez, Will Howe, Ana María Pedroza,</span>
             </div>
             <div><span>Kamron Poosti, and Jacob Sullenszino - 2022-2023</span></div>
-            <div><a href="mailto:swank@example.com">swank@example.com</a></div>
+            <div><a href="/contact-us">Contact us</a></div>
         </footer>
     </>
   )

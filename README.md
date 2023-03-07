@@ -39,7 +39,7 @@ DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose build
 ## Testing
 * Run `python -m pytest`
 
-## Functionality
+## Features
 * When clients access the app, they will be able to sign up for an account.
 * A client will be able to create a profile
 * When therapists access the app, they will be able to sign up for an account.
@@ -47,6 +47,9 @@ DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose build
 * Users will have the ability to log in, logout, and create a wishlist.
 * Users will have the ability to search through a list of the therapists by inputting a Zip code and radius.
 * The user will be able to further narrow their search by adding filters for specialties and payment options.
+
+## Context Map
+![Alt text](ghi/src/imgs/TherapyHubMap.png)
 
 ## How to Use:
 ### Signing up

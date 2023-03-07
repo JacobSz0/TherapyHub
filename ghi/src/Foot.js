@@ -27,10 +27,10 @@ const Foot = () => {
             <div><span>{quote}</span></div>
             <div style={{padding: "7px"}}></div>
             <div>
-                <span>Authors: SWANK Team: Nancy Chavez, Will Howe, Ana María Pedroza,</span>
+                <span>Authors: Team SWANK: Nancy Chavez, Will Howe, Ana María Pedroza,</span>
             </div>
             <div><span>Kamron Poosti, and Jacob Sullenszino - 2022-2023</span></div>
-            <div><a href="mailto:swank@example.com">swank@example.com</a></div>
+            <div><a href="/about-us">About Us</a> | <a href="/contact-us">Contact</a></div>
         </footer>
     </>
   )

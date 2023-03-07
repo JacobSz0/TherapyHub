@@ -16,6 +16,8 @@ import ClientUpdateForm from "./ClientUpdateForm";
 import ClientDetail from "./ClientDetail";
 import Foot from "./Foot"
 import React from 'react';
+import Contact from "./Contact";
+import AboutUs from "./AboutUs";
 
 function GetToken() {
   useToken();
@@ -51,6 +53,8 @@ function App() {
             <Route path="therapist/update" element={<TherapistUpdateForm />} />
             <Route path="/client/update" element={<ClientUpdateForm />} />
             <Route path="/client/detail/:id" element={<ClientDetail />} />
+            <Route path="/contact-us" element={<Contact />} />
+            <Route path="/about-us" element={<AboutUs />} />
           </Routes>
         </div>
         <Foot/>

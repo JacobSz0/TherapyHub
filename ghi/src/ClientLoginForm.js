@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useToken } from "./Authentication.js";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function ClientLoginForm() {
-  const { login } = useToken();
+  const { token, login } = useToken();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { clientId } = useParams();
+  const [redirect, setRedirect] = useState();
+
 
   const handleUsernameChange = (event) => {
     const value = event.target.value;

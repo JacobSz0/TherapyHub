@@ -121,3 +121,22 @@ Today, I worked on;
 * unit test and deployment.
 
  I worked on unit testing and deployment. I also made some changes to the navigation, and we merged our work. 
+
+
+  ## March 06, 2023
+
+Today, I worked on;
+
+* unit test and deployment.
+
+ We work clean up the code, fix some bug in the front end.
+
+
+  ## March 07, 2023
+
+Today, I worked on;
+
+* unit test and deployment.
+
+ Today, we worked on the deployment and updated the wireframe for the webpage that was added to the Readme file.
+

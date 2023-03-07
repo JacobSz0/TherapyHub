@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useToken } from "./Authentication";
 
 function ClientLandingPage() {
-  const [client, setClient] = useState({});
+  const [client_id, setClient_id] = useState({});
   const { token } = useToken();
   const [account_id, setAccountId] = useState();
 
@@ -31,7 +31,7 @@ function ClientLandingPage() {
         const data = await response.json();
         for (let key in data) {
           if (data[key]["account_id"] === account_id) {
-            setClient(data[key]);
+            setClient_id(data[key]);
           }
         }
       }
@@ -46,7 +46,7 @@ function ClientLandingPage() {
       <div className="card-body">
         <div className="row">
           <div className="col-sm-7 card text-center">
-            <h1>Welcome back, {client.name}!</h1>
+            <h1>Welcome back, {client_id.name}!</h1>
             <div className="card text-left">
               <p></p>
               <p></p>
@@ -60,11 +60,11 @@ function ClientLandingPage() {
             <div className="card">
               <div className="card-body">
                 <h4 className="card-title">Account details:</h4>
-                <p className="card-text">Name: {client.name}</p>
-                <p className="card-text">City: {client.city}</p>
-                <p className="card-text">State: {client.state}</p>
-                <p className="card-text">Zip Code: {client.zipcode}</p>
-                <p className="card-text">Notes: {client.additional_notes}</p>
+                <p className="card-text">Name: {client_id.name}</p>
+                <p className="card-text">City: {client_id.city}</p>
+                <p className="card-text">State: {client_id.state}</p>
+                <p className="card-text">Zip Code: {client_id.zipcode}</p>
+                <p className="card-text">Notes: {client_id.additional_notes}</p>
               </div>
             </div>
           </div>

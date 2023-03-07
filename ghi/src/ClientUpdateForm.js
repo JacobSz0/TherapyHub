@@ -105,7 +105,7 @@ function ClientUpdateForm() {
       setAdditional_notes("");
 
 
-      navigate(`/`);
+      navigate(`/client/detail/:id`);
     }
   };
 

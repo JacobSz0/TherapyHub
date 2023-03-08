@@ -23,7 +23,7 @@ const Foot = () => {
   },[])
   return(
     <>
-        <footer className="bg-info" style={{textAlign: "center", padding: "20px"}}>
+        <footer className="bg-info" style={{textAlign: "center", padding: "20px", marginTop: "90px"}}>
             <div><span>{quote}</span></div>
             <div style={{padding: "7px"}}></div>
             <div>

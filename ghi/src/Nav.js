@@ -6,19 +6,18 @@ function Nav() {
   const { token, logout } = useToken();
   const [role_id, SetRoleId] = useState();
   const [therapistId, setTherapistID] = useState();
-  const [accountId, setAccountId] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(Boolean(token));
 
   function parseJwt(data) {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
-    setAccountId(info.account.id);
     SetRoleId(info.account.role_id);
+    return info.account.id
   }
 
 
-  const fetchData = async () => {
+  const fetchData = async (accountId) => {
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
     const response = await fetch(url);
     if (response.ok) {
@@ -30,29 +29,17 @@ function Nav() {
       }
     }
   };
-
 
   useEffect(() => {
-    const fetchData = async () => {
-    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      for (let key in data) {
-        if (data[key]["account_id"] === accountId) {
-          setTherapistID(data[key]["id"]);
-        }
-      }
-    }
-  };
-    fetchData();
+
     if (token) {
-      parseJwt(token);
+      const accountId = parseJwt(token);
+      fetchData(accountId );
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
     }
-  }, [token, accountId]);
+  }, [token, fetchData]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
@@ -125,7 +112,7 @@ function Nav() {
                 </li>
                 <li className="nav-item">
                   <NavLink
-                    onClick={fetchData()}
+                    onClick={fetchData}
                     className="nav-link"
                     to={`/therapist/detail/${therapistId}`}
                   >

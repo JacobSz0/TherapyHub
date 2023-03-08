@@ -46,12 +46,12 @@ function ClientLandingPage() {
       <div className="col-sm-4">
         <div className="card text-center">
           <div className="card-body">
-            <img
+            {/* <img
               src="https://cdn.vectorstock.com/i/preview-1x/29/75/hand-drawn-doodle-simple-set-of-gender-related-vector-45002975.jpg"
               className="img-thumbnail"
               alt="..."
               width="200">
-            </img>
+            </img> */}
             <p></p>
             <h4 className="card-title"><strong>Account details:</strong></h4>
             <p className="card-text"><strong>Name:</strong> {client_id.name}</p>

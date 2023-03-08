@@ -10,7 +10,7 @@ function AccountSignupForm() {
   const [password, setPassword] = useState("");
   const { login } = useToken();
   const navigate = useNavigate();
-  
+
 
 
 
@@ -53,7 +53,7 @@ function AccountSignupForm() {
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      login(username, password);
+      await login(username, password);
       setUsername("");
       setEmail("");
       setPassword("");

@@ -18,7 +18,7 @@ function Nav() {
   }
 
 
-  const fetchData = useCallback(async (accountId) => {
+  const fetchData = async (accountId) => {
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
     const response = await fetch(url);
     if (response.ok) {
@@ -29,10 +29,8 @@ function Nav() {
         }
       }
     }
-  }, []);
-
+  };
   useEffect(() => {
-
     if (token) {
       const accountId = parseJwt(token);
       fetchData(accountId );
@@ -40,7 +38,7 @@ function Nav() {
     } else {
       setIsLoggedIn(false);
     }
-  }, [token, fetchData]);
+  }, [token]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
@@ -113,7 +111,6 @@ function Nav() {
                 </li>
                 <li className="nav-item">
                   <NavLink
-                    onClick={fetchData}
                     className="nav-link"
                     to={`/therapist/detail/${therapistId}`}
                   >

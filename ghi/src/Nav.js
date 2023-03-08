@@ -39,7 +39,7 @@ function Nav() {
     } else {
       setIsLoggedIn(false);
     }
-  }, [token]);
+  }, [token, fetchData]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">

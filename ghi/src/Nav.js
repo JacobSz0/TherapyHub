@@ -129,9 +129,9 @@ function Nav() {
             {isLoggedIn && (
               <>
                 <li className="nav-item">
-                  <button className="btn" onClick={logout}>
+                  <NavLink className="nav-link" onClick={logout}>
                     Logout
-                  </button>
+                  </NavLink>
                 </li>
               </>
             )}

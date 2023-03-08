@@ -11,15 +11,15 @@ lint-test-job:
     - pip install flake8
     - flake8 therapy
 
-# run-unit-tests:
-#   image: python:3-bullseye
-#   stage: test
-#   needs:
-#     - lint-test-job
-#   script:
-#     - cd therapy
-#     - pip install -r requirements.txt
-#     - python -m pytest
+run-unit-tests:
+  image: python:3-bullseye
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd therapy
+    - pip install -r requirements.txt
+    - python -m pytest
 
 # Build the React/JavaScript front-end
 build-front-end-job:

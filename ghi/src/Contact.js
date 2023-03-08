@@ -3,7 +3,7 @@ import React from 'react';
 function Contact() {
   return (
     <div className="d-flex">
-      <div className="card mt-4 ml-4" style={{ width: '30rem' }}>
+      <div className="card mt-4 ml-4 shadow p-4 mt-4" style={{ width: '30rem' }}>
         <div className="card-body">
           <h2 className="card-title">TherapyHub HQ</h2>
           <p className="card-text">Email: <a href="mailto:therapyhub@swank.com">therapyhub@swank.com</a></p>

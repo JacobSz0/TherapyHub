@@ -12,3 +12,40 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.navbar-nav {
+  /* background-color: #ffffff00; */
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  /* padding: 10px; */
+}
+.navbar-nav li a {
+  color: #fff;
+  font-size: 18px;
+  padding: 10px;
+  text-decoration: none;
+}
+.navbar-item li a:hover {
+  text-decoration-color: #ffffff;
+}
+.footer {
+  font-family: Arial, Helvetica, sans-serif;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  color: #000000;
+  text-align: center;
+}
+/* footer {
+  background-color: #ffffff62;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+} */
+footer a {
+  color: #000000;
+  text-decoration-line: none;
+}
+footer a:hover {
+  text-decoration: rgb(255, 255, 255);
+}

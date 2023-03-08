@@ -107,12 +107,11 @@ function TherapistProfile() {
 
  return (
    <div className="row">
+    <div className="mx-auto d-block my-card">
      <p>
        {" "}
        <br></br>{" "}
-
      </p>
-     <div className="mx-auto d-block">
        <div className="row">
          <div className="col-lg-8">
            <div className="card">

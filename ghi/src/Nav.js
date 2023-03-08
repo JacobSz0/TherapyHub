@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useToken } from "./Authentication.js";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+
 
 function Nav() {
   const { token, logout } = useToken();
@@ -17,7 +18,7 @@ function Nav() {
   }
 
 
-  const fetchData = async (accountId) => {
+  const fetchData = useCallback(async (accountId) => {
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
     const response = await fetch(url);
     if (response.ok) {
@@ -28,7 +29,7 @@ function Nav() {
         }
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
 

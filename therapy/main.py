@@ -6,11 +6,6 @@ import os
 
 
 app = FastAPI()
-app.include_router(therapy.router)
-app.include_router(client.router)
-app.include_router(accounts.router)
-app.include_router(api.router)
-app.include_router(authenticator.router)
 
 origins = [
     "http://localhost",
@@ -27,3 +22,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(therapy.router)
+app.include_router(client.router)
+app.include_router(accounts.router)
+app.include_router(api.router)
+app.include_router(authenticator.router)

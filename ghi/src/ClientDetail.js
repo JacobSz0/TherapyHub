@@ -43,17 +43,11 @@ function ClientLandingPage() {
 
   return (
     <div className="row">
-      <div className="col-sm-4">
-        <div className="card text-center">
-          <div className="card-body">
-            {/* <img
-              src="https://cdn.vectorstock.com/i/preview-1x/29/75/hand-drawn-doodle-simple-set-of-gender-related-vector-45002975.jpg"
-              className="img-thumbnail"
-              alt="..."
-              width="200">
-            </img> */}
+      <div className="col-md-7 col-lg-3">
+        <div className="card text-left shadow p-4 mt-4">
+          <div className="card-body pt-0">
+            <h4 className="card-title"><strong>Account Details:</strong></h4>
             <p></p>
-            <h4 className="card-title"><strong>Account details:</strong></h4>
             <p className="card-text"><strong>Name:</strong> {client_id.name}</p>
             <p className="card-text"><strong>City:</strong> {client_id.city}</p>
             <p className="card-text"><strong>State:</strong> {client_id.state}</p>
@@ -62,21 +56,17 @@ function ClientLandingPage() {
           </div>
         </div>
       </div>
-      <div className="col-sm-7">
-        <div className="card text-center">
+
+      <div className="col-sm-9">
+        <div className="card text-center shadow p-4 mt-4">
           <div className="card-body">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/008/652/535/small/yoga-lotus-pose-icon-logo-concept-meditation-yoga-minimal-symbol-health-spa-meditation-harmony-zen-logotype-creative-graphic-sign-design-template-vector.jpg" alt="..." width="150"></img>
+            <h1>Welcome, {client_id.name}!
             <p></p>
-            <p></p>
-            <p></p>
-            <img src="https://static.vecteezy.com/system/resources/thumbnails/008/652/535/small/yoga-lotus-pose-icon-logo-concept-meditation-yoga-minimal-symbol-health-spa-meditation-harmony-zen-logotype-creative-graphic-sign-design-template-vector.jpg" alt="..." width="225"></img>
-            <h1>Welcome back, {client_id.name}!
+            It's really good to see you.
             </h1>
-            <p></p>
-              <h5 className="card-text">What would you like to do today?</h5>
               <p></p>
-              <a href="/Wishlist">You can view your wishlist here</a>
-              <p></p>
-              <a href="/">Haven't found a therapist you absolutely love? Keep browsing!</a>
+              <a href="/">Let's find you the perfect therapist!</a>
               <p></p>
               <p></p>
               <p></p>

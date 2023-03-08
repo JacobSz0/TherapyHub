@@ -1,0 +1,2 @@
+ZIPCODE_API_KEY = 51c4dad0-ba12-11ed-a52c-c34441cd35af
+DATABASE_URL = postgresql://therapy:password@postgres/therapy

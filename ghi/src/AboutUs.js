@@ -3,7 +3,7 @@ import React from 'react';
 function AboutUs() {
   return (
     <div className="card">
-      <div className="card-body">
+      <div className="card-body shadow p-4 mt-4">
         <h1 className="card-title">Welcome to TherapyHub!</h1>
         <p className="card-text">Our team is dedicated to helping you find the right therapist
             to meet your unique needs and preferences. We understand that finding a therapist

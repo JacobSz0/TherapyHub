@@ -75,7 +75,7 @@ function ClientSignupForm(){
       setState("");
       setZipcode("");
       setAdditionalNote("");
-      navigate("/")
+      navigate(`/client/detail/:id`)
     }
   };
 
@@ -88,7 +88,7 @@ function ClientSignupForm(){
   return (
     <div className="container">
       <div className="row">
-        <div className="offset-3 col-6">
+        <div className="offset-2 col-8">
           <div className="shadow p-4 mt-4">
             <h1>Add information</h1>
             <form onSubmit={handleSubmit} id="create-new-employee-form">

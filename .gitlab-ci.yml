@@ -11,8 +11,7 @@ lint-test-job:
     - pip install flake8
     - flake8 therapy
 
-# Run unit tests
-# API Unit Tests:
+# run-unit-tests:
 #   image: python:3-bullseye
 #   stage: test
 #   needs:
@@ -34,7 +33,7 @@ build-front-end-job:
     # You need to substitute in your real values for
     # GROUP_NAME, PROJECT_NAME, & CAPROVER_NAME below.
     # https://therapy-hub.nov-pt-13.mod3projects.com/
-    PUBLIC_URL: https://team-swank.gitlab.io/therapy-hub/
+    PUBLIC_URL: https://therapy-hub.nov-pt-13.mod3projects.com/
     REACT_APP_THERAPYHUB_API_HOST: https://captain.nov-pt-12.mod3projects.com/
   script:
     - cd ghi
@@ -60,7 +59,7 @@ pages:
     paths:
       - public
 
-Build Therapy Service:
+build-therapy-service:
   image: docker:20-dind
   stage: build
   services:

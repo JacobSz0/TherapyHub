@@ -63,7 +63,6 @@ class ClientRepository:
                     id = result.fetchone()[0]
                     # Return new data
                     old_data = client.dict()
-                    print("old_dta**************", old_data)
                     return ClientOut(id=id, **old_data)
                     # return self.vacation_in_to_out(id, vacation)
         except Exception:

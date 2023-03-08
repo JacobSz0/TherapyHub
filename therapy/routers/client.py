@@ -7,7 +7,6 @@ router = APIRouter()
 
 @router.post("/client", response_model=Union[ClientOut, Error])
 def create_client(client: ClientIn, repo: ClientRepository = Depends()):
-    print("client", client)
     return repo.create_client(client)
 
 

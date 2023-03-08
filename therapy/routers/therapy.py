@@ -12,7 +12,6 @@ router = APIRouter()
 
 @router.post("/therapy", response_model=Union[TherapyOut, Error])
 def create_therapy(therapy: TherapyIn, repo: TherapyRepository = Depends()):
-    print("therapy", therapy)
     return repo.create_therapy(therapy)
 
 

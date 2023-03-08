@@ -138,5 +138,5 @@ Today, I worked on;
 
 * unit test and deployment.
 
- Today, we worked on the deployment and updated the wireframe for the webpage that was added to the Readme file.
+ Today, we worked on the deployment and updated the wireframe for the webpage that was added to the README file. Additionally, I was finally able to fix a problem I had in the nav.js file with the account_id. I had set it up using useState, but it wasn't updating, so every time I wanted to see the therapist profile, I needed to reload the page. Now it's fixed; I just needed to return the account_id instead of setting that value in a useState.
 

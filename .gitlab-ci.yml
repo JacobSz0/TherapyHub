@@ -20,6 +20,8 @@ run-unit-tests:
     - cd therapy
     - pip install -r requirements.txt
     - python -m pytest
+  variables:
+    DATABASE_URL: ""
 
 # Build the React/JavaScript front-end
 build-front-end-job:

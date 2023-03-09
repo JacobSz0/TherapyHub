@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { useToken } from "./Authentication"
 import logo from "./imgs/doughnut.png"
 
@@ -115,7 +116,7 @@ const Wishlist = () => {
                       { i.city }, { i.state } { i.zipcode }
                     </p>
                     </div>
-                      <a href={`/therapist/detail/${i.id}`} className="btn btn-primary">Learn more!</a>
+                      <NavLink to={`/therapist/detail/${i.id}`} className="btn btn-primary stretched-link">Learn more!</NavLink>
                     <p></p>
                     <button className="btn btn-primary" type="button" onClick={() => updateClient(i.id, currentClient.id)} style={deleteStyle}>DELETE</button>
                   </div>

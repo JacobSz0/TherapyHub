@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useToken } from "./Authentication.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 function ClientLoginForm() {
   const { login } = useToken();
@@ -67,13 +67,11 @@ const handleSubmit = async (event) => {
             <button className="btn btn-outline-info my-2 my-sm-0" type="submit">
               Submit
             </button>
-            <button
-              type="button"
-              className="btn btn-link"
-              onClick={() => (window.location.href = `/account`)}
-            >
-              Don't have an account? Register here!
-            </button>
+            <div>
+              <NavLink to="/account"
+                className="btn btn-light">
+                  Don't have an account? Register here!</NavLink>
+            </div>
           </form>
         </div>
       </div>

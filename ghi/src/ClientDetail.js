@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { useToken } from "./Authentication";
 
 function ClientLandingPage() {
@@ -66,7 +67,11 @@ function ClientLandingPage() {
             It's really good to see you.
             </h1>
               <p></p>
-              <a href="/">Let's find you the perfect therapist!</a>
+              <NavLink
+              className="nav-link"
+              to="/">
+                <p>Let's find you the perfect therapist!</p>
+              </NavLink>
               <p></p>
               <p></p>
               <p></p>

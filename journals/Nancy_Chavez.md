@@ -96,3 +96,19 @@ Today, I worked on:
 * As a team, we continued to make progress in our deployment and debugged a few files together. We also assigned each person stretch goals.
 
 * I created the about page, the contact page and updated the client detail page.
+
+
+## March 7, 2023
+
+Today, I worked on:
+
+* As a team, we continued to make progress in our deployment and debugged a few files together.
+
+* I worked out a few bugs I had and worked on some of the CSS
+
+
+## March 8, 2023
+
+Today, I worked on:
+
+* As a team, we continued to make progress in our deployment. We were actually able to deploy today, so thats great! We were finally able to fix a bug that was giving us problems all day.

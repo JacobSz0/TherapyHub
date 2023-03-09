@@ -71,3 +71,12 @@ I made some small fixes to an error I was receiving in my therapist list by addi
 ## March 6, 2023
 
 As a team we worked on deployment. As a team we worked on cleaning our code and removing all console.log and print statements. I worked with a SEIR to identify an issue with the 3rd party api being used for the project. The SEIR and I corrected the issue. As a team we discussed possible stretch goals. I completed a stretch goal to add a back button to the therapist profile pages to take a user back to the previous screen without having to hit the back button on the browser.
+
+## March 7, 2023
+
+I completed our README file. I assisted team with trouble shooting our issues with deployment. As a team we discovered the cause of some of our errors and corrected the errors. Tomorrow we plan on completing deployment and completing our merges.
+
+
+## March 8, 2023
+
+As a group my team and I worked with an instructor to deploy our app. As a team we troubleshooted some errors. As a team we worked on pipeline errors. I assisted a group member with their unit tests. I assisted another group member with troubleshooting their docker.

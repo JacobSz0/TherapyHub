@@ -140,7 +140,6 @@ function TherapistSignupForm() {
       resetValues();
 
       const newTherapist = await response.json();
-      console.log("NEW THERAPIST", newTherapist)
       const therapist_id = newTherapist.id
       navigate(`/therapist/detail/${therapist_id}`)
 

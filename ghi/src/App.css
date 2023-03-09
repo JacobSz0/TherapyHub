@@ -19,11 +19,9 @@
   margin-right: auto;
 }
 .navbar-nav {
-  /* background-color: #ffffff00; */
   color: #fff;
   display: flex;
   justify-content: space-between;
-  /* padding: 10px; */
 }
 .navbar-nav li a {
   color: #fff;
@@ -36,17 +34,12 @@
 }
 .footer {
   font-family: Arial, Helvetica, sans-serif;
+
   bottom: 0;
   width: 100%;
   color: #000000;
   text-align: center;
 }
-/* footer {
-  background-color: #ffffff62;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-} */
 footer a {
   color: #000000;
   text-decoration-line: none;

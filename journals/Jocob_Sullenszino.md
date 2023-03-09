@@ -25,7 +25,7 @@ In addition, we created the issues in GitLab and plan to assign points tomorrow.
 03-02-23: Refactored Wishlist front end and routers to get client by account ID (Pair programming with Will) Got token from JWT. Started Deployment.
 03-03-23: Worked on Linting, Deployment, and Unit Tests with group.
 03-06-23: Continued Deployment and made a footer with API, fixed issues on Nav bar.
-03-07-23:
-03-08-23:
-03-09-23:
-03-10-23:
+03-07-23: Worked on Deployment
+03-08-23: Worked on Deployment and Nav Zombie-Problem finally defeated today
+03-09-23: Worked on Deployment and cleanup
+03-10-23: Helped team with stretch goals and CSS

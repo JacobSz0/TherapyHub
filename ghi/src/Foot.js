@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Foot = () => {
   const [quote, setQuote] = useState(["Pending..."])
@@ -31,7 +32,7 @@ const Foot = () => {
                 <span><strong>Team SWANK:</strong> Nancy Chavez, Will Howe, Ana María Pedroza,</span>
             </div>
             <div><span>Kamron Poosti, and Jacob Sullenszino - 2022-2023</span></div>
-            <div><a href="/about-us">About Us</a> | <a href="/contact-us">Contact</a></div>
+            <div><NavLink className="nav-link" to="/about-us">About Us</NavLink>|<NavLink className="nav-link" to="/contact-us">Contact</NavLink></div>
         </footer>
       </footer>
     </>

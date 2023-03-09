@@ -35,16 +35,14 @@ function Nav() {
 
   async function therapistProfileClick(token){
     const acc_id = parseJwt(token);
-    console.log(acc_id)
     const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}therapistacc/?account_id=${acc_id}`)
 
     if (response.ok) {
       var therapistData = await response.json();
-      console.log("REDIRECTED!!!")
       navigate(`/therapist/detail/${therapistData.id}`);
     }
   }
-  
+
 
   useEffect(() => {
     const fetchDataAndParseJwt = async () => {
@@ -128,14 +126,10 @@ function Nav() {
                     Home
                   </NavLink>
                 </li>
-                <li>
-                  <button onClick={() => therapistProfileClick(token)}>YAMUTHA</button>
-                </li>
                 <li className="nav-item">
                   <NavLink
                     onClick={() => therapistProfileClick(token)}
                     className="nav-link"
-                    to={`/therapist/detail/${therapistId}`}
                   >
                     Profile
                   </NavLink>
@@ -150,9 +144,9 @@ function Nav() {
             {isLoggedIn && (
               <>
                 <li className="nav-item">
-                  <button className="btn" onClick={logout}>
+                  <NavLink className="nav-link" onClick={logout}>
                     Logout
-                  </button>
+                  </NavLink>
                 </li>
               </>
             )}

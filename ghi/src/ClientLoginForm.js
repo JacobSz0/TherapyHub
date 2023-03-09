@@ -24,7 +24,6 @@ const handleSubmit = async (event) => {
   event.preventDefault();
   try {
     const response = await login(username, password);
-    console.log(response);
     navigate("/client/detail/:id");
   } catch (error) {
     console.error(error);

@@ -32,7 +32,7 @@ Today, I worked on;
 
 * Accounts, update tables.
 
-I worked on how a therapist or client can login. I created an 'account' table that has a foreign key 'role_id', so we know what type of account it is when the user log in. 
+I worked on how a therapist or client can login. I created an 'account' table that has a foreign key 'role_id', so we know what type of account it is when the user log in.
 
 
 ## February 20, 2023
@@ -50,7 +50,7 @@ Today, I worked on;
 
 * Today, I worked on the monolithic application
 
-During the day, we decided to consolidate the backend by merging all microservices into one. As a result, we deleted the account microservice. However, we encountered some issues with Docker while making these changes. After a couple of hours of troubleshooting with the SIer, we were able to resolve the issues and the container is now working. Also, we divided the work and assigned points to each feature. 
+During the day, we decided to consolidate the backend by merging all microservices into one. As a result, we deleted the account microservice. However, we encountered some issues with Docker while making these changes. After a couple of hours of troubleshooting with the SIer, we were able to resolve the issues and the container is now working. Also, we divided the work and assigned points to each feature.
 
 
 ## February 22, 2023
@@ -77,7 +77,7 @@ Today, I worked on;
 
 * add information Form.
 
-Today, I worked on implementing a form where a new client can fill out personal information. Once the client fills out the account form, they are redirected to the add information form. I have almost finished the form, but I am having trouble passing a value from the account form to the add information form. I hope I can solve this problem with a SEIR. 
+Today, I worked on implementing a form where a new client can fill out personal information. Once the client fills out the account form, they are redirected to the add information form. I have almost finished the form, but I am having trouble passing a value from the account form to the add information form. I hope I can solve this problem with a SEIR.
 
 
 ## February 27, 2023
@@ -86,7 +86,7 @@ Today, I worked on;
 
 * access to token and decode it.
 
-Today, I worked on accessing and decoding a token. Finally, I was able to successfully access the account_id by implementing authentication in the front end and passing the token value to app.js. With this, I was able to successfully add the value account-id when the client fill out the add information form. 
+Today, I worked on accessing and decoding a token. Finally, I was able to successfully access the account_id by implementing authentication in the front end and passing the token value to app.js. With this, I was able to successfully add the value account-id when the client fill out the add information form.
 
 ## February 28, 2023
 
@@ -94,14 +94,14 @@ Today, I worked on;
 
 * create a therapist profile
 
- I worked on creating a therapist profile. I successfully created the profile and now therapists have access to their detail page. Additionally, I merged our changes to the main branch, ensuring it is up-to-date. I also collaborated with Jacob to implement the 'add to wishlist' button.", we haven't be able to make it work yet. 
+ I worked on creating a therapist profile. I successfully created the profile and now therapists have access to their detail page. Additionally, I merged our changes to the main branch, ensuring it is up-to-date. I also collaborated with Jacob to implement the 'add to wishlist' button.", we haven't be able to make it work yet.
 
 
  ## March 01, 2023
 
 Today, I worked on;
 
-* update the profile therapist and merge 
+* update the profile therapist and merge
 
  I updated the therapist form to make it look better. I also added a function in the navigation bar so that the therapist can see the "Update" button when they are logged in. As a team, we worked on fixing the Flake8 errors to make the pipeline pass, and we started working on deployment.
 
@@ -120,7 +120,7 @@ Today, I worked on;
 
 * unit test and deployment.
 
- I worked on unit testing and deployment. I also made some changes to the navigation, and we merged our work. 
+ I worked on unit testing and deployment. I also made some changes to the navigation, and we merged our work.
 
 
   ## March 06, 2023
@@ -136,7 +136,14 @@ Today, I worked on;
 
 Today, I worked on;
 
-* unit test and deployment.
+* Fix bug and deployment.
 
  Today, we worked on the deployment and updated the wireframe for the webpage that was added to the README file. Additionally, I was finally able to fix a problem I had in the nav.js file with the account_id. I had set it up using useState, but it wasn't updating, so every time I wanted to see the therapist profile, I needed to reload the page. Now it's fixed; I just needed to return the account_id instead of setting that value in a useState.
 
+  ## March 08, 2023
+
+Today, I worked on;
+
+* fix bug and deployment
+
+ Today, we deployed the app and were able to successfully see it in the browser and connect it to the backend. Additionally, we added some information to the database and cleaned up the code. We also fixed a bug in the nav. We spent a couple of hours troubleshooting but were able to fix it.

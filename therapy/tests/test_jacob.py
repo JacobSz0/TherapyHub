@@ -1,26 +1,54 @@
 from fastapi.testclient import TestClient
+from queries.therapy import TherapyRepository
 from main import app
+
 
 client = TestClient(app)
 
 
-# Arrange/Act
+class UpdateTherapist:
+    def update_therapy(self, therapy_id, therapy):
+        therapy_id = 6
+        return {
+            "id": therapy_id,
+            **therapy.dict(),
+        }
 
 
-def do_zipcode(zip_code, radius):
+def test_update_therapy():
 
-    response = client.post(f"zipcode?zip_code={zip_code}&radius={radius}")
-    print("DO ZIPCODE ***********", response)
-    return response
+    app.dependency_overrides[TherapyRepository] = UpdateTherapist
 
+    json = {
+        "name": "kamron",
+        "license_information": "LMFT 124629",
+        "city": "Los Angeles",
+        "state": "Ca",
+        "zipcode": 91343,
+        "picture": "string",
+        "specialties": [
+            "Anxiety",
+            "Depression",
+            "Trauma"
+        ],
+        "about_me": "I am a therapist",
+        "payment": [
+            "Cash",
+            "Anthem"
+        ],
+        "languages": "english",
+        "email": "kamron@yahoo.com",
+        "phone": "5555555555",
+        "account_id": 1
+    }
 
-# Assert
+    expected = {
+        "id": 6,
+        **json,
+    }
 
+    response = client.put("/therapy/6", json=json)
 
-def test_zipcode():
     app.dependency_overrides = {}
-    response = do_zipcode(98133, 5)
-    print("DO RESPONSE *&*&*&*&*&*&*&*&*", response)
-    expected = "98177"
     assert response.status_code == 200
-    assert expected in response.json()
+    assert response.json() == expected

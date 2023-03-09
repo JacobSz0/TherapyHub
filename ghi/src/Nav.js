@@ -1,24 +1,25 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useToken } from "./Authentication.js";
 import React, { useState, useEffect, useCallback } from "react";
-
 
 function Nav() {
   const { token, logout } = useToken();
   const [role_id, SetRoleId] = useState();
   const [therapistId, setTherapistID] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(Boolean(token));
+  const navigate = useNavigate();
 
-  function parseJwt(data) {
+
+  const parseJwt = useCallback((data) => {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
     SetRoleId(info.account.role_id);
     return info.account.id
-  }
+  }, []);
 
 
-  const fetchData = async (accountId) => {
+  const fetchData = useCallback(async (accountId) => {
     const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
     const response = await fetch(url);
     if (response.ok) {
@@ -29,16 +30,34 @@ function Nav() {
         }
       }
     }
-  };
-  useEffect(() => {
-    if (token) {
-      const accountId = parseJwt(token);
-      fetchData(accountId );
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
+  }, []);
+
+
+  async function therapistProfileClick(token){
+    const acc_id = parseJwt(token);
+    console.log(acc_id)
+    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}therapistacc/?account_id=${acc_id}`)
+
+    if (response.ok) {
+      var therapistData = await response.json();
+      console.log("REDIRECTED!!!")
+      navigate(`/therapist/detail/${therapistData.id}`);
     }
-  }, [token]);
+  }
+  
+
+  useEffect(() => {
+    const fetchDataAndParseJwt = async () => {
+      if (token) {
+        const accountId = parseJwt(token);
+        await fetchData(accountId);
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    };
+    fetchDataAndParseJwt();
+  }, [token, fetchData, parseJwt]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
@@ -63,12 +82,12 @@ function Nav() {
               <>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/client/login">
-                    Client
+                    Client Login
                   </NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/therapist/login">
-                    Therapist
+                    Therapist Login
                   </NavLink>
                 </li>
                 <li className="nav-item">
@@ -109,8 +128,12 @@ function Nav() {
                     Home
                   </NavLink>
                 </li>
+                <li>
+                  <button onClick={() => therapistProfileClick(token)}>YAMUTHA</button>
+                </li>
                 <li className="nav-item">
                   <NavLink
+                    onClick={() => therapistProfileClick(token)}
                     className="nav-link"
                     to={`/therapist/detail/${therapistId}`}
                   >
@@ -127,9 +150,9 @@ function Nav() {
             {isLoggedIn && (
               <>
                 <li className="nav-item">
-                  <NavLink className="nav-link" onClick={logout}>
+                  <button className="btn" onClick={logout}>
                     Logout
-                  </NavLink>
+                  </button>
                 </li>
               </>
             )}

@@ -116,7 +116,7 @@ const Wishlist = () => {
                       { i.city }, { i.state } { i.zipcode }
                     </p>
                     </div>
-                      <NavLink to={`/therapist/detail/${i.id}`} className="btn btn-primary stretched-link">Learn more!</NavLink>
+                      <NavLink to={`/therapist/detail/${i.id}`} className="btn btn-primary">Learn more!</NavLink>
                     <p></p>
                     <button className="btn btn-primary" type="button" onClick={() => updateClient(i.id, currentClient.id)} style={deleteStyle}>DELETE</button>
                   </div>

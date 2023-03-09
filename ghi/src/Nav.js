@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useToken } from "./Authentication.js";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect} from "react";
 
 function Nav() {
   const { token, logout } = useToken();
@@ -9,26 +9,13 @@ function Nav() {
   const navigate = useNavigate();
 
 
-  const parseJwt = useCallback((data) => {
-    const base64Url = data.split(".")[1];
-    const base64 = base64Url.replace("-", "+").replace("_", "/");
-    const info = JSON.parse(window.atob(base64));
-    SetRoleId(info.account.role_id);
-    return info.account.id
-  }, []);
-
-
-  const fetchData = useCallback(async (accountId) => {
-    const url = `${process.env.REACT_APP_THERAPYHUB_API_HOST}therapy`;
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      for (let key in data) {
-        if (data[key]["account_id"] === accountId) {
-        }
-      }
-    }
-  }, []);
+  function parseJwt (data) {
+  const base64Url = data.split(".")[1];
+  const base64 = base64Url.replace("-", "+").replace("_", "/");
+  const info = JSON.parse(window.atob(base64));
+  SetRoleId(info.account.role_id);
+  return info.account.id
+  }
 
 
   async function therapistProfileClick(token){
@@ -43,17 +30,14 @@ function Nav() {
 
 
   useEffect(() => {
-    const fetchDataAndParseJwt = async () => {
       if (token) {
-        const accountId = parseJwt(token);
-        await fetchData(accountId);
+        parseJwt(token);
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);
       }
-    };
-    fetchDataAndParseJwt();
-  }, [token, fetchData, parseJwt]);
+    
+  }, [token]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">

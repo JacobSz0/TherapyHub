@@ -5,7 +5,6 @@ import React, { useState, useEffect, useCallback } from "react";
 function Nav() {
   const { token, logout } = useToken();
   const [role_id, SetRoleId] = useState();
-  const [therapistId, setTherapistID] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(Boolean(token));
   const navigate = useNavigate();
 
@@ -26,7 +25,6 @@ function Nav() {
       const data = await response.json();
       for (let key in data) {
         if (data[key]["account_id"] === accountId) {
-          setTherapistID(data[key]["id"]);
         }
       }
     }

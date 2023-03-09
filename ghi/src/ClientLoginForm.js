@@ -23,7 +23,7 @@ function ClientLoginForm() {
 const handleSubmit = async (event) => {
   event.preventDefault();
   try {
-    const response = await login(username, password);
+    await login(username, password);
     navigate("/client/detail/:id");
   } catch (error) {
     console.error(error);

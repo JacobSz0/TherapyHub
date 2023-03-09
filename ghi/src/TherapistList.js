@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import {NavLink, useSearchParams } from 'react-router-dom';
 import { Multiselect } from "multiselect-react-dropdown";
 
 
@@ -60,6 +60,9 @@ function TherapistList(){
     setRadius(value);
   };
 
+  if (therapists === undefined) {
+    return null;
+  }
 
   return (
     <div className="row justify-content-center">
@@ -181,7 +184,7 @@ function TherapistList(){
                   <p className="card-text">
                   {therapist.city}, {therapist.state}, {therapist.zipcode}
                 </p>
-                <a href={`/therapist/detail/${therapist.id}`} className="btn btn-primary stretched-link">Learn more!</a>
+                  <NavLink to={`/therapist/detail/${therapist.id}`} className="btn btn-primary stretched-link">Learn more!</NavLink>
                 </div>
               </div>
             </div>

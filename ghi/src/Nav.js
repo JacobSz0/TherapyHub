@@ -33,7 +33,7 @@ function Nav() {
 
   async function therapistProfileClick(token){
     const acc_id = parseJwt(token);
-    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}therapistacc/?account_id=${acc_id}`)
+    const response = await fetch(`${process.env.REACT_APP_THERAPYHUB_API_HOST}therapistacc?account_id=${acc_id}`)
 
     if (response.ok) {
       var therapistData = await response.json();
